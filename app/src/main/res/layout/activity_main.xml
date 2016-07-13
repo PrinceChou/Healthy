@@ -70,8 +70,8 @@
             android:layout_below="@id/activity_main_toolbar"
             android:background="@color/whilte">
             <!-- TODO -->
-            <android.support.v4.view.ViewPager
-                android:id="@+id/activity_main_viewpager"
+            <FrameLayout
+                android:id="@+id/activity_main_fragment_content"
                 android:layout_width="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_above="@+id/activity_main_bottomnavigationbar"
@@ -81,7 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-
                 app:bnbActiveColor="@color/whilte"
                 app:bnbBackgroundColor="@color/blue_light"
                 app:bnbBackgroundStyle="background_style_static"

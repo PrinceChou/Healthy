@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 该布局文件已经未使用 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/viewpager_healthy"
                 android:layout_width="match_parent"
@@ -35,7 +36,6 @@
             android:id="@+id/viewpager_healthy_banner_radiobutton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/dot"
             android:checked="false"/>
 
         <RadioButton
@@ -43,21 +43,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:button="@drawable/dot"/>
+            android:layout_marginRight="10dip"/>
 
         <RadioButton
             android:id="@+id/viewpager_healthy_banner_radiobutton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:button="@drawable/dot"/>
+            android:layout_marginRight="10dip"/>
 
         <RadioButton
             android:id="@+id/viewpager_healthy_banner_radiobutton4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/dot"/>
+            android:layout_height="wrap_content"/>
     </RadioGroup>
 
 </RelativeLayout>

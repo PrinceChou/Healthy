@@ -14,9 +14,10 @@ import android.microanswer.healthy.viewbean.HealthyItemItemAsk;
 import android.microanswer.healthy.viewbean.HealthyItemItemBooks;
 import android.microanswer.healthy.viewbean.HealthyItemItemInfo;
 import android.microanswer.healthy.viewbean.HealthyItemItemKnowledge;
+import android.microanswer.healthy.viewbean.SmartBannerViewHolder;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -41,8 +43,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     public static final int TYPE_ITEM_INFO = 6;
 
 
-    public static final int FUNCTION_NORMALLOAD = 1;
-    public static final int FUNCTION_REFRESH = 2;
+//    public static final int FUNCTION_NORMALLOAD = 1;
+//    public static final int FUNCTION_REFRESH = 2;
 
     private static final int WHAT_ITEMUPDATE = 1;
     private static final int WHAT_REFRESH_END = 2;
@@ -50,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private static final int WHAT_ITEM_APPEND = 4;
     private static final int WHAT_ERROR = 5;
 
-    private FragmentManager fragmentmanager;
+    private Fragment parentFragment;
     private Context context;
 
 
@@ -63,10 +65,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
      */
     private ArrayList<Map<String, Object>> data;
 
-    public RecyclerViewAdapter(Context ccontext, FragmentManager fragmentmanager) {
+    public RecyclerViewAdapter(Context ccontext, Fragment parentFragment) {
         this.context = ccontext;
+        this.parentFragment = parentFragment;
         data = generateDisOnlineData();
-        this.fragmentmanager = fragmentmanager;
     }
 
     /**
@@ -79,7 +81,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
         Map<String, Object> banner = new HashMap<>();
         banner.put("type", TYPE_BANNER);
-        banner.put("function", FUNCTION_NORMALLOAD);
+        banner.put("data", null);
         datalist.add(banner);
         //构建Banner
 
@@ -219,7 +221,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
                 Map<String, Object> banner = new HashMap<>();
                 banner.put("type", TYPE_BANNER);
-                banner.put("function", FUNCTION_REFRESH);
+                List<InfoListItem> infoListData1 = JavaBeanTools.Info.getInfoListData(1, 5, rd.nextInt(7));
+                banner.put("data", infoListData1);
                 Message msg0 = handler.obtainMessage();
                 msg0.what = WHAT_ITEMUPDATE;
                 msg0.obj = banner;
@@ -308,12 +311,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         this.notifyItemChanged(index);
     }
 
+    private SmartBannerViewHolder smartBannerViewHolder;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //        Log.i("RecyclerViewAdapter", "onCreateViewHolder,parent=" + parent.getClass().getSimpleName() + ",viewType=" + viewType);
         if (viewType == TYPE_BANNER) {
-            View bannerview = View.inflate(context, R.layout.viewpager_healthy_banner, null);
-            return new BannerViewHolder(bannerview, context, fragmentmanager);
+            if (smartBannerViewHolder == null) {
+                View bannerview = View.inflate(context, R.layout.healthy_banner, null);
+//            return new BannerViewHolder(bannerview, context, parentFragment);
+                smartBannerViewHolder = new SmartBannerViewHolder(bannerview);
+            }
+            return smartBannerViewHolder;
         } else if (viewType == TYPE_ITEMGROUP) {
             View itemGroupView = View.inflate(context, R.layout.viewpager_healthy_itemgroup, null);
             return new HealthyItemGroup(itemGroupView);
@@ -336,20 +344,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder != null && holder == smartBannerViewHolder) {
+            smartBannerViewHolder.stopTurning();
+        }
+    }
+
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 //        Log.i("RecyclerViewAdapter", "Bind数据：" + holder.getClass().getSimpleName() + ",position=" + position);
         Map<String, Object> itemdata = data.get(position);
         int type = (int) itemdata.get("type");
         if (type == TYPE_BANNER) {
-            BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
-            int function = (int) itemdata.get("function");
-            if (function == FUNCTION_NORMALLOAD) {
-                bannerViewHolder.loadData();
-            } else if (function == FUNCTION_REFRESH) {
-                bannerViewHolder.refresh();
-                itemdata.put("function", FUNCTION_NORMALLOAD);
-            }
+            SmartBannerViewHolder bannerViewHolder = (SmartBannerViewHolder) holder;
+//            int function = (int) itemdata.get("function");
+//            if (function == FUNCTION_NORMALLOAD) {
+//                bannerViewHolder.loadData();
+//            } else if (function == FUNCTION_REFRESH) {
+//                bannerViewHolder.refresh();
+//                itemdata.put("function", FUNCTION_NORMALLOAD);
+//            }
 //                bannerViewHolder.startPlay();
+            if (itemdata.get("data") != null)
+                bannerViewHolder.setData((List<InfoListItem>) itemdata.get("data"));
         } else {
             if (type == TYPE_ITEMGROUP) {
                 HealthyItemGroup healthyItemGroup = (HealthyItemGroup) holder;

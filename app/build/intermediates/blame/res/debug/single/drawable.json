@@ -24,10 +24,6 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\dot.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\drawable\\dot.xml"
-    },
-    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
     },
@@ -70,6 +66,10 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\drawable\\abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\dot2.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\drawable\\dot2.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background.xml",
@@ -206,5 +206,9 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\drawable_line.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\drawable\\drawable_line.xml"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\dot1.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\drawable\\dot1.xml"
     }
 ]

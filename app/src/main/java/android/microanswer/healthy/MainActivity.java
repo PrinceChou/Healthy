@@ -3,8 +3,10 @@ package android.microanswer.healthy;
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.microanswer.healthy.adapter.MainViewPagerAdapter;
 import android.microanswer.healthy.bean.User;
+import android.microanswer.healthy.fragment.HealthyFragment;
+import android.microanswer.healthy.fragment.LifeFragment;
+import android.microanswer.healthy.fragment.MoreFragment;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.view.MActionBarDrawerToggle;
 import android.os.Build;
@@ -13,6 +15,8 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.design.internal.NavigationMenuPresenter;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -43,9 +47,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private TextView wealther_tv, nick_name_tv, singnature_tv;
     private NavigationView navigationView;
     private BottomNavigationBar bottomNavigationBar;
-    private ViewPager viewPager;
-    private MainViewPagerAdapter viewpageradapter;
     private SharedPreferences sharedPreferences;
+    private FragmentManager fragmentManager;
+    private Fragment[] fragments;
     MActionBarDrawerToggle mActionBarDrawerToggle;
 
     @Override
@@ -84,10 +88,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         wealther_tv = (TextView) navigationView.getHeaderView(0).findViewById(R.id.view_sliding_menu_textview_wealther);
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.activity_main_bottomnavigationbar);
 
-        viewPager = (ViewPager) findViewById(R.id.activity_main_viewpager);
-        viewPager.addOnPageChangeListener(this);
-        viewpageradapter = new MainViewPagerAdapter(this,getSupportFragmentManager());
-        viewPager.setAdapter(viewpageradapter);
+        fragmentManager = getSupportFragmentManager();
+        fragments = new Fragment[3];
 
         mActionBarDrawerToggle = new MActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_navigation, R.string.close_navigation);
         mActionBarDrawerToggle.setNavigationView(navigationView);
@@ -190,7 +192,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void onTabSelected(int position) {
-        viewPager.setCurrentItem(position,true);
+        if (fragments[position] == null) {
+            fragments[position] = (position == 0 ? new HealthyFragment() : (position == 1 ? new LifeFragment() : new MoreFragment()));
+        }
+        fragmentManager.beginTransaction().replace(R.id.activity_main_fragment_content, fragments[position]).commit();
     }
 
     @Override

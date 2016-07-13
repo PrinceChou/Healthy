@@ -32,12 +32,12 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\guanyu.png"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\shezhi.png",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\shezhi.png"
-    },
-    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\head_bg.jpg",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\head_bg.jpg"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\shezhi.png",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\shezhi.png"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\key.png",

@@ -1,61 +1,34 @@
 package android.microanswer.healthy.viewbean;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.microanswer.healthy.R;
 import android.microanswer.healthy.bean.InfoListItem;
-import android.microanswer.healthy.exception.JavaBeanDataLoadException;
 import android.microanswer.healthy.fragment.BannerItemFragment;
-import android.microanswer.healthy.tools.BaseTools;
-import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.tools.JavaBeanTools;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
-import java.util.UUID;
-
+//该类已经未使用
 /**
  * Created by Micro on 2016/6/22.
  */
-
+@Deprecated
 public class BannerViewHolder extends RecyclerView.ViewHolder implements Runnable, ViewPager.OnPageChangeListener {
 
     private static final int WHAT_PAGER_CHANGE = 3;
     private static boolean playing = false;//记录Viewpager是否在播放
 
-    private FragmentManager fragmentManager;
+    private Fragment parentFragment;
     private Context context;
     private ViewPager viewPager;
     private TextView tv_tag;
@@ -64,10 +37,10 @@ public class BannerViewHolder extends RecyclerView.ViewHolder implements Runnabl
     private BannerViewPagerAdapter bannerViewPagerAdapter;
 
 
-    public BannerViewHolder(View itemView, Context context, FragmentManager fragmentManager) {
+    public BannerViewHolder(View itemView, Context context, Fragment parentFragment) {
         super(itemView);
         this.context = context;
-        this.fragmentManager = fragmentManager;
+        this.parentFragment = parentFragment;
         viewPager = (ViewPager) itemView.findViewById(R.id.viewpager_healthy_banner_viewpager);
         viewPager.addOnPageChangeListener(this);
         radioButton = new RadioButton[4];
@@ -210,10 +183,10 @@ public class BannerViewHolder extends RecyclerView.ViewHolder implements Runnabl
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == WHAT_DATA_LOADOK) {
-                bannerViewPagerAdapter = new BannerViewPagerAdapter(fragmentManager, (ArrayList<InfoListItem>) msg.obj);
+                bannerViewPagerAdapter = new BannerViewPagerAdapter(parentFragment.getChildFragmentManager(), (ArrayList<InfoListItem>) msg.obj);
                 viewPager.setAdapter(bannerViewPagerAdapter);
                 radioButton[0].setChecked(true);
-                startplay();
+//                startplay();
             } else if (msg.what == WHAT_PAGER_CHANGE) {
                 viewPager.setCurrentItem(msg.arg1, true);
             }

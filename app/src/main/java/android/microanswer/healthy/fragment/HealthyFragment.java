@@ -9,13 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.Toast;
 
 /**
  * 由 Micro 创建于 2016/6/30.
@@ -32,15 +29,20 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root == null) {
             root = inflater.inflate(R.layout.fragment_healthy, null, true);
-            initData();
-            initView();
+
         }
+        initData();
+        initView();
         return root;
     }
 
     private void initView() {
-        recyclerView = (RecyclerView) root.findViewById(R.id.viewpager_healthy_recyclerview);
-        swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.viewpager_healthy_swiperefreshlayout);
+        if (recyclerView == null) {
+            recyclerView = (RecyclerView) root.findViewById(R.id.viewpager_healthy_recyclerview);
+        }
+        if (swipeRefreshLayout == null) {
+            swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.viewpager_healthy_swiperefreshlayout);
+        }
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent, R.color.blue_light);
         swipeRefreshLayout.setOnRefreshListener(this);
         recyclerView.addOnScrollListener(scrollListener);
@@ -81,7 +83,7 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
     private void initData() {
-        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), getActivity().getSupportFragmentManager());
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), this);
         recyclerViewAdapter.setRefreshListener(this);
         linearLayoutManager = new LinearLayoutManager(getActivity());
     }

@@ -8,6 +8,8 @@ import java.io.Serializable;
  */
 @Deprecated
 public class InfoListItem implements Serializable {
+
+
     private int count;
     private String description;
     private int fcount;
@@ -20,14 +22,6 @@ public class InfoListItem implements Serializable {
     private long time;
     private String title;
     private String url;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public int getCount() {
         return count;
@@ -117,10 +111,17 @@ public class InfoListItem implements Serializable {
         this.title = title;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     @Override
     public String toString() {
-        return "InfoListItem{" +
+        return "\nInfoListItem{" +
                 "count=" + count +
                 ", description='" + description + '\'' +
                 ", fcount=" + fcount +
@@ -133,6 +134,6 @@ public class InfoListItem implements Serializable {
                 ", time=" + time +
                 ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
-                '}';
+                "}\n";
     }
 }
