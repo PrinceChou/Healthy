@@ -1,0 +1,565 @@
+package android.microanswer.healthy.tools;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.text.TextPaint;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.WindowManager;
+import android.widget.ImageView;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * 基本工具类
+ * Created by Micro on 2016/6/17.
+ */
+
+public class BaseTools {
+
+
+    /**
+     * 获取屏幕对角尺寸
+     *
+     * @param ctx
+     * @return
+     */
+    public static double getScreenPhysicalSize(Context ctx) {
+        DisplayMetrics dm = new DisplayMetrics();
+        ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+        double diagonalPixels = Math.sqrt(Math.pow(dm.widthPixels, 2) + Math.pow(dm.heightPixels, 2));
+        return diagonalPixels / (160 * dm.density);
+    }
+
+    /**
+     * 获取文字宽度
+     *
+     * @param text
+     * @param Size
+     * @return
+     */
+    public static float GetTextWidth(String text, float Size) {
+        TextPaint FontPaint = new TextPaint();
+        FontPaint.setTextSize(Size);
+        return FontPaint.measureText(text);
+    }
+
+    /**
+     * 判断某字符串是否包含汉字
+     *
+     * @param sequence
+     * @return
+     */
+    public static boolean checkChinese(String sequence) {
+        final String format = "[\\u4E00-\\u9FA5\\uF900-\\uFA2D]";
+        boolean result = false;
+        Pattern pattern = Pattern.compile(format);
+        Matcher matcher = pattern.matcher(sequence);
+        result = matcher.find();
+        return result;
+    }
+
+    /**
+     * 使用渐变的方式在ImageView里面显示这个Bitmap
+     *
+     * @param imageView
+     * @param bitmap
+     * @param context
+     */
+    private static void setImageBitmap(ImageView imageView, Bitmap bitmap, Context context) {
+        // Use TransitionDrawable to fade in.
+        final TransitionDrawable td = new TransitionDrawable(new Drawable[]{new ColorDrawable(context.getResources().getColor(android.R.color.transparent)), new BitmapDrawable(context.getResources(), bitmap)});
+        //noinspection deprecation
+        imageView.setBackgroundDrawable(imageView.getDrawable());
+        imageView.setImageDrawable(td);
+        td.startTransition(200);
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getStatusBarHeight(Context context) {
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, statusBarHeight = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return statusBarHeight;
+    }
+
+    /**
+     * 将px值转换为sp值，保证文字大小不变
+     */
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
+     * 将sp值转换为px值，保证文字大小不变
+     */
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    public static int Dp2Px(Context context, float dp) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
+    public static int Px2Dp(Context context, float px) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (px / scale + 0.5f);
+    }
+
+
+    /**
+     * 判断手机是否有能力处理某个action
+     *
+     * @param context
+     * @param action
+     * @return
+     */
+    public static boolean isIntentAvailable(Context context, String action) {
+        final PackageManager packageManager = context.getPackageManager();
+        final Intent intent = new Intent(action);
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
+    }
+
+
+    /**
+     * 从数据库的查询结果中取得一个对象,[#在传入cursor之前,你应该先指定好其中的position]
+     *
+     * @param cursor
+     * @return
+     */
+    public static <T> T cursor2Object(Class<T> clazz, Cursor cursor) {
+        try {
+            T t = clazz.newInstance();
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field f : fields) {
+                f.setAccessible(true);
+                String fieldName = f.getName();
+                Class type = f.getType();
+                if (type.getName().equals("String")) {
+                    String fieldValue = cursor.getString(cursor.getColumnIndex(fieldName));
+                    f.set(t, fieldValue);
+                } else if (type.getName().equals("Integer") || type.getName().equals("int")) {
+                    int fieldValues = cursor.getInt(cursor.getColumnIndex(fieldName));
+                    f.set(t, fieldValues);
+                } else if (type.getName().equals("Long") || type.getName().equals("long")) {
+                    long fieldValues = cursor.getLong(cursor.getColumnIndex(fieldName));
+                    f.set(t, fieldValues);
+                } else if (type.getName().contains("ArrayList")) {
+                    f.set(t, byteArray2object(cursor.getBlob(cursor.getColumnIndex(fieldName))));
+                }
+            }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 将字节数组反序列化成对象
+     *
+     * @param data
+     * @param <T>
+     * @return
+     */
+    public static <T> T byteArray2object(byte[] data) {
+        T t = null;
+        ByteArrayInputStream byteArrayInputStream = null;
+        ObjectInputStream objectInputStream = null;
+        try {
+            byteArrayInputStream = new ByteArrayInputStream(data);
+            objectInputStream = new ObjectInputStream(byteArrayInputStream);
+            t = (T) objectInputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (byteArrayInputStream != null) {
+                    byteArrayInputStream.close();
+                }
+                if (objectInputStream != null) {
+                    objectInputStream.close();
+                }
+            } catch (Exception ee) {
+                ee.printStackTrace();
+            }
+        }
+        return t;
+    }
+
+    /**
+     * 将对象序列化为字节数组<br/>
+     *
+     * @param bean 要进行序列化的对象,该对象应该实现Serializable接口
+     * @return 序列化结果的字节数组
+     */
+    public static byte[] object2byteArray(Object bean) {
+        byte[] data = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(bean);
+            objectOutputStream.flush();
+            data = byteArrayOutputStream.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (objectOutputStream != null)
+                    objectOutputStream.close();
+                if (byteArrayOutputStream != null)
+                    byteArrayOutputStream.close();
+            } catch (Exception ee) {
+                ee.printStackTrace();
+            }
+        }
+        return data;
+    }
+
+    /**
+     * 将对象转变为可以写入数据库的Values
+     *
+     * @param key  写入数据库时的字段名
+     * @param bean 具体内容
+     */
+    public static ContentValues createBlobContentValues(String key, Object bean) {
+        ContentValues values = new ContentValues();
+        values.put(key, object2byteArray(bean));
+        return values;
+    }
+
+    /**
+     * 创建一个对应bean的可以用于写入数据库的ContentValues
+     *
+     * @param bean
+     * @return
+     */
+    public static ContentValues createContentValues(Object bean) {
+
+        ContentValues values = new ContentValues();
+        try {
+            Class<?> aClass = bean.getClass();
+            Field[] declaredFields = aClass.getDeclaredFields();//取得该Bean的所有字段
+            for (Field f : declaredFields) {
+                f.setAccessible(true);
+                String fieldName = f.getName();
+                Object fieldValues = f.get(bean);
+                if (fieldValues instanceof String) {
+                    values.put(fieldName, fieldValues + "");
+                } else if (fieldValues instanceof Integer) {
+                    values.put(fieldName, (int) fieldValues);
+                } else if (fieldValues instanceof Long) {
+                    values.put(fieldName, (long) fieldValues);
+                } else if (fieldValues instanceof ArrayList) {
+                    values.put(fieldName, object2byteArray(fieldValues));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return values;
+    }
+
+    /**
+     * 帮你整理一个可以创建你指定的键的表的可执行的SQL语句
+     *
+     * @param tableName 要创建的表名
+     * @param fields    表中的字段属性（"name,varchar"）
+     * @return 该表的可执行语句
+     */
+    public static String createTable(String tableName, String... fields) {
+        StringBuilder baseSql = new StringBuilder("create table " + tableName + "( _id integer primary key autoincrement,");
+        String baseSqlEnd = ");";
+        for (String item : fields) {
+            String s[] = item.split(",");
+            String s1 = s[0];
+            String s2 = s[1];
+            baseSql.append(s1).append(" ").append(s2).append(",");
+        }
+        return baseSql.append(baseSqlEnd).toString();
+    }
+
+
+    /**
+     * 图片高斯模糊
+     *
+     * @param sentBitmap
+     * @param radius
+     * @return
+     */
+    public static Bitmap doBlur(Bitmap sentBitmap, int radius) {
+        boolean canReuseInBitmap = false;
+
+        // Stack Blur v1.0 from
+        // http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html
+        //
+        // Java Author: Mario Klingemann <mario at quasimondo.com>
+        // http://incubator.quasimondo.com
+        // created Feburary 29, 2004
+        // Android port : Yahel Bouaziz <yahel at kayenko.com>
+        // http://www.kayenko.com
+        // ported april 5th, 2012
+
+        // This is a compromise between Gaussian Blur and Box blur
+        // It creates much better looking blurs than Box Blur, but is
+        // 7x faster than my Gaussian Blur implementation.
+        //
+        // I called it Stack Blur because this describes best how this
+        // filter works internally: it creates a kind of moving stack
+        // of colors whilst scanning through the image. Thereby it
+        // just has to add one new block of color to the right side
+        // of the stack and remove the leftmost color. The remaining
+        // colors on the topmost layer of the stack are either added on
+        // or reduced by one, depending on if they are on the right or
+        // on the left side of the stack.
+        //
+        // If you are using this algorithm in your code please add
+        // the following line:
+        //
+        // Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
+
+        Bitmap bitmap;
+        if (canReuseInBitmap) {
+            bitmap = sentBitmap;
+        } else {
+            bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
+        }
+
+        if (radius < 1) {
+            return (null);
+        }
+
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+
+        int[] pix = new int[w * h];
+        bitmap.getPixels(pix, 0, w, 0, 0, w, h);
+
+        int wm = w - 1;
+        int hm = h - 1;
+        int wh = w * h;
+        int div = radius + radius + 1;
+
+        int r[] = new int[wh];
+        int g[] = new int[wh];
+        int b[] = new int[wh];
+        int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
+        int vmin[] = new int[Math.max(w, h)];
+
+        int divsum = (div + 1) >> 1;
+        divsum *= divsum;
+        int dv[] = new int[256 * divsum];
+        for (i = 0; i < 256 * divsum; i++) {
+            dv[i] = (i / divsum);
+        }
+
+        yw = yi = 0;
+
+        int[][] stack = new int[div][3];
+        int stackpointer;
+        int stackstart;
+        int[] sir;
+        int rbs;
+        int r1 = radius + 1;
+        int routsum, goutsum, boutsum;
+        int rinsum, ginsum, binsum;
+
+        for (y = 0; y < h; y++) {
+            rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
+            for (i = -radius; i <= radius; i++) {
+                p = pix[yi + Math.min(wm, Math.max(i, 0))];
+                sir = stack[i + radius];
+                sir[0] = (p & 0xff0000) >> 16;
+                sir[1] = (p & 0x00ff00) >> 8;
+                sir[2] = (p & 0x0000ff);
+                rbs = r1 - Math.abs(i);
+                rsum += sir[0] * rbs;
+                gsum += sir[1] * rbs;
+                bsum += sir[2] * rbs;
+                if (i > 0) {
+                    rinsum += sir[0];
+                    ginsum += sir[1];
+                    binsum += sir[2];
+                } else {
+                    routsum += sir[0];
+                    goutsum += sir[1];
+                    boutsum += sir[2];
+                }
+            }
+            stackpointer = radius;
+
+            for (x = 0; x < w; x++) {
+
+                r[yi] = dv[rsum];
+                g[yi] = dv[gsum];
+                b[yi] = dv[bsum];
+
+                rsum -= routsum;
+                gsum -= goutsum;
+                bsum -= boutsum;
+
+                stackstart = stackpointer - radius + div;
+                sir = stack[stackstart % div];
+
+                routsum -= sir[0];
+                goutsum -= sir[1];
+                boutsum -= sir[2];
+
+                if (y == 0) {
+                    vmin[x] = Math.min(x + radius + 1, wm);
+                }
+                p = pix[yw + vmin[x]];
+
+                sir[0] = (p & 0xff0000) >> 16;
+                sir[1] = (p & 0x00ff00) >> 8;
+                sir[2] = (p & 0x0000ff);
+
+                rinsum += sir[0];
+                ginsum += sir[1];
+                binsum += sir[2];
+
+                rsum += rinsum;
+                gsum += ginsum;
+                bsum += binsum;
+
+                stackpointer = (stackpointer + 1) % div;
+                sir = stack[(stackpointer) % div];
+
+                routsum += sir[0];
+                goutsum += sir[1];
+                boutsum += sir[2];
+
+                rinsum -= sir[0];
+                ginsum -= sir[1];
+                binsum -= sir[2];
+
+                yi++;
+            }
+            yw += w;
+        }
+        for (x = 0; x < w; x++) {
+            rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
+            yp = -radius * w;
+            for (i = -radius; i <= radius; i++) {
+                yi = Math.max(0, yp) + x;
+
+                sir = stack[i + radius];
+
+                sir[0] = r[yi];
+                sir[1] = g[yi];
+                sir[2] = b[yi];
+
+                rbs = r1 - Math.abs(i);
+
+                rsum += r[yi] * rbs;
+                gsum += g[yi] * rbs;
+                bsum += b[yi] * rbs;
+
+                if (i > 0) {
+                    rinsum += sir[0];
+                    ginsum += sir[1];
+                    binsum += sir[2];
+                } else {
+                    routsum += sir[0];
+                    goutsum += sir[1];
+                    boutsum += sir[2];
+                }
+
+                if (i < hm) {
+                    yp += w;
+                }
+            }
+            yi = x;
+            stackpointer = radius;
+            for (y = 0; y < h; y++) {
+                // Preserve alpha channel: ( 0xff000000 & pix[yi] )
+                pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
+
+                rsum -= routsum;
+                gsum -= goutsum;
+                bsum -= boutsum;
+
+                stackstart = stackpointer - radius + div;
+                sir = stack[stackstart % div];
+
+                routsum -= sir[0];
+                goutsum -= sir[1];
+                boutsum -= sir[2];
+
+                if (x == 0) {
+                    vmin[y] = Math.min(y + r1, hm) * w;
+                }
+                p = x + vmin[y];
+
+                sir[0] = r[p];
+                sir[1] = g[p];
+                sir[2] = b[p];
+
+                rinsum += sir[0];
+                ginsum += sir[1];
+                binsum += sir[2];
+
+                rsum += rinsum;
+                gsum += ginsum;
+                bsum += binsum;
+
+                stackpointer = (stackpointer + 1) % div;
+                sir = stack[stackpointer];
+
+                routsum += sir[0];
+                goutsum += sir[1];
+                boutsum += sir[2];
+
+                rinsum -= sir[0];
+                ginsum -= sir[1];
+                binsum -= sir[2];
+
+                yi += w;
+            }
+        }
+
+        bitmap.setPixels(pix, 0, w, 0, 0, w, h);
+
+        return (bitmap);
+    }
+}

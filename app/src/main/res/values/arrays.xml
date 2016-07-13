@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sliding_menu">
+        <item>个人中心</item>
+        <item>@string/set</item>
+        <item>鼓励捐赠</item>
+        <item>关于软件</item>
+        <item>健康提示</item>
+    </string-array>
+    <string-array name="mian_item">
+        <item>健康</item>
+        <item>生活</item>
+        <item>@string/more</item>
+    </string-array>
+    <string-array name="exit_times">
+        <item>1秒</item>
+        <item>2秒</item>
+        <item>3秒</item>
+        <item>4秒</item>
+    </string-array>
+    <string-array name="exit_times_values">
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+    </string-array>
+    <string-array name="font_size">
+        <item>特小</item>
+        <item>小</item>
+        <item>普通</item>
+        <item>大</item>
+        <item>特大</item>
+    </string-array>
+    <string-array name="font_size_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>

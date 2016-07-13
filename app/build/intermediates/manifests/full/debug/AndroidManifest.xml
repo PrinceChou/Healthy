@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="android.microanswer.healthy"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="android.microanswer.healthy.application.Healthy"
+        android:allowBackup="true"
+        android:icon="@mipmap/tb"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="android.microanswer.healthy.LogoActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="android.microanswer.healthy.MainActivity" />
+        <activity
+            android:name="android.microanswer.healthy.UserCenterActivity"
+            android:label="@string/usercenter" />
+        <activity
+            android:name="android.microanswer.healthy.RegActivity"
+            android:label="@string/reg"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="android.microanswer.healthy.LoginActivity"
+            android:label="@string/login"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="android.microanswer.healthy.SetActivity"
+            android:label="@string/set"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>
