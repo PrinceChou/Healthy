@@ -22,11 +22,11 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.Date;
-
+//已经未使用
 /**
  * 由 Micro 创建于 2016/6/30.
  */
-
+@Deprecated
 public class BannerItemFragment extends Fragment implements ImageLoadingListener {
     private View root;
 

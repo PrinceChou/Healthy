@@ -47,6 +47,14 @@ public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     public void setData(List<InfoListItem> datas) {
+        if (datas == null) {
+            return;
+        }
+
+        if (this.data == datas) {//相同数据不用重新设置banner
+            return;
+        }
+
         this.data = datas;
         convenientBanner.setPages(bannerItemCreator, datas).setPageIndicator(new int[]{R.drawable.dot2, R.drawable.dot1})
                 //以下使用了一个匿名内部类作为Viewpager的切换动画

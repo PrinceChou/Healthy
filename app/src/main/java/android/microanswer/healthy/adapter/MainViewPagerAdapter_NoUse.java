@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by Micro on 2016/6/21.
  */
 
+@Deprecated
 public class MainViewPagerAdapter_NoUse extends FragmentPagerAdapter {
     private Context context;
     private Fragment[] fragments;

@@ -29,10 +29,10 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root == null) {
             root = inflater.inflate(R.layout.fragment_healthy, null, true);
-
+            initData();
+            initView();
         }
-        initData();
-        initView();
+
         return root;
     }
 
@@ -78,6 +78,8 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
      */
     protected boolean isSlideToBottom(RecyclerView recyclerView) {
         if (recyclerView == null) return false;
+        if (recyclerView.getAdapter() == null) return false;
+        if (getActivity() == null) return false;
         return recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= (recyclerView.computeVerticalScrollRange() - BaseTools.Dp2Px(getActivity(), 400));
     }
 

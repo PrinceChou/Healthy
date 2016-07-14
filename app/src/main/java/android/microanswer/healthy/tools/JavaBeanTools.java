@@ -160,10 +160,14 @@ public class JavaBeanTools {
         public static final List<InfoListItem> getInfoListData(int page, int rows, int id) {
             String url = "http://www.tngou.net/api/info/list?page=" + page + "&rows=" + rows + "&id=" + id;
             String result = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(result);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), InfoListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -225,10 +229,14 @@ public class JavaBeanTools {
         public static final List<InfoListItem> getInfoNews(int rows, int classify, int id) {
             String url = "http://www.tngou.net/api/info/news?rows=" + rows + "&classify=" + classify + "&id=" + id;
             String request = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), InfoListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -281,9 +289,13 @@ public class JavaBeanTools {
         public static final InfoListItem getInfo(int id) {
             String url = "http://www.tngou.net/api/info/show?id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 return JSON.parseObject(res, InfoListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -345,10 +357,14 @@ public class JavaBeanTools {
         public static final List<LoreClassifyItem> getLoreClassifyData() {
             String url = "http://www.tngou.net/api/lore/classify";
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), LoreClassifyItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -410,10 +426,14 @@ public class JavaBeanTools {
         public static final List<LoreListItem> getLoreListData(int page, int rows, int id) {
             String url = "http://www.tngou.net/api/lore/list?page=" + page + "&rows=" + rows + "&id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), LoreListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -482,9 +502,13 @@ public class JavaBeanTools {
         public static final LoreNews getLoreNew(int rows, int classify, int id) {
             String url = "http://www.tngou.net/api/lore/news?rows=" + rows + "&classify=" + classify + "&id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 return JSON.parseObject(res, LoreNews.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -591,10 +615,14 @@ public class JavaBeanTools {
         public static final List<AskClassifyItem> getAskClassifyData() {
             String url = "http://www.tngou.net/api/ask/classify";
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), AskClassifyItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -658,10 +686,14 @@ public class JavaBeanTools {
         public static final List<AskListItem> getAskListData(int page, int rows, int id) {
             String url = "http://www.tngou.net/api/ask/list?page=" + page + "&rows=" + rows + "&id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), AskListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -723,9 +755,13 @@ public class JavaBeanTools {
         public static final AskNews getAskNews(int rows, int classify, int id) {
             String url = "http://www.tngou.net/api/ask/news?rows=" + rows + "&classify=" + classify + "&id =" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 return JSON.parseObject(res, AskNews.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -835,10 +871,14 @@ public class JavaBeanTools {
         public static final List<BookClassifyItem> getBookClassifyData() {
             String url = "http://www.tngou.net/api/book/classify";
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), BookClassifyItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -906,10 +946,14 @@ public class JavaBeanTools {
         public static final List<BookListItem> getBookList(int page, int rows, int id) {
             String url = "http://www.tngou.net/api/book/list?page=" + page + "&rows=" + rows + "&id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray list = jsonObject.getJSONArray("list");
                 return JSON.parseArray(list.toJSONString(), BookListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -958,9 +1002,13 @@ public class JavaBeanTools {
         public static final BookListItem getBook(int id) {
             String url = "http://www.tngou.net/api/book/show?id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 return JSON.parseObject(res, BookListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -978,11 +1026,14 @@ public class JavaBeanTools {
         public static final List<CookClassify> getCookClassifyData() {
             String url = "http://www.tngou.net/api/cook/classify";
             String request = InternetServiceTool.request(url);
-
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), CookClassify.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -996,10 +1047,14 @@ public class JavaBeanTools {
         public static final List<CookListItem> getCookList(int rows, int page, int id) {
             String url = "http://www.tngou.net/api/cook/list?rows=" + rows + "&page=" + page + "&id=" + id;
             String request = InternetServiceTool.request(url);
-            com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
+            try {
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
             if (jsonObject.getBooleanValue("true")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), CookListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1011,9 +1066,13 @@ public class JavaBeanTools {
         public static final CookListItem getCookShow(int id) {
             String url = "http://www.tngou.net/api/cook/show?id=" + id;
             String res = InternetServiceTool.request(url);
-            com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
+            try {
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 return JSON.parseObject(res, CookListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1025,9 +1084,13 @@ public class JavaBeanTools {
         public static final CookListItem getCookName(String name) {
             String url = "http://www.tngou.net/api/cook/name?name=" + name;
             String res = InternetServiceTool.request(url);
-            com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
+            try {
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 return JSON.parseObject(res, CookListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1042,10 +1105,14 @@ public class JavaBeanTools {
         public static final List<FoodClassify> getFoodClassify2(int id) {
             String url = "http://www.tngou.net/api/food/classify?id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), FoodClassify.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1059,10 +1126,14 @@ public class JavaBeanTools {
         public static final List<FoodListItem> getFoodList(int rows, int page, int id) {
             String url = "http://www.tngou.net/api/food/list?rows=" + rows + "&page=" + page + "&id=" + id;
             String res  = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if(jsonObject.getBooleanValue("status")){
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(),FoodListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1074,9 +1145,13 @@ public class JavaBeanTools {
         public static final FoodListItem getFoodShow(int id) {
             String url = "http://www.tngou.net/api/food/show?id=" + id;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if(jsonObject.getBooleanValue("status")){
                 return JSON.parseObject(res,FoodListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1088,9 +1163,13 @@ public class JavaBeanTools {
         public static final FoodListItem getFoodName(String name) {
             String url = "http://www.tngou.net/api/food/name?name=" + name;
             String res = InternetServiceTool.request(url);
+            try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
             if(jsonObject.getBooleanValue("status")){
                 return JSON.parseObject(res,FoodListItem.class);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
@@ -1106,8 +1185,12 @@ public class JavaBeanTools {
      */
     private static <T> T request(String url, Class<T> clazz) {
         String res = InternetServiceTool.request(url);
-
-        return JSON.parseObject(res, clazz);
+        try {
+            return JSON.parseObject(res, clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

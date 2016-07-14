@@ -4,9 +4,6 @@ import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.microanswer.healthy.bean.User;
-import android.microanswer.healthy.fragment.HealthyFragment;
-import android.microanswer.healthy.fragment.LifeFragment;
-import android.microanswer.healthy.fragment.MoreFragment;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.view.MActionBarDrawerToggle;
 import android.os.Build;
@@ -17,6 +14,7 @@ import android.support.design.internal.NavigationMenuPresenter;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -90,6 +88,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
         fragmentManager = getSupportFragmentManager();
         fragments = new Fragment[3];
+        fragments[0] = fragmentManager.findFragmentById(R.id.activity_main_fragment_1);
+        fragments[1] = fragmentManager.findFragmentById(R.id.activity_main_fragment_2);
+        fragments[2] = fragmentManager.findFragmentById(R.id.activity_main_fragment_3);
 
         mActionBarDrawerToggle = new MActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_navigation, R.string.close_navigation);
         mActionBarDrawerToggle.setNavigationView(navigationView);
@@ -101,6 +102,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar.setTabSelectedListener(this);
         bottomNavigationBar.initialise();
 
+        onTabSelected(bottomNavigationBar.getCurrentSelectedPosition());
     }
 
     /**
@@ -192,10 +194,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void onTabSelected(int position) {
-        if (fragments[position] == null) {
-            fragments[position] = (position == 0 ? new HealthyFragment() : (position == 1 ? new LifeFragment() : new MoreFragment()));
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        if (position == 0) {
+            fragmentTransaction.show(fragments[0]);
+            fragmentTransaction.hide(fragments[1]);
+            fragmentTransaction.hide(fragments[2]);
+        } else if (position == 1) {
+            fragmentTransaction.hide(fragments[0]);
+            fragmentTransaction.show(fragments[1]);
+            fragmentTransaction.hide(fragments[2]);
+        } else if (position == 2) {
+            fragmentTransaction.hide(fragments[0]);
+            fragmentTransaction.hide(fragments[1]);
+            fragmentTransaction.show(fragments[2]);
         }
-        fragmentManager.beginTransaction().replace(R.id.activity_main_fragment_content, fragments[position]).commit();
+        fragmentTransaction.commit();
     }
 
     @Override

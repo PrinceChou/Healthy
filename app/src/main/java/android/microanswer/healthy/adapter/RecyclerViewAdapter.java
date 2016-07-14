@@ -6,9 +6,7 @@ import android.microanswer.healthy.bean.AskClassifyItem;
 import android.microanswer.healthy.bean.BookListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
-import android.microanswer.healthy.exception.JavaBeanDataLoadException;
 import android.microanswer.healthy.tools.JavaBeanTools;
-import android.microanswer.healthy.viewbean.BannerViewHolder;
 import android.microanswer.healthy.viewbean.HealthyItemGroup;
 import android.microanswer.healthy.viewbean.HealthyItemItemAsk;
 import android.microanswer.healthy.viewbean.HealthyItemItemBooks;
@@ -19,7 +17,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -190,9 +187,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                     Map<String, Object> item = new HashMap<String, Object>();
                     item.put("type", TYPE_ITEM_INFO);
                     try {
-                        ArrayList<InfoListItem> data = JavaBeanTools.Info.getInfoListData(2, ++infoPage, lastinfoclass, null);
+                        List<InfoListItem> data = JavaBeanTools.Info.getInfoListData(++infoPage, 2, lastinfoclass);
                         item.put("data", data);
-                    } catch (JavaBeanDataLoadException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Message msge = Message.obtain(handler);
                         msge.what = WHAT_ERROR;
@@ -234,7 +231,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                 try {
                     int loreClassID = rd.nextInt(7);
                     for (int i = 0; i < 2; i++) {
-                        ArrayList<LoreListItem> loreListData = JavaBeanTools.Lore.getLoreListData(2, 1 + i, loreClassID, null);
+                        List<LoreListItem> loreListData = JavaBeanTools.Lore.getLoreListData(1 + i, 2, loreClassID);
                         HashMap<String, Object> items = new HashMap<String, Object>();
                         items.put("type", TYPE_ITEM_KNOWLEDGE);
                         items.put("data", loreListData);
@@ -245,7 +242,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                         handler.sendMessage(msg);
                     }//请求健康知识数据
 
-                    ArrayList<AskClassifyItem> askClassifyData = JavaBeanTools.Ask.getAskClassifyData(null);
+                    List<AskClassifyItem> askClassifyData = JavaBeanTools.Ask.getAskClassifyData();
 
 
                     for (int j = 0; j < 3; j++) {
@@ -267,7 +264,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
                     int id = rd.nextInt(7);
                     for (int j = 0; j < 3; j++) {
-                        ArrayList<BookListItem> itembookData = JavaBeanTools.Book.getBookListData(3, (1 + j), id, null);
+                        List<BookListItem> itembookData = JavaBeanTools.Book.getBookList((1 + j), 3, id);
                         Map<String, Object> items = new HashMap<String, Object>();
                         items.put("type", TYPE_ITEM_BOOKS);
                         items.put("data", itembookData);
@@ -282,7 +279,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                     for (int i = 0; i < 3; i++) {
                         Map<String, Object> infoitemdata = new HashMap<>();
                         infoPage = (1 + i);
-                        ArrayList<InfoListItem> infoListData = JavaBeanTools.Info.getInfoListData(2, infoPage, rd.nextInt(7) + 1, null);
+                        List<InfoListItem> infoListData = JavaBeanTools.Info.getInfoListData(infoPage, 2, rd.nextInt(7) + 1);
                         infoitemdata.put("type", TYPE_ITEM_INFO);
                         infoitemdata.put("data", infoListData);
                         Message msg = handler.obtainMessage();
@@ -343,13 +340,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         return data.get(index);
     }
 
-    @Override
-    public void onViewRecycled(RecyclerView.ViewHolder holder) {
-        super.onViewRecycled(holder);
-        if (holder != null && holder == smartBannerViewHolder) {
-            smartBannerViewHolder.stopTurning();
-        }
-    }
+//    @Override
+//    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+//        super.onViewRecycled(holder);
+//        if (holder != null && holder == smartBannerViewHolder) {
+//            smartBannerViewHolder.stopTurning();
+//        }
+//    }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -366,7 +363,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 //                itemdata.put("function", FUNCTION_NORMALLOAD);
 //            }
 //                bannerViewHolder.startPlay();
-            if (itemdata.get("data") != null)
                 bannerViewHolder.setData((List<InfoListItem>) itemdata.get("data"));
         } else {
             if (type == TYPE_ITEMGROUP) {
@@ -379,21 +375,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             } else if (type == TYPE_ITEM_ASK) {
                 HealthyItemItemAsk healthyItemItem = (HealthyItemItemAsk) holder;
                 ArrayList<AskClassifyItem> item = (ArrayList<AskClassifyItem>) itemdata.get("data");
-                healthyItemItem.setData(item);
+                if (item != null)
+                    healthyItemItem.setData(item);
 
             } else if (type == TYPE_ITEM_BOOKS) {
                 HealthyItemItemBooks healthyItemItem = (HealthyItemItemBooks) holder;
                 ArrayList<BookListItem> item = (ArrayList<BookListItem>) itemdata.get("data");
-                healthyItemItem.setData(item);
+                if (item != null)
+                    healthyItemItem.setData(item);
 
             } else if (type == TYPE_ITEM_KNOWLEDGE) {
                 HealthyItemItemKnowledge healthyItemItem = (HealthyItemItemKnowledge) holder;
                 ArrayList<LoreListItem> item = (ArrayList<LoreListItem>) itemdata.get("data");
+                if (item != null)
                 healthyItemItem.setData(item);
 
             } else if (type == TYPE_ITEM_INFO) {
                 HealthyItemItemInfo healthyItemItemInfo = (HealthyItemItemInfo) holder;
                 ArrayList<InfoListItem> item = (ArrayList<InfoListItem>) itemdata.get("data");
+                if (item != null)
                 healthyItemItemInfo.setData(item);
             }
         }

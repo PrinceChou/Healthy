@@ -7,6 +7,7 @@ import android.microanswer.healthy.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 /**
  * 应用程序类
@@ -21,9 +22,9 @@ public class Healthy extends Application {
         super.onCreate();
         if (ilc == null) {
             ilc = new ImageLoaderConfiguration.Builder(this).threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY)
-                    .defaultDisplayImageOptions(new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true).showImageOnFail(R.mipmap.ic_img_faill)
-                            .showImageOnLoading(R.mipmap.loading).build())
-                    .diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(100).build();
+                    .defaultDisplayImageOptions(new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(R.mipmap.ic_img_faill)
+                            .displayer(new FadeInBitmapDisplayer(200)).showImageOnLoading(R.mipmap.loading).build())
+                    .diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(300).build();
         }
         if (!ImageLoader.getInstance().isInited()) {
             ImageLoader.getInstance().init(ilc);
