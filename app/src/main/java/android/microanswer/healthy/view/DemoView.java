@@ -33,6 +33,7 @@ public class DemoView extends View {
 
     private void init() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setAntiAlias(true);
         paint.setTextSize(30);
         paint.setColor(Color.BLACK);
     }
@@ -64,10 +65,20 @@ public class DemoView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+//        canvas.drawLine();/
+
+
+
+
+
+
         String res1 = widthMode == MeasureSpec.AT_MOST ? "AT_MOST" : widthMode == MeasureSpec.EXACTLY ? "EXACTLY" : "UNSPECIFIED";
         String res2 = heightMode == MeasureSpec.AT_MOST ? "AT_MOST" : widthMode == MeasureSpec.EXACTLY ? "EXACTLY" : "UNSPECIFIED";
         res1="宽测量模式：" + res1+",参考尺寸："+widthSize;
         canvas.drawText(res1, 20, 40, paint);
+
+//        canvas.drawLines();
+
         Rect rect = new Rect();
         paint.getTextBounds(res1,0,res1.length(),rect);
         canvas.drawLine(20,40,20+rect.width(),40,paint);

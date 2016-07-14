@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 由 Micro 创建于 2016/6/24.
@@ -35,7 +36,7 @@ public class HealthyItemItemInfo extends RecyclerView.ViewHolder {
         iv_imgs[1] = (ImageView) itemView.findViewById(R.id.viewpager_healthy_itemitem_health_knowledge_img2);
     }
 
-    public void setData(ArrayList<InfoListItem> data) {
+    public void setData(List<InfoListItem> data) {
         for (int i = 0; i < data.size(); i++) {
             InfoListItem item = data.get(i);
             tv_names[i].setText(item.getTitle());

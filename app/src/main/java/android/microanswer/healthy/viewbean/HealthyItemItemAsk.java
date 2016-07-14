@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 由 Micro 创建于 2016/6/24.
@@ -33,7 +34,7 @@ public class HealthyItemItemAsk extends RecyclerView.ViewHolder {
         tv_names[3] = (TextView) itemView.findViewById(R.id.viewpager_healthy_itemitem_health_question$ask4);
     }
 
-    public void setData(ArrayList<AskClassifyItem> data) {
+    public void setData(List<AskClassifyItem> data) {
 
         for (int i = 0; i < data.size(); i++) {
             tv_names[i].setText(data.get(i).getTitle());

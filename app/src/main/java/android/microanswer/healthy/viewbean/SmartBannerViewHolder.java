@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements Vi
         if (this.data == datas) {//相同数据不用重新设置banner
             return;
         }
+        Log.i("从数据库获取到的健康咨询","Banner设置数据:"+datas.toString());
 
         this.data = datas;
         convenientBanner.setPages(bannerItemCreator, datas).setPageIndicator(new int[]{R.drawable.dot2, R.drawable.dot1})

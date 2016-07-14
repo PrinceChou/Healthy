@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 由 Micro 创建于 2016/6/24.
@@ -32,7 +33,7 @@ public class HealthyItemItemBooks extends RecyclerView.ViewHolder {
         iv_imgs[2] = (ImageView) itemView.findViewById(R.id.viewpager_healthy_itemitem_health_books_img3);
     }
 
-    public void setData(ArrayList<BookListItem> data) {
+    public void setData(List<BookListItem> data) {
         for (int i = 0; i < data.size(); i++) {
             BookListItem item = data.get(i);
             tv_names[i].setText(item.getName());

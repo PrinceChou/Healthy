@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -173,16 +174,16 @@ public class BaseTools {
                 f.setAccessible(true);
                 String fieldName = f.getName();
                 Class type = f.getType();
-                if (type.getName().equals("String")) {
+                if (type.getSimpleName().equals("String")) {
                     String fieldValue = cursor.getString(cursor.getColumnIndex(fieldName));
                     f.set(t, fieldValue);
-                } else if (type.getName().equals("Integer") || type.getName().equals("int")) {
+                } else if (type.getSimpleName().equals("Integer") || type.getSimpleName().equals("int")) {
                     int fieldValues = cursor.getInt(cursor.getColumnIndex(fieldName));
                     f.set(t, fieldValues);
-                } else if (type.getName().equals("Long") || type.getName().equals("long")) {
+                } else if (type.getSimpleName().equals("Long") || type.getSimpleName().equals("long")) {
                     long fieldValues = cursor.getLong(cursor.getColumnIndex(fieldName));
                     f.set(t, fieldValues);
-                } else if (type.getName().contains("ArrayList")) {
+                } else if (type.getSimpleName().contains("ArrayList")) {
                     f.set(t, byteArray2object(cursor.getBlob(cursor.getColumnIndex(fieldName))));
                 }
             }
@@ -310,11 +311,12 @@ public class BaseTools {
     public static String createTable(String tableName, String... fields) {
         StringBuilder baseSql = new StringBuilder("create table " + tableName + "( _id integer primary key autoincrement,");
         String baseSqlEnd = ");";
-        for (String item : fields) {
+        for (int i = 0; i < fields.length; i++) {
+            String item = fields[i];
             String s[] = item.split(",");
             String s1 = s[0];
             String s2 = s[1];
-            baseSql.append(s1).append(" ").append(s2).append(",");
+            baseSql.append(s1).append(" ").append(s2).append(i == fields.length - 1 ? "" : ",");
         }
         return baseSql.append(baseSqlEnd).toString();
     }

@@ -48,8 +48,13 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
         recyclerView.addOnScrollListener(scrollListener);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerViewAdapter.generateOnlineData();
-        Log.i("HealthyFragment", "设置适配器完成");
+        recyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recyclerViewAdapter.generateOnlineData();
+            }
+        }, 500);
+
     }
 
     /**
@@ -59,7 +64,6 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            Log.i("HealthyFragment", "newState=" + newState);
         }
 
         @Override
@@ -77,15 +81,12 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
      * @return
      */
     protected boolean isSlideToBottom(RecyclerView recyclerView) {
-        if (recyclerView == null) return false;
-        if (recyclerView.getAdapter() == null) return false;
-        if (getActivity() == null) return false;
-        return recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= (recyclerView.computeVerticalScrollRange() - BaseTools.Dp2Px(getActivity(), 400));
+        return recyclerView != null && recyclerView.getAdapter() != null && getActivity() != null && recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= (recyclerView.computeVerticalScrollRange() - BaseTools.Dp2Px(getActivity(), 400));
     }
 
 
     private void initData() {
-        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), this);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity());
         recyclerViewAdapter.setRefreshListener(this);
         linearLayoutManager = new LinearLayoutManager(getActivity());
     }

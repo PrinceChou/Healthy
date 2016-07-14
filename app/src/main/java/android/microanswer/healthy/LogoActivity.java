@@ -80,7 +80,12 @@ public class LogoActivity extends BaseActivity implements BaseActivity.OtherThre
                 });
             }
         }else{
-            toast("欢迎", POSOTION_TOP);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    toast("欢迎", POSOTION_TOP);
+                }
+            });
         }
         SystemClock.sleep(time);
         return null;

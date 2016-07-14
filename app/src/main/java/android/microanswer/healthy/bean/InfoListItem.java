@@ -120,6 +120,12 @@ public class InfoListItem implements Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        InfoListItem item = (InfoListItem) obj;
+        return item.getId() == getId();
+    }
+
+    @Override
     public String toString() {
         return "\nInfoListItem{" +
                 "count=" + count +
