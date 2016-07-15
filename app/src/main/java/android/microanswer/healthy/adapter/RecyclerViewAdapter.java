@@ -7,6 +7,7 @@ import android.microanswer.healthy.bean.BookListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.database.DataManager;
+import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.JavaBeanTools;
 import android.microanswer.healthy.viewbean.HealthyItemGroup;
 import android.microanswer.healthy.viewbean.HealthyItemItemAsk;
@@ -87,8 +88,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         Map<String, Object> banner = new HashMap<>();
         banner.put("type", TYPE_BANNER);
 
-
-        ArrayList<InfoListItem> infoListItems = dataManager.getInfoListItems(5, 1, rd.nextInt(7) + 1);
+        int inclassifyid = rd.nextInt(7) + 1;
+        ArrayList<InfoListItem> infoListItems = dataManager.getInfoListItems(10, 1, inclassifyid);
         Log.i("从数据库获取到的", "健康咨询=" + infoListItems.toString());
 
         banner.put("data", infoListItems);
@@ -157,8 +158,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             }
         }
 
-        //TODO 从数据库继续读数据
-
         Map<String, Object> group3 = new HashMap<>();
         group3.put("type", TYPE_ITEMGROUP);
         group3.put("name", "健康图书");
@@ -166,17 +165,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         datalist.add(group3);
         //构建健康问答标题
 
-        for (int m = 0; m < 3; m++) {
-            Map<String, Object> bookdata = new HashMap<>();
-            bookdata.put("type", TYPE_ITEM_BOOKS);
-            ArrayList<BookListItem> item_in_item = new ArrayList<>();
-            for (int l = 0; l < 3; l++) {
-                BookListItem bookListItem = new BookListItem();
-                bookListItem.setName("加载中...");
-                item_in_item.add(bookListItem);
+        int bookclassify = rd.nextInt(10) + 1;
+        ArrayList<BookListItem> bookListItems = dataManager.getBookListItems(9, 1, bookclassify);
+        if (bookListItems == null || bookListItems.size() != 9) {
+            for (int m = 0; m < 3; m++) {
+                Map<String, Object> bookdata = new HashMap<>();
+                bookdata.put("type", TYPE_ITEM_BOOKS);
+                ArrayList<BookListItem> item_in_item = new ArrayList<>();
+                for (int l = 0; l < 3; l++) {
+                    BookListItem bookListItem = new BookListItem();
+                    bookListItem.setName("加载中...");
+                    item_in_item.add(bookListItem);
+                }
+                bookdata.put("data", item_in_item);
+                datalist.add(bookdata);
             }
-            bookdata.put("data", item_in_item);
-            datalist.add(bookdata);
+        } else {
+            for (int m = 0; m < 3; m++) {
+                Map<String, Object> bookdata = new HashMap<>();
+                bookdata.put("type", TYPE_ITEM_BOOKS);
+                List<BookListItem> item_in_item = bookListItems.subList((m * 3), (m * 3) + 3);
+                bookdata.put("data", item_in_item);
+                datalist.add(bookdata);
+            }
         }//构建健康问答数据
 
         Map<String, Object> group4 = new HashMap<>();
@@ -186,19 +197,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         datalist.add(group4);
         //构建更多资讯标题
 
-        for (int i = 0; i < 3; i++) {
-            Map<String, Object> Infolistdata = new HashMap<>();
-            Infolistdata.put("type", TYPE_ITEM_INFO);
-            ArrayList<InfoListItem> item_in_item = new ArrayList<>();
-            for (int j = 0; j < 2; j++) {
-                InfoListItem infoListItem = new InfoListItem();
-                infoListItem.setDescription("加载中...");
-                item_in_item.add(infoListItem);
+
+        ArrayList<InfoListItem> infoListItems1 = dataManager.getInfoListItems(10, 2, inclassifyid);
+        if (infoListItems1 == null || infoListItems1.size() != 10) {
+            for (int i = 0; i < 5; i++) {
+                Map<String, Object> Infolistdata = new HashMap<>();
+                Infolistdata.put("type", TYPE_ITEM_INFO);
+                ArrayList<InfoListItem> item_in_item = new ArrayList<>();
+                for (int j = 0; j < 2; j++) {
+                    InfoListItem infoListItem = new InfoListItem();
+                    infoListItem.setDescription("加载中...");
+                    item_in_item.add(infoListItem);
+                }
+                Infolistdata.put("data", item_in_item);
+                datalist.add(Infolistdata);
             }
-            Infolistdata.put("data", item_in_item);
-            datalist.add(Infolistdata);
-        }//构建更多数据
-        infoPage = 1;
+        } else {//构建更多数据
+            for (int i = 0; i < 5; i++) {
+                Map<String, Object> Infolistdata = new HashMap<>();
+                Infolistdata.put("type", TYPE_ITEM_INFO);
+                List<InfoListItem> item_in_item = infoListItems1.subList((i * 2), (i * 2) + 2);
+                Infolistdata.put("data", item_in_item);
+                datalist.add(Infolistdata);
+            }
+        }
         return datalist;
     }
 
@@ -209,16 +231,61 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         if (isappending) {//正在添加新内容，不要再添加
             return;
         }
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 isappending = true;
                 Map<String, Object> itemObject = getItemObject(getItemCount() - 1);
-                ArrayList<InfoListItem> itemdatas = (ArrayList<InfoListItem>) itemObject.get("data");
+                Log.i("从数据库", "获取到的最后一个数据是:" + itemObject.toString());
+                List<InfoListItem> itemdatas = (List<InfoListItem>) itemObject.get("data");
+                if (itemdatas == null || itemdatas.size() < 1) {
+                    isappending = false;
+                    return;
+                }
                 InfoListItem lastinfo = itemdatas.get(1);
                 int startindex = getItemCount() + 1;
                 int lastinfoclass = lastinfo.getInfoclass();
-                for (int i = 0; i < 3; i++) {
+                List<InfoListItem> infoListData = JavaBeanTools.Info.getInfoListData(infoPage, 10, lastinfoclass);
+                if (infoListData != null) {
+                    infoPage++;
+                    Log.i("从数据库", "从网络获取到的资讯写入数据库" + dataManager.putInfoListItems(infoListData) + "条");
+                    for (int i = 0; i < 5; i++) {
+                        Map<String, Object> infoitemdata = new HashMap<>();
+                        infoitemdata.put("type", TYPE_ITEM_INFO);
+                        infoitemdata.put("data", infoListData.subList((i * 2), (i * 2) + 2));
+                        Message msg = handler.obtainMessage();
+                        msg.what = WHAT_ITEM_APPEND;
+                        msg.obj = infoitemdata;
+                        msg.sendToTarget();
+                    }//构建更多资讯数据
+                } else {
+                    Message msge = Message.obtain(handler);
+                    msge.what = WHAT_ERROR;
+                    msge.obj = "你的网络好像不怎么好！";
+                    msge.sendToTarget();
+                    isappending = false;
+
+                    infoListData = dataManager.getInfoListItems(10, infoPage, lastinfoclass);
+                    if (infoListData != null && infoListData.size() == 10) {
+                        infoPage++;
+                        for (int i = 0; i < 5; i++) {
+                            Map<String, Object> infoitemdata = new HashMap<>();
+                            infoitemdata.put("type", TYPE_ITEM_INFO);
+                            infoitemdata.put("data", infoListData.subList((i * 2), (i * 2) + 2));
+                            Message msg = handler.obtainMessage();
+                            msg.what = WHAT_ITEM_APPEND;
+                            msg.obj = infoitemdata;
+                            msg.sendToTarget();
+                        }//构建更多资讯数据
+                    } else {
+
+
+                    }
+
+                }
+               /* for (int i = 0; i < 5; i++) {
                     Message msg = Message.obtain(handler);
                     msg.what = WHAT_ITEM_APPEND;
                     Map<String, Object> item = new HashMap<String, Object>();
@@ -237,7 +304,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                     }
                     msg.obj = item;
                     msg.sendToTarget();
-                }
+                }*/
                 isappending = false;
             }
         }).start();
@@ -258,7 +325,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                     banner.put("type", TYPE_BANNER);
                     int classifyId = rd.nextInt(7);
 
-                    List<InfoListItem> infoListData1 = JavaBeanTools.Info.getInfoListData(1, 5, classifyId);
+                    List<InfoListItem> infoListData1 = JavaBeanTools.Info.getInfoListData(1, 10, classifyId);
                     if (infoListData1 != null) {
                         dataManager.putInfoListItems(infoListData1);
                         banner.put("data", infoListData1);
@@ -303,29 +370,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                             msg.obj = askdata;
                             handler.sendMessage(msg);
                         }
-
-                        
-                        /*for (int j = 0; j < 3; j++) {
-                            ArrayList<AskClassifyItem> itemAskData = new ArrayList<AskClassifyItem>();
-                            Map<String, Object> items = new HashMap<String, Object>();
-                            for (int g = 0; g < 4; g++) {
-                                if (askClassifyData.size() > 0) {
-                                    itemAskData.add(askClassifyData.remove(0));
-                                }
-                            }
-                            items.put("type", TYPE_ITEM_ASK);
-                            items.put("data", itemAskData);
-                            Message msg = handler.obtainMessage();
-                            msg.what = WHAT_ITEMUPDATE;
-                            msg.arg1 = (j + 5);
-                            msg.obj = items;
-                            handler.sendMessage(msg);
-                        }*/
                     }//请求健康问答数据
 
 
+                    int bookclassify = rd.nextInt(10) + 1;
+                    List<BookListItem> itembookData = JavaBeanTools.Book.getBookList(1, 9, bookclassify);
+                    if (itembookData != null) {
+                        Log.i("从数据库", "从网络获取图书列表并向数据库写入了" + dataManager.putBookListItems(itembookData) + "条数据");
+                        for (int m = 0; m < 3; m++) {
+                            Map<String, Object> bookdata = new HashMap<>();
+                            bookdata.put("type", TYPE_ITEM_BOOKS);
+                            List<BookListItem> item_in_item = itembookData.subList((m * 3), (m * 3) + 3);
+                            bookdata.put("data", item_in_item);
+                            Message msg = handler.obtainMessage();
+                            msg.what = WHAT_ITEMUPDATE;
+                            msg.arg1 = (m + 9);
+                            msg.obj = bookdata;
+                            handler.sendMessage(msg);
+                        }
+                    }
 
-                    int id = rd.nextInt(7);
+                    /*int id = rd.nextInt(7);
                     for (int j = 0; j < 3; j++) {
                         List<BookListItem> itembookData = JavaBeanTools.Book.getBookList((1 + j), 3, id);
                         Map<String, Object> items = new HashMap<String, Object>();
@@ -336,9 +401,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                         msg.arg1 = (j + 9);
                         msg.obj = items;
                         handler.sendMessage(msg);
-                    }//请求健康图书数据
+                    }//请求健康图书数据*/
 
 
+                    List<InfoListItem> infoListData = JavaBeanTools.Info.getInfoListData(2, 10, classifyId);
+                    if (infoListData != null) {
+                        Log.i("从数据库", "从网络获取到的资讯写入数据库" + dataManager.putInfoListItems(infoListData) + "条");
+                        for (int i = 0; i < 5; i++) {
+                            Map<String, Object> infoitemdata = new HashMap<>();
+                            infoitemdata.put("type", TYPE_ITEM_INFO);
+                            infoitemdata.put("data", infoListData.subList((i * 2), (i * 2) + 2));
+                            Message msg = handler.obtainMessage();
+                            msg.what = WHAT_ITEMUPDATE;
+                            msg.arg1 = (i + 13);
+                            msg.obj = infoitemdata;
+                            msg.sendToTarget();
+                        }//构建更多资讯数据
+                        infoPage = 3;
+                    }
+                    /*
                     for (int i = 0; i < 3; i++) {
                         Map<String, Object> infoitemdata = new HashMap<>();
                         infoPage = (1 + i);
@@ -350,7 +431,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                         msg.arg1 = (i + 13);
                         msg.obj = infoitemdata;
                         msg.sendToTarget();
-                    }//构建更多资讯数据
+                    }//构建更多资讯数据*/
 
 
                 } catch (Exception e) {

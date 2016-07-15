@@ -606,7 +606,7 @@ public final class DataManager {
     public ArrayList<BookListItem> getBookListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_BOOK, null, DataBaseOpenHelper.BOOK_ID+" = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.BOOK_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_BOOK, null, DataBaseOpenHelper.BOOK_BOOKCLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.BOOK_ID + " DESC", (count * (page - 1)) + "," + count);
             ArrayList<BookListItem> data = new ArrayList<>();
             if (query.moveToFirst())
                 do {
@@ -649,7 +649,7 @@ public final class DataManager {
      * @param bookListItems
      * @return
      */
-    public int putBookListItems(ArrayList<BookListItem> bookListItems) {
+    public int putBookListItems(List<BookListItem> bookListItems) {
         int count = 0;
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
         if (writableDatabase.isOpen()) {

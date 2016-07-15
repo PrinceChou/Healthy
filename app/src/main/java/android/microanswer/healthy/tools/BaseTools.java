@@ -25,6 +25,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -159,6 +160,22 @@ public class BaseTools {
         return list.size() > 0;
     }
 
+    /**
+     * 打印一个Cursor中所有的字段
+     *
+     * @param cursor
+     * @return
+     */
+    public static String[] printCursorColumNames(String logTag, Cursor cursor) {
+        int columnCount = cursor.getColumnCount();
+        String[] names = new String[columnCount];
+        for (int i = 0; i < columnCount; i++) {
+            names[i] = cursor.getColumnName(i);
+        }
+        Log.i(logTag, Arrays.toString(names));
+        return names;
+    }
+
 
     /**
      * 从数据库的查询结果中取得一个对象,[#在传入cursor之前,你应该先指定好其中的position]
@@ -169,22 +186,28 @@ public class BaseTools {
     public static <T> T cursor2Object(Class<T> clazz, Cursor cursor) {
         try {
             T t = clazz.newInstance();
+            Log.i("从数据库", "实列化类:" + clazz.getName());
+            printCursorColumNames("从数据库", cursor);
             Field[] fields = clazz.getDeclaredFields();
             for (Field f : fields) {
                 f.setAccessible(true);
                 String fieldName = f.getName();
                 Class type = f.getType();
-                if (type.getSimpleName().equals("String")) {
-                    String fieldValue = cursor.getString(cursor.getColumnIndex(fieldName));
-                    f.set(t, fieldValue);
-                } else if (type.getSimpleName().equals("Integer") || type.getSimpleName().equals("int")) {
-                    int fieldValues = cursor.getInt(cursor.getColumnIndex(fieldName));
-                    f.set(t, fieldValues);
-                } else if (type.getSimpleName().equals("Long") || type.getSimpleName().equals("long")) {
-                    long fieldValues = cursor.getLong(cursor.getColumnIndex(fieldName));
-                    f.set(t, fieldValues);
-                } else if (type.getSimpleName().contains("ArrayList")) {
-                    f.set(t, byteArray2object(cursor.getBlob(cursor.getColumnIndex(fieldName))));
+                try {
+                    if (type.getSimpleName().equals("String")) {
+                        String fieldValue = cursor.getString(cursor.getColumnIndexOrThrow(fieldName));
+                        f.set(t, fieldValue);
+                    } else if (type.getSimpleName().equals("Integer") || type.getSimpleName().equals("int")) {
+                        int fieldValues = cursor.getInt(cursor.getColumnIndexOrThrow(fieldName));
+                        f.set(t, fieldValues);
+                    } else if (type.getSimpleName().equals("Long") || type.getSimpleName().equals("long")) {
+                        long fieldValues = cursor.getLong(cursor.getColumnIndexOrThrow(fieldName));
+                        f.set(t, fieldValues);
+                    } else if (type.getSimpleName().contains("List")) {
+                        f.set(t, byteArray2object(cursor.getBlob(cursor.getColumnIndexOrThrow(fieldName))));
+                    }
+                } catch (Exception e) {
+                    System.err.print("出错字段:" + fieldName + " |----| " + e.toString());
                 }
             }
             return t;
@@ -202,6 +225,10 @@ public class BaseTools {
      * @return
      */
     public static <T> T byteArray2object(byte[] data) {
+        if (data == null) {
+            return null;
+        }
+
         T t = null;
         ByteArrayInputStream byteArrayInputStream = null;
         ObjectInputStream objectInputStream = null;

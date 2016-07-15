@@ -36,7 +36,10 @@ public class HealthyItemItemBooks extends RecyclerView.ViewHolder {
     public void setData(List<BookListItem> data) {
         for (int i = 0; i < data.size(); i++) {
             BookListItem item = data.get(i);
-            tv_names[i].setText(item.getName());
+            if (item == null) {
+                continue;
+            }
+            tv_names[i].setText((item.getName() + "").replace("null", "未知书名"));
             if (item.getImg() != null) {
                 ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + item.getImg(), iv_imgs[i]);
             }
