@@ -131,14 +131,22 @@ public final class DataManager {
         if (readableDatabase.isOpen()) {//{"limit " + count + " offset "+ (count * (page - 1))}
             Cursor result = readableDatabase.query(DataBaseOpenHelper.TABLE_INFO, null, DataBaseOpenHelper.INFO_INFOCLASSIFY + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.INFO_ID + " DESC", (count * (page - 1)) + "," + count);
             ArrayList<InfoListItem> data = new ArrayList<>();
-            if (result.moveToFirst()) {
-                do {
-                    InfoListItem infoListItem = BaseTools.cursor2Object(InfoListItem.class, result);
-                    data.add(infoListItem);
-                } while (result.moveToNext());
+            try {
+                if (result.moveToFirst()) {
+                    do {
+                        InfoListItem infoListItem = BaseTools.cursor2Object(InfoListItem.class, result);
+                        data.add(infoListItem);
+                    } while (result.moveToNext());
+                }
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                result.close();
+                readableDatabase.close();
+                return null;
+            } finally {
+                result.close();
+                readableDatabase.close();
             }
-            result.close();
-            readableDatabase.close();
             return data;
         }
         return null;
@@ -1530,7 +1538,7 @@ public final class DataManager {
          * 图书的收藏量<br/>
          * 存在于表：(@link {@link #TABLE_BOOK})
          */
-        static final String BOOKJ_FCOUNT = "fcount";
+        static final String BOOK_FCOUNT = "fcount";
         /**
          * 字段：time<br/>
          * 图书的发表时间<br/>
@@ -1881,7 +1889,7 @@ public final class DataManager {
                     g(BOOK_IMG, FieldType.VARCHAR),
                     g(BOOK_LIST, FieldType.BLOB),
                     g(BOOK_RCOUNT, FieldType.INTEGER),
-                    g(BOOKJ_FCOUNT, FieldType.INTEGER),
+                    g(BOOK_FCOUNT, FieldType.INTEGER),
                     g(BOOK_SUMMARY, FieldType.VARCHAR),
                     g(BOOK_TIME, FieldType.LONG));
             db.execSQL(sqlTableBook);  //创建健康图书详情表

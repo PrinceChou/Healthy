@@ -10,7 +10,7 @@ import java.util.List;
 public class BookListItem implements Serializable {
     private String name;//名称
     private String img;//图片
-    private String from;//    来源
+//    private String from;//    来源
     private String author;//      作者
     private String summary;//     简介
     private int bookclass;//      分类
@@ -61,13 +61,13 @@ public class BookListItem implements Serializable {
         this.img = img;
     }
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
+//    public String getFrom() {
+//        return from;
+//    }
+//
+//    public void setFrom(String from) {
+//        this.from = from;
+//    }
 
     public String getAuthor() {
         return author;

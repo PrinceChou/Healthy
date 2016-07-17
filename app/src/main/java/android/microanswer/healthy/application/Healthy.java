@@ -24,7 +24,7 @@ public class Healthy extends Application {
             ilc = new ImageLoaderConfiguration.Builder(this).threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY)
                     .defaultDisplayImageOptions(new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(R.mipmap.ic_img_faill)
                             .displayer(new FadeInBitmapDisplayer(200)).showImageOnLoading(R.mipmap.loading).build())
-                    .diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(300).build();
+                    .diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(1000).build();
         }
         if (!ImageLoader.getInstance().isInited()) {
             ImageLoader.getInstance().init(ilc);
