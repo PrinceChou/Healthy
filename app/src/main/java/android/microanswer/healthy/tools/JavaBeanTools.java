@@ -32,6 +32,7 @@ import java.util.List;
 
 public class JavaBeanTools {
     private static final String error_description = "数据加载出错";
+    private static final String TAG = "JavaBeanTools";
 
     /**
      * 健康咨询
@@ -1025,13 +1026,13 @@ public class JavaBeanTools {
          */
         public static final List<CookClassify> getCookClassifyData() {
             String url = "http://www.tngou.net/api/cook/classify";
-            String request = InternetServiceTool.request(url);
             try {
-            com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
-            if (jsonObject.getBooleanValue("status")) {
-                com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
-                return JSON.parseArray(tngou.toJSONString(), CookClassify.class);
-            }
+                String request = InternetServiceTool.request(url);
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
+                if (jsonObject.getBooleanValue("status")) {
+                    com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
+                    return JSON.parseArray(tngou.toJSONString(), CookClassify.class);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1047,9 +1048,10 @@ public class JavaBeanTools {
         public static final List<CookListItem> getCookList(int rows, int page, int id) {
             String url = "http://www.tngou.net/api/cook/list?rows=" + rows + "&page=" + page + "&id=" + id;
             String request = InternetServiceTool.request(url);
+//            Log.i(TAG, "健康菜谱请求结果:" + request);
             try {
                 com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
-            if (jsonObject.getBooleanValue("true")) {
+                if (jsonObject.getBooleanValue("status")) {
                 com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
                 return JSON.parseArray(tngou.toJSONString(), CookListItem.class);
             }

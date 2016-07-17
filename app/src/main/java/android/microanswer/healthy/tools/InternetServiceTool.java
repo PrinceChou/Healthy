@@ -3,8 +3,11 @@ package android.microanswer.healthy.tools;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import static android.R.attr.data;
 
 /**
  * 该类里面是一些简单的从网络获取的信息
@@ -98,6 +101,7 @@ public class InternetServiceTool {
     public static final String request(String urla) {
         String result = "";
         InputStreamReader inputStreamReader = null;
+        BufferedReader reader = null;
         try {
             URL url = new URL(urla);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -107,11 +111,11 @@ public class InternetServiceTool {
             httpURLConnection.connect();
             InputStream inputStream = httpURLConnection.getInputStream();
             inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-            char data[] = new char[1024];
-            int datasize = 0;
+            reader = new BufferedReader(inputStreamReader);
             StringBuffer sbf = new StringBuffer();
-            while ((datasize = inputStreamReader.read(data)) != -1) {
-                sbf.append(data, 0, datasize);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sbf.append(line);
             }
             result = sbf.toString();
         } catch (Exception e) {

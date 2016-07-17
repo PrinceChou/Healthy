@@ -879,7 +879,7 @@ public final class DataManager {
      * @param datas
      * @return
      */
-    public int putCookClassifys(ArrayList<CookClassify> datas) {
+    public int putCookClassifys(List<CookClassify> datas) {
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
         int count = 0;
         if (writableDatabase.isOpen()) {
@@ -974,7 +974,7 @@ public final class DataManager {
      * @param items
      * @return
      */
-    public int putCookListItems(ArrayList<CookListItem> items) {
+    public int putCookListItems(List<CookListItem> items) {
         int count = 0;
 
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
