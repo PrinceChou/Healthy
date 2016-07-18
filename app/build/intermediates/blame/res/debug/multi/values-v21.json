@@ -1782,5 +1782,1130 @@
                 }
             }
         ]
+    },
+    {
+        "outputFile": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\values-v21\\values-v21.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 16,
+                    "endColumn": 12,
+                    "endOffset": 907
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\values-v21\\styles.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 923
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 912,
+                    "endColumn": 90,
+                    "endOffset": 998
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1003,
+                    "endColumn": 102,
+                    "endOffset": 1101
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1106,
+                    "endColumn": 102,
+                    "endOffset": 1204
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1209,
+                    "endColumn": 104,
+                    "endOffset": 1309
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1314,
+                    "endColumn": 106,
+                    "endOffset": 1416
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1421,
+                    "endColumn": 108,
+                    "endOffset": 1525
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1530,
+                    "endColumn": 108,
+                    "endOffset": 1634
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1639,
+                    "endColumn": 108,
+                    "endOffset": 1743
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1748,
+                    "endColumn": 108,
+                    "endOffset": 1852
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1857,
+                    "endColumn": 108,
+                    "endOffset": 1961
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1966,
+                    "endColumn": 106,
+                    "endOffset": 2068
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 2073,
+                    "endColumn": 102,
+                    "endOffset": 2171
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 2176,
+                    "endColumn": 118,
+                    "endOffset": 2290
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 2295,
+                    "endLine": 31,
+                    "endColumn": 12,
+                    "endOffset": 2445
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 2450,
+                    "endLine": 33,
+                    "endColumn": 12,
+                    "endOffset": 2600
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 2605,
+                    "endColumn": 104,
+                    "endOffset": 2705
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 2710,
+                    "endColumn": 120,
+                    "endOffset": 2826
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 2831,
+                    "endColumn": 100,
+                    "endOffset": 2927
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 2932,
+                    "endLine": 38,
+                    "endColumn": 12,
+                    "endOffset": 3074
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 3079,
+                    "endLine": 40,
+                    "endColumn": 12,
+                    "endOffset": 3215
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 3220,
+                    "endColumn": 102,
+                    "endOffset": 3318
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 3323,
+                    "endColumn": 118,
+                    "endOffset": 3437
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 3442,
+                    "endColumn": 106,
+                    "endOffset": 3544
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 3549,
+                    "endColumn": 102,
+                    "endOffset": 3647
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 3652,
+                    "endLine": 46,
+                    "endColumn": 12,
+                    "endOffset": 3802
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 3807,
+                    "endLine": 48,
+                    "endColumn": 12,
+                    "endOffset": 3973
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 3978,
+                    "endLine": 50,
+                    "endColumn": 12,
+                    "endOffset": 4122
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 4127,
+                    "endLine": 52,
+                    "endColumn": 12,
+                    "endOffset": 4287
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 4292,
+                    "endLine": 54,
+                    "endColumn": 12,
+                    "endOffset": 4444
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 4449,
+                    "endLine": 56,
+                    "endColumn": 12,
+                    "endOffset": 4595
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 4600,
+                    "endColumn": 118,
+                    "endOffset": 4714
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 4719,
+                    "endLine": 62,
+                    "endColumn": 12,
+                    "endOffset": 5086
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 5091,
+                    "endLine": 64,
+                    "endColumn": 12,
+                    "endOffset": 5235
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 5240,
+                    "endLine": 66,
+                    "endColumn": 12,
+                    "endOffset": 5384
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 5389,
+                    "endColumn": 111,
+                    "endOffset": 5496
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 5501,
+                    "endColumn": 146,
+                    "endOffset": 5643
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 5648,
+                    "endLine": 70,
+                    "endColumn": 12,
+                    "endOffset": 5796
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 5801,
+                    "endLine": 72,
+                    "endColumn": 12,
+                    "endOffset": 5943
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 5948,
+                    "endColumn": 74,
+                    "endOffset": 6018
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 6023,
+                    "endColumn": 88,
+                    "endOffset": 6107
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 6112,
+                    "endColumn": 86,
+                    "endOffset": 6194
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 6199,
+                    "endColumn": 100,
+                    "endOffset": 6295
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 77,
+                    "startColumn": 4,
+                    "startOffset": 6300,
+                    "endColumn": 102,
+                    "endOffset": 6398
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 78,
+                    "startColumn": 4,
+                    "startOffset": 6403,
+                    "endLine": 121,
+                    "endColumn": 12,
+                    "endOffset": 9466
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 122,
+                    "startColumn": 4,
+                    "startOffset": 9471,
+                    "endLine": 124,
+                    "endColumn": 12,
+                    "endOffset": 9652
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 125,
+                    "startColumn": 4,
+                    "startOffset": 9657,
+                    "endLine": 168,
+                    "endColumn": 12,
+                    "endOffset": 12732
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 169,
+                    "startColumn": 4,
+                    "startOffset": 12737,
+                    "endLine": 171,
+                    "endColumn": 12,
+                    "endOffset": 12930
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 172,
+                    "startColumn": 4,
+                    "startOffset": 12935,
+                    "endLine": 174,
+                    "endColumn": 12,
+                    "endOffset": 13130
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 175,
+                    "startColumn": 4,
+                    "startOffset": 13135,
+                    "endLine": 176,
+                    "endColumn": 12,
+                    "endOffset": 13253
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 177,
+                    "startColumn": 4,
+                    "startOffset": 13258,
+                    "endLine": 178,
+                    "endColumn": 12,
+                    "endOffset": 13376
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 179,
+                    "startColumn": 4,
+                    "startOffset": 13381,
+                    "endLine": 180,
+                    "endColumn": 12,
+                    "endOffset": 13489
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 181,
+                    "startColumn": 4,
+                    "startOffset": 13494,
+                    "endLine": 183,
+                    "endColumn": 12,
+                    "endOffset": 13672
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 184,
+                    "startColumn": 4,
+                    "startOffset": 13677,
+                    "endLine": 185,
+                    "endColumn": 12,
+                    "endOffset": 13803
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 186,
+                    "startColumn": 4,
+                    "startOffset": 13808,
+                    "endLine": 188,
+                    "endColumn": 12,
+                    "endOffset": 14004
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 189,
+                    "startColumn": 4,
+                    "startOffset": 14009,
+                    "endColumn": 88,
+                    "endOffset": 14093
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 190,
+                    "startColumn": 4,
+                    "startOffset": 14098,
+                    "endColumn": 110,
+                    "endOffset": 14204
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 191,
+                    "startColumn": 4,
+                    "startOffset": 14209,
+                    "endLine": 193,
+                    "endColumn": 12,
+                    "endOffset": 14437
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 194,
+                    "startColumn": 4,
+                    "startOffset": 14442,
+                    "endColumn": 100,
+                    "endOffset": 14538
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 195,
+                    "startColumn": 4,
+                    "startOffset": 14543,
+                    "endColumn": 94,
+                    "endOffset": 14633
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 196,
+                    "startColumn": 4,
+                    "startOffset": 14638,
+                    "endColumn": 122,
+                    "endOffset": 14756
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 197,
+                    "startColumn": 4,
+                    "startOffset": 14761,
+                    "endColumn": 128,
+                    "endOffset": 14885
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 198,
+                    "startColumn": 4,
+                    "startOffset": 14890,
+                    "endColumn": 116,
+                    "endOffset": 15002
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 199,
+                    "startColumn": 4,
+                    "startOffset": 15007,
+                    "endLine": 201,
+                    "endColumn": 12,
+                    "endOffset": 15179
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 202,
+                    "startColumn": 4,
+                    "startOffset": 15184,
+                    "endColumn": 98,
+                    "endOffset": 15278
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 203,
+                    "startColumn": 4,
+                    "startOffset": 15283,
+                    "endLine": 204,
+                    "endColumn": 12,
+                    "endOffset": 15413
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 205,
+                    "startColumn": 4,
+                    "startOffset": 15418,
+                    "endLine": 206,
+                    "endColumn": 12,
+                    "endOffset": 15556
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 207,
+                    "startColumn": 4,
+                    "startOffset": 15561,
+                    "endLine": 208,
+                    "endColumn": 12,
+                    "endOffset": 15691
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 209,
+                    "startColumn": 4,
+                    "startOffset": 15696,
+                    "endLine": 210,
+                    "endColumn": 12,
+                    "endOffset": 15810
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 211,
+                    "startColumn": 4,
+                    "startOffset": 15815,
+                    "endLine": 214,
+                    "endColumn": 12,
+                    "endOffset": 16011
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 215,
+                    "startColumn": 4,
+                    "startOffset": 16016,
+                    "endLine": 216,
+                    "endColumn": 12,
+                    "endOffset": 16130
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 217,
+                    "startColumn": 4,
+                    "startOffset": 16135,
+                    "endColumn": 92,
+                    "endOffset": 16223
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 218,
+                    "startColumn": 4,
+                    "startOffset": 16228,
+                    "endColumn": 110,
+                    "endOffset": 16334
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 219,
+                    "startColumn": 4,
+                    "startOffset": 16339,
+                    "endColumn": 55,
+                    "endOffset": 16390
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 220,
+                    "startColumn": 4,
+                    "startOffset": 16395,
+                    "endLine": 221,
+                    "endColumn": 12,
+                    "endOffset": 16497
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 222,
+                    "startColumn": 4,
+                    "startOffset": 16502,
+                    "endLine": 225,
+                    "endColumn": 12,
+                    "endOffset": 16692
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 226,
+                    "startColumn": 4,
+                    "startOffset": 16697,
+                    "endLine": 227,
+                    "endColumn": 12,
+                    "endOffset": 16803
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 228,
+                    "startColumn": 4,
+                    "startOffset": 16808,
+                    "endLine": 229,
+                    "endColumn": 12,
+                    "endOffset": 16936
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 230,
+                    "startColumn": 4,
+                    "startOffset": 16941,
+                    "endColumn": 94,
+                    "endOffset": 17031
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 231,
+                    "startColumn": 4,
+                    "startOffset": 17036,
+                    "endColumn": 90,
+                    "endOffset": 17122
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 232,
+                    "startColumn": 4,
+                    "startOffset": 17127,
+                    "endColumn": 90,
+                    "endOffset": 17213
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 233,
+                    "startColumn": 4,
+                    "startOffset": 17218,
+                    "endColumn": 116,
+                    "endOffset": 17330
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 234,
+                    "startColumn": 4,
+                    "startOffset": 17335,
+                    "endLine": 235,
+                    "endColumn": 12,
+                    "endOffset": 17469
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 236,
+                    "startColumn": 4,
+                    "startOffset": 17474,
+                    "endLine": 245,
+                    "endColumn": 12,
+                    "endOffset": 17982
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 246,
+                    "startColumn": 4,
+                    "startOffset": 17987,
+                    "endLine": 255,
+                    "endColumn": 12,
+                    "endOffset": 18507
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 256,
+                    "startColumn": 4,
+                    "startOffset": 18512,
+                    "endLine": 265,
+                    "endColumn": 12,
+                    "endOffset": 19187
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 266,
+                    "startColumn": 4,
+                    "startOffset": 19192,
+                    "endColumn": 56,
+                    "endOffset": 19244
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 267,
+                    "startColumn": 4,
+                    "startOffset": 19249,
+                    "endColumn": 57,
+                    "endOffset": 19302
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 268,
+                    "startColumn": 4,
+                    "startOffset": 19307,
+                    "endLine": 270,
+                    "endColumn": 12,
+                    "endOffset": 19496
+                },
+                "from": {
+                    "file": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\values-v21\\values-v21.xml"
+                }
+            }
+        ]
     }
 ]

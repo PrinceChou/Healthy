@@ -2,5 +2,9 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\design_layout_snackbar.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout-sw600dp-v13\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\design_layout_snackbar.xml",
+        "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout-sw600dp-v13\\design_layout_snackbar.xml"
     }
 ]

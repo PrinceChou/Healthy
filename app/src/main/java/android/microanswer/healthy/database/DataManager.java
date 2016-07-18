@@ -1023,7 +1023,7 @@ public final class DataManager {
      * @param table
      * @return
      */
-    private boolean exist(int id, String table, SQLiteDatabase sqLiteDatabase) {
+    private synchronized boolean exist(int id, String table, SQLiteDatabase sqLiteDatabase) {
         String sql = "select * from " + table + " where id = ?";
         if (sqLiteDatabase.isOpen()) {
             Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{id + ""});

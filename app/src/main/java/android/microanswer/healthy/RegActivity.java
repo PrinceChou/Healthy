@@ -1,6 +1,7 @@
 
 package android.microanswer.healthy;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -56,7 +57,7 @@ public class RegActivity extends BaseActivity implements View.OnClickListener, V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
-        sharedPreferences = getSharedPreferences("regactivity_data",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("regactivity_data", MODE_PRIVATE);
         initview();
     }
 
@@ -91,19 +92,19 @@ public class RegActivity extends BaseActivity implements View.OnClickListener, V
         submit.setOnClickListener(this);
         runOnOtherThread(new CheckCodeCreater(), 2);
 
-        acount.setText(sharedPreferences.getString("acount",""));
-        email.setText(sharedPreferences.getString("email",""));
+        acount.setText(sharedPreferences.getString("acount", ""));
+        email.setText(sharedPreferences.getString("email", ""));
     }
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (v instanceof EditText) {
             if (hasFocus) {
-                SimpleViewFocusHinter.makeSimpleViewFocusHinter(this, v,  v.getContentDescription().toString()).show();
+                SimpleViewFocusHinter.makeSimpleViewFocusHinter(this, v, v.getContentDescription().toString()).show();
             } else {
                 SimpleViewFocusHinter.dismassMaked();
             }
-        }else{
+        } else {
             SimpleViewFocusHinter.dismassMaked();
         }
     }
@@ -145,11 +146,13 @@ public class RegActivity extends BaseActivity implements View.OnClickListener, V
             String rees = message.obj.toString();
             if (!n(User.getUser().getAccess_token())) {
                 //注册成功
-                setResult(REG_ACCOUNT);
+                Intent intent = new Intent();
+                intent.putExtra("name_pwd", new String[]{acount.getText().toString().trim(), pwd1.getText().toString().trim()});
+                setResult(REG_ACCOUNT,intent);
                 finish();
             } else {
                 //注册失败
-                toast(rees,POSOTION_TOP);
+                errorDialog(rees,this);
             }
         }
 
@@ -177,53 +180,53 @@ public class RegActivity extends BaseActivity implements View.OnClickListener, V
         if (v.getId() == R.id.activity_reg_button_submit) {
             final String semail = email.getText().toString().trim();
             if (n(semail)) {
-                toast(getString(R.string.emailhint),POSOTION_TOP);
+                toast(getString(R.string.emailhint), POSOTION_TOP);
                 return;
             }
             final String sacount = acount.getText().toString().trim();
             if (n(sacount)) {
-                toast(getString(R.string.acounthint),POSOTION_TOP);
+                toast(getString(R.string.acounthint), POSOTION_TOP);
                 return;
             }
             final String spwd1 = pwd1.getText().toString().trim();
             if (n(spwd1)) {
-                toast(getString(R.string.pwdhint),POSOTION_TOP);
+                toast(getString(R.string.pwdhint), POSOTION_TOP);
                 return;
             }
             String spwd2 = pwd2.getText().toString().trim();
             if (n(spwd2)) {
-                toast(getString(R.string.pwd2hint),POSOTION_TOP);
+                toast(getString(R.string.pwd2hint), POSOTION_TOP);
                 return;
             }
             final int ssex = boy.isChecked() ? 1 : (gril.isChecked() ? 0 : -1);
             String scode = checkcode.getText().toString().trim();
             if (n(scode)) {
-                toast(getString(R.string.checkcodehint),POSOTION_TOP);
+                toast(getString(R.string.checkcodehint), POSOTION_TOP);
                 return;
             }
             if (!isCheckCodeRight(scode)) {
-                toast(getString(R.string.checkcode2),POSOTION_TOP);
+                toast(getString(R.string.checkcode2), POSOTION_TOP);
                 return;
             }
 
             if (!checkEmail(semail)) {
-                toast("邮箱格式不正确，请检查",POSOTION_TOP);
+                toast("邮箱格式不正确，请检查", POSOTION_TOP);
                 return;
             }
 
 
             if (sacount.length() < 6) {
-                toast("账号长度至少为6位",POSOTION_TOP);
+                toast("账号长度至少为6位", POSOTION_TOP);
                 return;
             }
 
             if (!checkAccount(sacount)) {
-                toast("账号不合法，开头不能为数字，只能使用字母下划线和$开头，不能包含中文",POSOTION_TOP);
+                toast("账号不合法，开头不能为数字，只能使用字母下划线和$开头，不能包含中文", POSOTION_TOP);
                 return;
             }
 
             if (!TextUtils.equals(spwd1, spwd2)) {
-                toast("两次密码输入不相同",POSOTION_TOP);
+                toast("两次密码输入不相同", POSOTION_TOP);
                 return;
             }
 
@@ -347,7 +350,7 @@ public class RegActivity extends BaseActivity implements View.OnClickListener, V
                 d = -d;
             }
             for (int j = 0; j < 6; j++) {
-                p.setStrokeWidth(random.nextInt(20) + 5);
+                p.setStrokeWidth(random.nextInt(10) + 5);
                 p.setColor(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
                 canvas.drawPoint(random.nextInt(width), random.nextInt(height), p);
             }
@@ -404,8 +407,8 @@ public class RegActivity extends BaseActivity implements View.OnClickListener, V
     @Override
     public void finish() {
         super.finish();
-        sharedPreferences.edit().putString("acount",acount.getText().toString().trim())
-                .putString("email",email.getText().toString())
+        sharedPreferences.edit().putString("acount", acount.getText().toString().trim())
+                .putString("email", email.getText().toString())
                 .apply();
     }
 }

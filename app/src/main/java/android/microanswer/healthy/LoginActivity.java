@@ -191,6 +191,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RegActivity.REG_ACCOUNT) {
+            String[] name_pwds = data.getStringArrayExtra("name_pwd");
+
+            etaccount.setText(name_pwds[0]);
+            et_pwd.setText(name_pwds[1]);
+
             toast("注册成功，正在登录", POSOTION_TOP);
             requestuserinfo();
         }

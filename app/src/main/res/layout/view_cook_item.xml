@@ -9,13 +9,11 @@
     <ImageView
         android:id="@+id/view_cook_item_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="160dp"
         android:layout_centerInParent="true"
-        android:minHeight="120dip"
-        android:minWidth="100dip"
         android:scaleType="centerCrop"/>
 
-    <TextView
+    <android.microanswer.healthy.view.AutoMoveTextView
         android:id="@+id/view_cook_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +22,9 @@
         android:layout_alignRight="@id/view_cook_item_img"
         android:background="#aaffffff"
         android:gravity="center"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:ellipsize="marquee"
         android:text="奶油泡芙"
         android:textColor="@color/black"
         android:textSize="13sp"/>
