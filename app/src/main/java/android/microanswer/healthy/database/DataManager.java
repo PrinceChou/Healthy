@@ -301,8 +301,8 @@ public final class DataManager {
     public ArrayList<LoreListItem> getLoreListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_LORE, null, DataBaseOpenHelper.LORE_LORECLASSIFY+" = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.LORE_ID + " DESC", (count * (page - 1)) + "," + count);
-            Log.i("从数据库获取到的","健康知识cursor数据条数:"+query.getCount());
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_LORE, null, DataBaseOpenHelper.LORE_LORECLASSIFY + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.LORE_ID + " DESC", (count * (page - 1)) + "," + count);
+            Log.i("从数据库获取到的", "健康知识cursor数据条数:" + query.getCount());
             ArrayList<LoreListItem> data = new ArrayList<>();
             if (query.moveToFirst()) {
                 do {
@@ -461,7 +461,7 @@ public final class DataManager {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
             ArrayList<AskListItem> data = new ArrayList<>();
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_ASK, null, DataBaseOpenHelper.ASK_ID+" = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.ASK_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_ASK, null, DataBaseOpenHelper.ASK_ID + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.ASK_ID + " DESC", (count * (page - 1)) + "," + count);
             if (query.moveToFirst()) {
                 do {
                     AskListItem askListItem = BaseTools.cursor2Object(AskListItem.class, query);
@@ -719,7 +719,7 @@ public final class DataManager {
      * @param datas
      * @return
      */
-    public int putFoodClassifys(ArrayList<FoodClassify> datas) {
+    public int putFoodClassifys(List<FoodClassify> datas) {
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
         int count = 0;
         if (writableDatabase.isOpen()) {
@@ -773,16 +773,24 @@ public final class DataManager {
     public ArrayList<FoodListItem> getFoodListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_FOOD, null, DataBaseOpenHelper.FOOD_CLASS + " = ? ", new String[]{id + ""}, null, DataBaseOpenHelper.FOOD_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_FOOD, null, DataBaseOpenHelper.FOOD_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.FOOD_ID + " DESC", (count * (page - 1)) + "," + count);
             ArrayList<FoodListItem> data = new ArrayList<>();
-            if (query.moveToFirst()) {
-                do {
-                    FoodListItem foodListItem = BaseTools.cursor2Object(FoodListItem.class, query);
-                    data.add(foodListItem);
-                } while (query.moveToNext());
+            try {
+                if (query.moveToFirst()) {
+                    do {
+                        FoodListItem foodListItem = BaseTools.cursor2Object(FoodListItem.class, query);
+                        data.add(foodListItem);
+                    } while (query.moveToNext());
+                }
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                query.close();
+                readableDatabase.close();
+                return null;
+            } finally {
+                query.close();
+                readableDatabase.close();
             }
-            query.close();
-            readableDatabase.close();
             return data;
         }
         return null;
@@ -816,7 +824,7 @@ public final class DataManager {
      * @param items
      * @return
      */
-    public int putFoodListItems(ArrayList<FoodListItem> items) {
+    public int putFoodListItems(List<FoodListItem> items) {
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
         int count = 0;
         if (writableDatabase.isOpen()) {
@@ -1696,7 +1704,6 @@ public final class DataManager {
          * 存在于表：{@link #TABLE_FOOD}
          */
         static final String FOOD_CLASS = "foodclass";
-
 
 
         @Deprecated
