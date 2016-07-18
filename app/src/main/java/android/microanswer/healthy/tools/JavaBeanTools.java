@@ -14,6 +14,7 @@ import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreClassifyItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.LoreNews;
+import android.microanswer.healthy.database.DataManager;
 import android.microanswer.healthy.exception.JavaBeanDataLoadException;
 import android.util.Log;
 
@@ -1052,9 +1053,14 @@ public class JavaBeanTools {
             try {
                 com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
                 if (jsonObject.getBooleanValue("status")) {
-                com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
-                return JSON.parseArray(tngou.toJSONString(), CookListItem.class);
-            }
+                    com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
+                    int count = tngou.size();
+                    for (int i = 0; i < count; i++) {
+                        tngou.getJSONObject(i).put("cookclass", id);
+                    }
+
+                    return JSON.parseArray(tngou.toJSONString(), CookListItem.class);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1127,13 +1133,17 @@ public class JavaBeanTools {
          */
         public static final List<FoodListItem> getFoodList(int rows, int page, int id) {
             String url = "http://www.tngou.net/api/food/list?rows=" + rows + "&page=" + page + "&id=" + id;
-            String res  = InternetServiceTool.request(url);
+            String res = InternetServiceTool.request(url);
             try {
-            com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
-            if(jsonObject.getBooleanValue("status")){
-                com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
-                return JSON.parseArray(tngou.toJSONString(),FoodListItem.class);
-            }
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(res);
+                if (jsonObject.getBooleanValue("status")) {
+                    com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
+                    int count = tngou.size();
+                    for (int i = 0; i < count; i++) {
+                        tngou.getJSONObject(i).put("foodclass", id);
+                    }
+                    return JSON.parseArray(tngou.toJSONString(), FoodListItem.class);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

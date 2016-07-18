@@ -773,7 +773,7 @@ public final class DataManager {
     public ArrayList<FoodListItem> getFoodListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_FOOD, null, DataBaseOpenHelper.FOOD_ID+" = ? ", new String[]{id + ""}, null, DataBaseOpenHelper.FOOD_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_FOOD, null, DataBaseOpenHelper.FOOD_CLASS + " = ? ", new String[]{id + ""}, null, DataBaseOpenHelper.FOOD_ID + " DESC", (count * (page - 1)) + "," + count);
             ArrayList<FoodListItem> data = new ArrayList<>();
             if (query.moveToFirst()) {
                 do {
@@ -934,7 +934,7 @@ public final class DataManager {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
             ArrayList<CookListItem> datas = new ArrayList<>();
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_COOK, null, DataBaseOpenHelper.COOK_ID+" = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.COOK_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_COOK, null, DataBaseOpenHelper.COOK_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.COOK_ID + " DESC", (count * (page - 1)) + "," + count);
             if (query.moveToFirst()) {
                 do {
                     CookListItem cookListItem = BaseTools.cursor2Object(CookListItem.class, query);
@@ -1678,6 +1678,13 @@ public final class DataManager {
          * 存在于表：{@link #TABLE_FOOD}
          */
         static final String FOOD_URL = "url";
+        /**
+         * 字段：foodclass<br/>
+         * 食物的所属分类<br/>
+         * 存在于表：{@link #TABLE_FOOD}
+         */
+        static final String FOOD_CLASS = "foodclass";
+
 
 
         @Deprecated
@@ -1791,6 +1798,12 @@ public final class DataManager {
          * 存在于表:{@link #TABLE_COOK}
          */
         static final String COOK_URL = "url";
+        /**
+         * 字段:cookclass<br/>
+         * 菜谱的所属分类<br/>
+         * 存在于表:{@link #TABLE_COOK}
+         */
+        static final String COOK_CLASS = "cookclass";
 
 
         public DataBaseOpenHelper(Context context, int version) {
@@ -1915,6 +1928,7 @@ public final class DataManager {
                     g(FOOD_KEYWORDS, FieldType.VARCHAR),
                     g(FOOD_MESSAGE, FieldType.TEXT),
                     g(FOOD_NAME, FieldType.VARCHAR),
+                    g(FOOD_CLASS, FieldType.INTEGER),
                     g(FOOD_RCOUNT, FieldType.INTEGER),
                     g(FOOD_SUMMARY, FieldType.VARCHAR),
                     g(FOOD_SYMPTOM, FieldType.VARCHAR),
@@ -1938,6 +1952,7 @@ public final class DataManager {
                     g(COOK_ID, FieldType.INTEGER),
                     g(COOK_RCOUNT, FieldType.INTEGER),
                     g(COOK_IMAGES, FieldType.VARCHAR),
+                    g(COOK_CLASS, FieldType.INTEGER),
                     g(COOK_IMG, FieldType.VARCHAR),
                     g(COOK_KEYWORDS, FieldType.VARCHAR),
                     g(COOK_MESSAGE, FieldType.TEXT),

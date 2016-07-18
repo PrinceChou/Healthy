@@ -22,6 +22,16 @@ public class FoodListItem implements Serializable {
     private String summary;
     private String symptom;
     private String url;
+    private int foodclass;
+
+
+    public int getFoodclass() {
+        return foodclass;
+    }
+
+    public void setFoodclass(int foodclass) {
+        this.foodclass = foodclass;
+    }
 
     public int getCount() {
         return count;

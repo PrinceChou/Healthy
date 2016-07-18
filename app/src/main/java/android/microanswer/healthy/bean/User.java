@@ -42,11 +42,11 @@ public class User implements Serializable{
     private User() {
     }
 
-    public static final void setUser(User user){
+    public static void setUser(User user) {
         User.user = user;
     }
 
-    public final static User getUser() {
+    public static User getUser() {
         if (user == null) {
             user = new User();
         }

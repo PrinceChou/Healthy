@@ -3,6 +3,7 @@ package android.microanswer.healthy.adapter;
 import android.content.Context;
 import android.microanswer.healthy.R;
 import android.microanswer.healthy.bean.CookListItem;
+import android.microanswer.healthy.fragment.CookFragment;
 import android.microanswer.healthy.viewbean.CookItemHolder;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
@@ -37,6 +38,15 @@ public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     /**
+     * 获取当前显示的分类
+     *
+     * @return
+     */
+    public int getCurrentClassify() {
+        return currentClassify;
+    }
+
+    /**
      * 设置对应菜谱分类的数据
      *
      * @param classify
@@ -50,6 +60,21 @@ public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     /**
+     * 追加对应分类数据
+     *
+     * @param classify
+     * @param data
+     */
+    public void appendClassifyData(int classify, List<CookListItem> data) {
+        List<CookListItem> cookListItems = this.data.get(classify);
+        int oldSize = cookListItems.size();
+        cookListItems.addAll(data);
+        if (classify == currentClassify) {
+            notifyItemRangeInserted(oldSize + 1, data.size());
+        }
+    }
+
+    /**
      * 获取对应分类的数据
      *
      * @param classify
@@ -57,6 +82,14 @@ public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
      */
     public List<CookListItem> getClassifyData(int classify) {
         return this.data.get(classify);
+    }
+
+    /**
+     * 获取当前显示了几页
+     * @return
+     */
+    public int getCurrentClassifyPage() {
+        return getClassifyData(currentClassify).size() / CookFragment.PAGE_COUNT;
     }
 
 

@@ -19,6 +19,15 @@ public class CookListItem implements Serializable {
     private String name;
     private int rcount;
     private String url;
+    private int cookclass;
+
+    public int getCookclass() {
+        return cookclass;
+    }
+
+    public void setCookclass(int cookclass) {
+        this.cookclass = cookclass;
+    }
 
     public int getCount() {
         return count;
