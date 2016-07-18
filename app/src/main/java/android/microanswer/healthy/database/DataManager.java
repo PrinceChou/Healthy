@@ -934,15 +934,24 @@ public final class DataManager {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
             ArrayList<CookListItem> datas = new ArrayList<>();
+
             Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_COOK, null, DataBaseOpenHelper.COOK_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.COOK_ID + " DESC", (count * (page - 1)) + "," + count);
-            if (query.moveToFirst()) {
-                do {
-                    CookListItem cookListItem = BaseTools.cursor2Object(CookListItem.class, query);
-                    datas.add(cookListItem);
-                } while (query.moveToNext());
+            try {
+                if (query.moveToFirst()) {
+                    do {
+                        CookListItem cookListItem = BaseTools.cursor2Object(CookListItem.class, query);
+                        datas.add(cookListItem);
+                    } while (query.moveToNext());
+                }
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                query.close();
+                readableDatabase.close();
+                return null;
+            } finally {
+                query.close();
+                readableDatabase.close();
             }
-            query.close();
-            readableDatabase.close();
             return datas;
         }
         return null;
@@ -974,7 +983,7 @@ public final class DataManager {
      * @param items
      * @return
      */
-    public int putCookListItems(List<CookListItem> items) {
+    public synchronized int putCookListItems(List<CookListItem> items) {
         int count = 0;
 
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
@@ -1016,11 +1025,14 @@ public final class DataManager {
      */
     private boolean exist(int id, String table, SQLiteDatabase sqLiteDatabase) {
         String sql = "select * from " + table + " where id = ?";
-        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{id + ""});
-        boolean exist = cursor != null && cursor.getCount() == 1;
-        if (cursor != null)
-            cursor.close();
-        return exist;
+        if (sqLiteDatabase.isOpen()) {
+            Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{id + ""});
+            boolean exist = cursor != null && cursor.getCount() == 1;
+            if (cursor != null)
+                cursor.close();
+            return exist;
+        }
+        return true;
     }
 
     /**

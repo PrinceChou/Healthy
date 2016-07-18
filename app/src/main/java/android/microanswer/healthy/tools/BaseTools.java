@@ -186,8 +186,7 @@ public class BaseTools {
     public static <T> T cursor2Object(Class<T> clazz, Cursor cursor) {
         try {
             T t = clazz.newInstance();
-            Log.i("从数据库", "实列化类:" + clazz.getName());
-            printCursorColumNames("从数据库", cursor);
+//            printCursorColumNames("从数据库", cursor);
             Field[] fields = clazz.getDeclaredFields();
             for (Field f : fields) {
                 f.setAccessible(true);

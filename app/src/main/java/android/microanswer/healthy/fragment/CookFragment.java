@@ -160,7 +160,7 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (!thread.isAlive()) {
+        if (childHandler == null) {
             thread.start();
         }
         if (rootview == null) {
@@ -262,7 +262,7 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
             if (isSlideToBottom(recyclerView)) {//滑动到底部自动加载更多
                 ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
-                if (cookClassifies == null || cookClassifies.size() != PAGE_COUNT) {
+                if (cookListItems == null || cookListItems.size() != PAGE_COUNT) {
                     if (isLoadingMore) {
                         return;
                     }
@@ -279,7 +279,7 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
     @Override
     public void onDestroy() {
         super.onDestroy();
-        childHandler.getLooper().quit();
+//        childHandler.getLooper().quit();
     }
 
     private boolean isSlideToBottom(RecyclerView recyclerView) {
