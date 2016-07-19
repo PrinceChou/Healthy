@@ -124,4 +124,10 @@ public class CookListItem implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        CookListItem cookListItem = (CookListItem) obj;
+        return cookListItem.getId() == getId();
+    }
 }

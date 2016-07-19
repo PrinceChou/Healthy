@@ -773,7 +773,7 @@ public final class DataManager {
     public ArrayList<FoodListItem> getFoodListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_FOOD, null, DataBaseOpenHelper.FOOD_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.FOOD_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_FOOD, null, DataBaseOpenHelper.FOOD_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.FOOD_ID + " ASC", (count * (page - 1)) + "," + count);
             ArrayList<FoodListItem> data = new ArrayList<>();
             try {
                 if (query.moveToFirst()) {
@@ -810,7 +810,7 @@ public final class DataManager {
         }
         if (writableDatabase.isOpen()) {
             ContentValues values = BaseTools.createContentValues(item);
-            long l = writableDatabase.insert(DataBaseOpenHelper.TABLE_FOOD, DataBaseOpenHelper.FOOD_SUMMARY, values);
+            long l = writableDatabase.insert(DataBaseOpenHelper.TABLE_FOOD, DataBaseOpenHelper.FOOD_DESCRIPTION, values);
             writableDatabase.close();
             return l;
         }
@@ -834,7 +834,7 @@ public final class DataManager {
                     continue;
                 }
                 ContentValues values = BaseTools.createContentValues(item);
-                long il = writableDatabase.insert(DataBaseOpenHelper.TABLE_FOOD, DataBaseOpenHelper.FOOD_SUMMARY, values);
+                long il = writableDatabase.insert(DataBaseOpenHelper.TABLE_FOOD, DataBaseOpenHelper.FOOD_DESCRIPTION, values);
                 if (il != -1) {
                     count++;
                 }
@@ -943,7 +943,7 @@ public final class DataManager {
         if (readableDatabase.isOpen()) {
             ArrayList<CookListItem> datas = new ArrayList<>();
 
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_COOK, null, DataBaseOpenHelper.COOK_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.COOK_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_COOK, null, DataBaseOpenHelper.COOK_CLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.COOK_ID + " ASC", (count * (page - 1)) + "," + count);
             try {
                 if (query.moveToFirst()) {
                     do {

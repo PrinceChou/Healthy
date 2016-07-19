@@ -261,12 +261,12 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
             super.onScrolled(recyclerView, dx, dy);
 
             if (isSlideToBottom(recyclerView)) {//滑动到底部自动加载更多
+                if (isLoadingMore) {
+                    return;
+                }
+                isLoadingMore = true;
                 ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
                 if (cookListItems == null || cookListItems.size() != PAGE_COUNT) {
-                    if (isLoadingMore) {
-                        return;
-                    }
-                    isLoadingMore = true;
                     childHandler.sendEmptyMessage(WHAT_LOAD_MORE);//通知子线程加载更多
                 } else {
                     adapter.appendClassifyData(adapter.getCurrentClassify(), cookListItems);

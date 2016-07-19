@@ -68,9 +68,19 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void appendClassifyData(int classify, List<FoodListItem> data) {
         List<FoodListItem> cookListItems = this.data.get(classify);
         int oldSize = cookListItems.size();
-        cookListItems.addAll(data);
+        int addsize = 0;
+        for (int i = 0; i < data.size(); i++) {
+            if (!cookListItems.contains(data.get(i))) {
+                cookListItems.add(data.get(i));
+                addsize++;
+            }
+        }
+        if(addsize==0){
+            return;
+        }
+//        cookListItems.addAll(data);
         if (classify == currentClassify) {
-            notifyItemRangeInserted(oldSize + 1, data.size());
+            notifyItemRangeInserted(oldSize + 1, addsize);
         }
     }
 

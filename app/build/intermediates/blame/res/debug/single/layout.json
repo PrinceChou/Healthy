@@ -52,12 +52,16 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\include_viewpager.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.bigkoo\\convenientbanner\\2.0.5\\res\\layout\\include_viewpager.xml"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_cook.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\fragment_cook.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
@@ -76,12 +80,12 @@
         "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
-        "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout\\design_navigation_item_subheader.xml"
-    },
-    {
         "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
+        "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0\\res\\layout\\design_navigation_item_subheader.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fixed_bottom_navigation_item.xml",
@@ -122,6 +126,10 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_cook_item.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\view_cook_item.xml"
     },
     {
         "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",

@@ -13,12 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * 由 Micro 创建于 2016/6/30.
  */
 
-public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewAdapter.RefreshListener {
+public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewAdapter.RefreshListener, RecyclerViewAdapter.OnItemClickListener {
     private View root = null;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -32,6 +33,7 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
             initData();
             initView();
         }
+        recyclerViewAdapter.setOnItemClickListener(this);
 
         return root;
     }
@@ -102,4 +104,9 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    @Override
+    public void onClick(Object item) {
+        Toast.makeText(getActivity(), item.toString(), Toast.LENGTH_SHORT).show();
+
+    }
 }

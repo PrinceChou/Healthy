@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 这个类是从CookFragment直接拷贝过来做了一点修改的,部分名字还没有改过来
  * 由 Micro 创建于 2016/7/17.
  */
 
@@ -141,9 +142,10 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
                         case WHAT_LOAD_MORE://加载更多数据
                             int currentClassify = adapter.getCurrentClassify();
                             List<FoodListItem> cookList1 = JavaBeanTools.Food.getFoodList(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, currentClassify);
+                            Log.i(TAG,"加载更多数据(网络):"+cookList1);
                             if (cookList1 != null) {
                                 int i = dataManager.putFoodListItems(cookList1);
-                                Log.i(TAG, "追加从网诺获取到的分类为:" + currentClassify + "的菜谱列表数据写入到数据库" + i + "条");
+                                Log.i(TAG, "追加从网诺获取到的分类为:" + currentClassify + "的食物列表数据写入到数据库" + i + "条");
                                 Message msg = mainHandler.obtainMessage();
                                 msg.what = WHAT_LOAD_MORE_OK;
                                 msg.obj = cookList1;
@@ -264,15 +266,17 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
             super.onScrolled(recyclerView, dx, dy);
 
             if (isSlideToBottom(recyclerView)) {//滑动到底部自动加载更多
+                if (isLoadingMore) {
+                    return;
+                }
+                isLoadingMore = true;
                 ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
+                Log.i(TAG, "加载更多健康食物:" + FoodListItems);
                 if (FoodListItems == null || FoodListItems.size() != PAGE_COUNT) {
-                    if (isLoadingMore) {
-                        return;
-                    }
-                    isLoadingMore = true;
                     childHandler.sendEmptyMessage(WHAT_LOAD_MORE);//通知子线程加载更多
                 } else {
                     adapter.appendClassifyData(adapter.getCurrentClassify(), FoodListItems);
+                    isLoadingMore = false;
                 }
             }
 

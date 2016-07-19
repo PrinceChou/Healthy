@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -30,14 +31,16 @@ import java.util.List;
  * 由 Micro 创建于 2016/7/14.
  */
 
-public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements ViewPager.OnPageChangeListener {
+public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements ViewPager.OnPageChangeListener, OnItemClickListener {
     private ConvenientBanner convenientBanner;
     private TextView bannertag;
     private BannerItemCreator bannerItemCreator;
+    private OnSmartBannerItemClickListener onSmartBannerItemClickListener;
 
     public SmartBannerViewHolder(View itemView) {
         super(itemView);
         convenientBanner = (ConvenientBanner) itemView.findViewById(R.id.healthy_banner);
+        convenientBanner.setOnItemClickListener(this);
         convenientBanner.setOnPageChangeListener(this);
         bannertag = (TextView) itemView.findViewById(R.id.healthy_banner_tag);
         bannerItemCreator = new BannerItemCreator();
@@ -126,6 +129,13 @@ public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements Vi
 
     }
 
+    @Override
+    public void onItemClick(int position) {
+        if (onSmartBannerItemClickListener != null) {
+            onSmartBannerItemClickListener.onItemClick(data.get(position));
+        }
+    }
+
 
     class BannerItemCreator implements CBViewHolderCreator<BannerItem> {
 
@@ -203,5 +213,17 @@ public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements Vi
                 v.setBackgroundDrawable(new BitmapDrawable(blurbitmap));
             }
         };
+    }
+
+    public OnSmartBannerItemClickListener getOnSmartBannerItemClickListener() {
+        return onSmartBannerItemClickListener;
+    }
+
+    public void setOnSmartBannerItemClickListener(OnSmartBannerItemClickListener onSmartBannerItemClickListener) {
+        this.onSmartBannerItemClickListener = onSmartBannerItemClickListener;
+    }
+
+    public interface OnSmartBannerItemClickListener {
+        void onItemClick(InfoListItem item);
     }
 }

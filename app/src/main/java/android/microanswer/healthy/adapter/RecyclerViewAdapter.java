@@ -35,7 +35,7 @@ import java.util.Set;
  * 由 Micro 创建于 2016/6/30.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter {
+public class RecyclerViewAdapter extends RecyclerView.Adapter implements HealthyItemItemAsk.OnHealItemItemAskClickListener, HealthyItemItemBooks.OnHealthyItemItemBooksClickListener, HealthyItemItemKnowledge.OnHealthyItemKnowledgeClickListener, HealthyItemItemInfo.OnHealthyItemItemInfoClickListener, SmartBannerViewHolder.OnSmartBannerItemClickListener {
     public static final int TYPE_BANNER = 1;
     public static final int TYPE_ITEMGROUP = 2;
     public static final int TYPE_ITEM_KNOWLEDGE = 3;
@@ -56,6 +56,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private Context context;
 
     private DataManager dataManager;
+
+    private OnItemClickListener onItemClickListener;
 
 
     /**
@@ -504,15 +506,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         int type = (int) itemdata.get("type");
         if (type == TYPE_BANNER) {
             SmartBannerViewHolder bannerViewHolder = (SmartBannerViewHolder) holder;
-//            int function = (int) itemdata.get("function");
-//            if (function == FUNCTION_NORMALLOAD) {
-//                bannerViewHolder.loadData();
-//            } else if (function == FUNCTION_REFRESH) {
-//                bannerViewHolder.refresh();
-//                itemdata.put("function", FUNCTION_NORMALLOAD);
-//            }
-//                bannerViewHolder.startPlay();
-                bannerViewHolder.setData((List<InfoListItem>) itemdata.get("data"));
+            bannerViewHolder.setOnSmartBannerItemClickListener(this);
+            bannerViewHolder.setData((List<InfoListItem>) itemdata.get("data"));
         } else {
             if (type == TYPE_ITEMGROUP) {
                 HealthyItemGroup healthyItemGroup = (HealthyItemGroup) holder;
@@ -523,27 +518,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
             } else if (type == TYPE_ITEM_ASK) {
                 HealthyItemItemAsk healthyItemItem = (HealthyItemItemAsk) holder;
+                healthyItemItem.setOnHealItemItemAskClickListener(this);
                 List<AskClassifyItem> item = (List<AskClassifyItem>) itemdata.get("data");
                 if (item != null)
                     healthyItemItem.setData(item);
 
             } else if (type == TYPE_ITEM_BOOKS) {
                 HealthyItemItemBooks healthyItemItem = (HealthyItemItemBooks) holder;
+                healthyItemItem.setOnHealthyItemItemBooksClickListener(this);
                 List<BookListItem> item = (List<BookListItem>) itemdata.get("data");
                 if (item != null)
                     healthyItemItem.setData(item);
 
             } else if (type == TYPE_ITEM_KNOWLEDGE) {
                 HealthyItemItemKnowledge healthyItemItem = (HealthyItemItemKnowledge) holder;
+                healthyItemItem.setOnHealthyItemKnowledgeClickListener(this);
                 List<LoreListItem> item = (List<LoreListItem>) itemdata.get("data");
                 if (item != null)
-                healthyItemItem.setData(item);
+                    healthyItemItem.setData(item);
 
             } else if (type == TYPE_ITEM_INFO) {
                 HealthyItemItemInfo healthyItemItemInfo = (HealthyItemItemInfo) holder;
+                healthyItemItemInfo.setOnHealthyItemItemInfoClickListener(this);
                 List<InfoListItem> item = (List<InfoListItem>) itemdata.get("data");
                 if (item != null)
-                healthyItemItemInfo.setData(item);
+                    healthyItemItemInfo.setData(item);
             }
         }
     }
@@ -600,7 +599,72 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
     private RefreshListener refreshListener;
 
+    /**
+     * 健康问答点击
+     *
+     * @param askClassifyItem
+     */
+    @Override
+    public void onClick(AskClassifyItem askClassifyItem) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(askClassifyItem);
+        }
+    }
+
+    /**
+     * 健康图书点击
+     *
+     * @param item
+     */
+    @Override
+    public void onClick(BookListItem item) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(item);
+        }
+    }
+
+    /**
+     * 健康知识点击
+     *
+     * @param item
+     */
+    @Override
+    public void onclick(LoreListItem item) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(item);
+        }
+    }
+
+    /**
+     * 健康咨询点击
+     *
+     * @param item
+     */
+    @Override
+    public void onclick(InfoListItem item) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(item);
+        }
+    }
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public void onItemClick(InfoListItem item) {
+        this.onclick(item);
+    }
+
     public interface RefreshListener {
         void onRefreshEnd();
+    }
+
+    public interface OnItemClickListener {
+        void onClick(Object item);
     }
 }

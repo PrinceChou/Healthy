@@ -144,4 +144,10 @@ public class FoodListItem implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        FoodListItem foodListItem = (FoodListItem) obj;
+        return foodListItem.getId() == getId();
+    }
 }
