@@ -188,7 +188,7 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
             ArrayList<FoodClassify> FOODCLASSIFYs = dataManager.getFoodClassifyItems();
             if (FOODCLASSIFYs == null || FOODCLASSIFYs.size() == 0) {
                 dialog = new ProgressDialog(getActivity());
-                dialog.setTitle("加载中...");
+                dialog.setMessage("加载中...");
                 dialog.show();
                 childHandler.sendEmptyMessage(WHAT_LOAD_FOODCLASSIFY);//给子线程发一条消息,让子线程加载菜谱分类
             } else {
@@ -238,7 +238,8 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
                     return;
                 }
                 dialog = new ProgressDialog(getActivity());
-                dialog.setTitle("正在加载[" + cookClassifies.get(tab.getPosition()).getName() + "]的列表数据");
+//                dialog.setTitle("正在加载[" + cookClassifies.get(tab.getPosition()).getName() + "]的列表数据");
+                dialog.setMessage("加载中...");
                 dialog.show();
             } else {
                 adapter.setClassifyData(id, FoodListItems);

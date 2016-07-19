@@ -13,6 +13,7 @@
         android:id="@+id/activity_login_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:theme="@style/mDrawerArrowToggle"
         android:background="@color/colorPrimary"
         android:elevation="6dip"
         android:title="@string/login"

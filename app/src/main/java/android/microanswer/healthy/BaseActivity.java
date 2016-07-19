@@ -2,6 +2,7 @@ package android.microanswer.healthy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -80,13 +82,13 @@ public abstract class BaseActivity extends ActionBarActivity {
         return args;
     }
 
-    @Override
-    public void setSupportActionBar(@Nullable Toolbar toolbar) {
-        super.setSupportActionBar(toolbar);
-        final Drawable upArrow = getResources().getDrawable(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
-        upArrow.setColorFilter(getResources().getColor(R.color.whilte), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
-    }
+//    @Override
+//    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+//        super.setSupportActionBar(toolbar);//abc_ic_ab_back_mtrl_am_alpha[lib23.2.0以前]
+//        final Drawable upArrow = ContextCompat.getDrawable(this,android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+//        upArrow.setColorFilter(getResources().getColor(R.color.whilte), PorterDuff.Mode.SRC_ATOP);
+//        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+//    }
 
     public int getScreenWidth() {
         return screenWidth;

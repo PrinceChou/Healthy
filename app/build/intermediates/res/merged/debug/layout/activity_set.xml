@@ -10,6 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_set_toolbat"
         android:layout_width="match_parent"
+        app:theme="@style/mDrawerArrowToggle"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/whilte"/>

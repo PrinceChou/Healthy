@@ -1928,6 +1928,6 @@
     </style>
     <style name="mDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/whilte</item>
-
+        <item name="android:textColorSecondary">@color/whilte</item>
     </style>
 </resources>

@@ -16,6 +16,7 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
         android:background="@color/colorPrimary"
+        app:theme="@style/mDrawerArrowToggle"
         android:elevation="10dip"
         android:title="@string/reg"
         app:titleTextColor="@color/whilte" />

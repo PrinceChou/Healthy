@@ -1797,7 +1797,7 @@
         <item name="android:visibility">gone</item>
     </style><style name="mDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/whilte</item>
-
+        <item name="android:textColorSecondary">@color/whilte</item>
     </style></file><file path="D:\Micro\document\project\Healthy\app\src\main\res\values-1920x1080\dimens.xml" qualifiers="1920x1080"><dimen name="activity_vertical_margin">6dp</dimen><dimen name="activity_horizontal_margin">6dp</dimen><dimen name="logo_size_width">80dip</dimen><dimen name="group_title_size">12sp</dimen><dimen name="logo_size_height">@dimen/logo_size_width</dimen><dimen name="knowledge_desc_size">13sp</dimen></file><file path="D:\Micro\document\project\Healthy\app\src\main\res\values-800x480\dimens.xml" qualifiers="800x480"><dimen name="knowledge_desc_size">11sp</dimen><dimen name="group_title_size">10sp</dimen><dimen name="ask_text_size">9.5sp</dimen></file><file path="D:\Micro\document\project\Healthy\app\src\main\res\values-v19\styles.xml" qualifiers="v19"><style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
