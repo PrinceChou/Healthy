@@ -4,6 +4,10 @@
         "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\like.png"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_item_right.png",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\ic_item_right.png"
+    },
+    {
         "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\down.png",
         "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\down.png"
     },
@@ -36,12 +40,12 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\checkcode.png"
     },
     {
-        "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\sina.png",
-        "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\sina.png"
-    },
-    {
         "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\sex.png",
         "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\sex.png"
+    },
+    {
+        "merged": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\sina.png",
+        "source": "C:\\Users\\MicroAnswer\\Documents\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\sina.png"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\head_bg.jpg",

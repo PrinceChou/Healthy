@@ -18,10 +18,12 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +73,36 @@ public abstract class BaseActivity extends ActionBarActivity {
         dialog = b.show();
         return dialog;
     }
+
+    protected ActionBar suitToolBar(int toolbarId) {
+        Toolbar toolbar = (Toolbar) findViewById(toolbarId);
+        setSupportActionBar(toolbar);
+        return getSupportActionBar();
+    }
+
+    /**
+     * 开启ToolBar返回按钮
+     */
+    protected void setToolBarBackEnable() {
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setHomeButtonEnabled(true);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            return onHomeButtonClick();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected boolean onHomeButtonClick() {
+        return true;
+    }
+
 
     /**
      * 一个没有用的方法

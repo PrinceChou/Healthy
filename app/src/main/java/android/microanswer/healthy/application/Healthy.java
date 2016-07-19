@@ -4,10 +4,18 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.microanswer.healthy.R;
 
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.download.ImageDownloader;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.concurrent.Executor;
 
 /**
  * 应用程序类
@@ -21,10 +29,27 @@ public class Healthy extends Application {
     public void onCreate() {
         super.onCreate();
         if (ilc == null) {
-            ilc = new ImageLoaderConfiguration.Builder(this).threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY)
-                    .defaultDisplayImageOptions(new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(R.mipmap.ic_img_faill)
-                            .displayer(new FadeInBitmapDisplayer(200)).showImageOnLoading(R.mipmap.loading).build())
-                    .diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(1000).build();
+            ilc = new ImageLoaderConfiguration.Builder(this)
+                    .threadPoolSize(5)
+                    .threadPriority(Thread.NORM_PRIORITY)
+                    .memoryCacheExtraOptions(480, 800)
+                    .diskCacheSize(500 * 1024 * 1024)
+                    .diskCache(new UnlimitedDiskCache(StorageUtils.getCacheDirectory(this)))
+                    .diskCacheFileNameGenerator(new FileNameGenerator() {
+                        @Override
+                        public String generate(String imageUri) {
+                            return imageUri + ".jpg";
+                        }
+                    })
+                    .defaultDisplayImageOptions(new DisplayImageOptions.Builder()
+                            .cacheInMemory(true)
+                            .cacheOnDisk(true)
+                            .showImageOnFail(R.mipmap.ic_img_faill)
+                            .displayer(new FadeInBitmapDisplayer(200))
+                            .showImageOnLoading(R.mipmap.loading)
+                            .build())
+                    .diskCacheFileCount(10000)
+                    .build();
         }
         if (!ImageLoader.getInstance().isInited()) {
             ImageLoader.getInstance().init(ilc);

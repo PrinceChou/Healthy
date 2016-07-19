@@ -241,7 +241,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                                 jumpTo(SetActivity.class,true);
                                 break;
                             case R.id.menu_about:
-
+                                jumpTo(AboutActivity.class, true);
                                 break;
                             case R.id.menu_usercenter://个人中心
                                 if (TextUtils.isEmpty(User.getUser().getAccount())) {
