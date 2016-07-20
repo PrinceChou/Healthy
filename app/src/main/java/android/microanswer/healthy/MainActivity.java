@@ -8,6 +8,7 @@ import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.view.MActionBarDrawerToggle;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.design.internal.NavigationMenuPresenter;
@@ -48,7 +49,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private SharedPreferences sharedPreferences;
     private FragmentManager fragmentManager;
     private Fragment[] fragments;
-    MActionBarDrawerToggle mActionBarDrawerToggle;
+    private MActionBarDrawerToggle mActionBarDrawerToggle;
+
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,7 +228,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public boolean onNavigationItemSelected(final MenuItem item) {
         drawerLayout.closeDrawers();
-        new Thread(new Runnable() {
+        if (handler == null) {
+            handler = new Handler();
+        }
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(300);
@@ -254,12 +260,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                                 break;
                             case R.id.menu_hint:
                                 break;
+                            case R.id.menu_userfriend:
+                                jumpTo(FriendsActivity.class, true);
+                                break;
                         }
                     }
                 });
-
             }
-        }).start();
+        }, 300);//点击过后,延迟300毫秒操作,留出时间让侧滑收回
         return true;
     }
 
