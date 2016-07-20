@@ -234,7 +234,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(300);
+                SystemClock.sleep(100);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -265,6 +265,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                                 break;
                         }
                     }
+
                 });
             }
         }, 300);//点击过后,延迟300毫秒操作,留出时间让侧滑收回

@@ -11,7 +11,6 @@
     </style>
 
     <style name="mDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">@color/whilte</item>
         <item name="android:textColorSecondary">@color/whilte</item>
     </style>
     <style name="BadgeText" parent="TextAppearance.AppCompat.Body2">
@@ -25,6 +24,24 @@
         <item name="android:paddingTop">@dimen/badge_height_padding</item>
         <item name="android:visibility">gone</item>
     </style>
+
+
+    <!-- 以下注释可能在ToolBar中用到
+
+     <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="titleMargin">4dp</item>
+        <item name="maxButtonHeight">@dimen/abc_action_bar_default_height_material</item>
+        <item name="buttonGravity">top</item>
+        <item name="collapseIcon">?attr/homeAsUpIndicator</item>
+        <item name="collapseContentDescription">@string/abc_toolbar_collapse_description</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetStartWithNavigation">@dimen/abc_action_bar_content_inset_with_nav</item>
+        <item name="android:paddingLeft">@dimen/abc_action_bar_default_padding_start_material</item>
+        <item name="android:paddingRight">@dimen/abc_action_bar_default_padding_end_material</item>
+
+     -->
 
 
 </resources>

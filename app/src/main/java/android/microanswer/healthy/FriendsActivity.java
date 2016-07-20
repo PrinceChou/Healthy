@@ -15,4 +15,10 @@ public class FriendsActivity extends BaseActivity {
         suitToolBar(R.id.activity_friends_toolbar);
         setToolBarBackEnable();
     }
+
+    @Override
+    protected boolean onHomeButtonClick() {
+        onBackPressed();
+        return true;
+    }
 }

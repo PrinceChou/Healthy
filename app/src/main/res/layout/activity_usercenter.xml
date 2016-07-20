@@ -10,13 +10,16 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/trancent"
+        android:background="@color/colorPrimary"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/activity_usercenter_collapsingToolBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:collapsedTitleGravity="left|center"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            app:expandedTitleGravity="right|bottom"
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -25,8 +28,7 @@
                 android:layout_height="200dip"
                 android:scaleType="fitXY"
                 android:src="@mipmap/head_bg"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.5" />
+                app:layout_collapseMode="parallax"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/activity_usercenter_toolbar"
