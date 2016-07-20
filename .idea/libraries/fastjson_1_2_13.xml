@@ -5,6 +5,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://D:/gradle-2.14/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.13/2d5b822faea2d6eb042c335566a82cff97eec1d8/fastjson-1.2.13-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.13/2d5b822faea2d6eb042c335566a82cff97eec1d8/fastjson-1.2.13-sources.jar!/" />
     </SOURCES>
   </library>

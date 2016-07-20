@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Date;
@@ -120,7 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     toast(getString(R.string.acounthint), POSOTION_TOP);
                     return;
                 }
-                String pwd = et_pwd.getText().toString().trim();
+                final String pwd = et_pwd.getText().toString().trim();
                 if (n(pwd)) {
                     toast(getString(R.string.pwdhint), POSOTION_TOP);
                     return;
@@ -151,6 +152,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                     user.setAccess_token(jo.getString("access_token"));
                                     user.setRefresh_token(jo.getString("refresh_token"));
                                     user.setId(jo.getInt("id"));
+                                    user.setPassword(pwd);
                                 } else {
                                     respones = jo.getString("msg");
                                 }
@@ -195,7 +197,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             etaccount.setText(name_pwds[0]);
             et_pwd.setText(name_pwds[1]);
-
+            User.getUser().setPassword(name_pwds[1]);
             toast("注册成功，正在登录", POSOTION_TOP);
             requestuserinfo();
         }
@@ -324,10 +326,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        objectOutputStream = new ObjectOutputStream(new FileOutputStream(getAppInternalWorkDir().getAbsolutePath() + "/" + userObjectFileName));
-                        objectOutputStream.writeObject(user);
-                        objectOutputStream.flush();
-                        Log.e("LoginActivity",user.toString());
+                        File appInternalWorkDir = getAppInternalWorkDir();
+                        if (appInternalWorkDir != null) {
+                            objectOutputStream = new ObjectOutputStream(new FileOutputStream(appInternalWorkDir.getAbsolutePath() + "/" + userObjectFileName));
+                            objectOutputStream.writeObject(user);
+                            objectOutputStream.flush();
+                        } else {
+                            Log.i("将登录信息写入文件", "文件目录创建失败");
+                        }
+                        Log.e("LoginActivity", user.toString());
                     } else {
                         try {
                             res = jsondata.getString("msg") + "\n请重试";

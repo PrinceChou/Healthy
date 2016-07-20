@@ -180,8 +180,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (f.exists()) {
             return f;
         } else {
-            f.mkdirs();
-            return f;
+            if (f.mkdirs())
+                return f;
+            else return null;
         }
     }
 
@@ -324,7 +325,22 @@ public abstract class BaseActivity extends ActionBarActivity {
             super.onPostExecute(msg);
             i("id为" + id + " 的子线程执行完成");
             onOtherThreadRunEnd(OtherThread.this.id, msg);
+            if (otherThreadTask instanceof BaseOtherThread) {
+                ((BaseOtherThread) otherThreadTask).onOtherThreadRunEnd(msg);
+            }
         }
+    }
+
+    /**
+     * 更方便的执行其他子线程结束的时候的方法
+     */
+    public abstract class BaseOtherThread implements OtherThreadTask {
+        /**
+         * 该方法在主线程运行
+         *
+         * @param msg
+         */
+        abstract void onOtherThreadRunEnd(Message msg);
     }
 
 

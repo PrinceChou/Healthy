@@ -1,5 +1,6 @@
 package android.microanswer.healthy.tools;
 
+import android.microanswer.healthy.LoginActivity;
 import android.microanswer.healthy.bean.AskClassifyItem;
 import android.microanswer.healthy.bean.AskListItem;
 import android.microanswer.healthy.bean.AskNews;
@@ -9,11 +10,13 @@ import android.microanswer.healthy.bean.CookClassify;
 import android.microanswer.healthy.bean.CookListItem;
 import android.microanswer.healthy.bean.FoodClassify;
 import android.microanswer.healthy.bean.FoodListItem;
+import android.microanswer.healthy.bean.Friend;
 import android.microanswer.healthy.bean.InfoClassifyItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreClassifyItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.LoreNews;
+import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.database.DataManager;
 import android.microanswer.healthy.exception.JavaBeanDataLoadException;
 import android.util.Log;
@@ -1205,6 +1208,67 @@ public class JavaBeanTools {
         return null;
     }
 
+
+    /**
+     * 天狗用户接口
+     */
+    public static final class UserInterface {
+
+        /**
+         * 登陆
+         *
+         * @param client_id     是	string	OAuth2客户ID
+         * @param client_secret 是	string	安全密文ret
+         * @param name          是	string	邮件/账号 也就是email与account的一个
+         * @param password      是	string	密码
+         * @return
+         */
+        public static final User login(String client_id, String client_secret, String name, String password) {
+            String url = "http://www.tngou.net/api/oauth2/login?client_id=" + client_id + "&client_secret=" + client_secret + "&name=" + name + "&password=" + password;
+            try {
+                String request = InternetServiceTool.request(url);
+                Log.i("登陆", request);
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
+                if (jsonObject.getBooleanValue("status")) {
+                    User.getUser().setAccess_token(jsonObject.getString("access_token"));
+                    User.getUser().setRefresh_token(jsonObject.getString("refresh_token"));
+                    User.getUser().setId(jsonObject.getInteger("id"));
+                    return User.getUser();
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        /**
+         * 获取我的关注好友列表
+         *
+         * @return
+         */
+        public static final List<Friend> myHeart(int rows, int page, String name, String access_token) {
+            String url = "http://www.tngou.net/api/my/heart?rows=" + rows + "&page=" + page + "&name=" + name + "&access_token=" + access_token;
+            String request = InternetServiceTool.request(url);
+            Log.i("获取关注好友", "" + request);
+            try {
+                com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
+                if (jsonObject.getBooleanValue("status")) {
+                    com.alibaba.fastjson.JSONArray tngou = jsonObject.getJSONArray("tngou");
+                    return JSON.parseArray(tngou.toJSONString(), Friend.class);
+                } else {
+                    if (login(LoginActivity.client_id, LoginActivity.client_secret, User.getUser().getAccount(), User.getUser().getPassword()) != null) {
+                        return myHeart(rows, page, name, access_token);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
     /**
      * 数据记载过程中的回调

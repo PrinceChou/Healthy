@@ -3,6 +3,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/activity_friends"
                 android:background="@color/colorPrimary"
                 android:fitsSystemWindows="true">
 
@@ -21,6 +22,30 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/activity_friends_toolbar"
         android:background="@color/whilte">
+
+        <LinearLayout
+            android:id="@+id/activity_friends_serch_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#bbbbbbbb"
+            android:orientation="horizontal"
+            android:padding="4dip">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:hint="搜索你关注的人"
+                android:padding="10dip"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/activity_friends_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_friends_serch_linearlayout"/>
 
 
     </RelativeLayout>
