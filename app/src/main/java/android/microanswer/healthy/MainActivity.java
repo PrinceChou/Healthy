@@ -257,6 +257,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                                 }
                                 break;
                             case R.id.menu_givemeny:
+                                jumpTo(DonationActivity.class, true);
                                 break;
                             case R.id.menu_hint:
                                 break;

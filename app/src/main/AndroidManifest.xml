@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".application.Healthy"
@@ -49,6 +50,19 @@
             android:name=".FriendActivity"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".MainSetActivity"
+            android:label="主界面设置"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="android.microanswer.healthy.MainSetActivity"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DonationActivity"
+            android:label="捐赠"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

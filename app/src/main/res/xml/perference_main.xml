@@ -27,6 +27,15 @@
             android:entryValues="@array/font_size_values"
             android:summary="普通"
             android:title="字体大小"/>
+        <Preference
+            android:summary="指定主界面加载数据的内容"
+            android:title="主界面数据设置">
+            <intent
+                android:action="android.microanswer.healthy.MainSetActivity"
+                android:targetClass="android.microanswer.healthy.MainSetActivity"
+                android:targetPackage="android.microanswer.healthy"
+                />
+        </Preference>
 
     </PreferenceCategory>
 

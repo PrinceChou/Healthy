@@ -50,12 +50,12 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
         recyclerView.addOnScrollListener(scrollListener);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recyclerViewAdapter.generateOnlineData();
-            }
-        }, 500);
+        if (BaseTools.isNetworkAvailable(getActivity())) {
+            recyclerViewAdapter.generateOnlineData();
+        } else {
+            recyclerViewAdapter.generateDatabaseData();
+            Toast.makeText(getActivity(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

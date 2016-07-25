@@ -312,6 +312,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
         }).start();
     }
 
+    /**
+     * 从数据库获取数据
+     */
+    public void generateDatabaseData() {
+
+    }
+
 
     /**
      * 生成在线数据，从网络获取数据

@@ -57,4 +57,6 @@
     <string name="healthy_lore">健康知识</string>
     <string name="health_knowledge">Health knowledge</string>
     <string name="button">button</string>
+    <string name="long_desc">\t\t首先，非常感谢您下载并打开本软件，本软件的开发宗旨在(为医疗界的人士们提供一个交流互动的平台)，在这里，你可以浏览到最新的医疗新闻和生活中相关的资料信息，你也可以找到和你兴趣相当的朋友，甚至和他们交流.一切的一切，都只为了让一位从事医疗相关工作的(或者其他工作)人们有一个属于自己的交流平台。但是，<b>这一切得以正常运行，是因为天狗(tngou.net)服务器为我们默默的做着奉献。</b>天狗云是一个免费提供数据接口的平台，我们的数据来自社区，所以也把相应的数据回馈给社区。如果你觉得我们的数据对你有帮助，同时你也想支持我们数据免费开放，不妨可以对我们施舍点！</string>
+    <string name="long_desc2">\t\t如果你对本软件有任何评价，欢迎到商店去评论。我们会第一时间纠正错误。</string>
 </resources>
