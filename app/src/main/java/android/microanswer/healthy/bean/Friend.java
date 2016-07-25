@@ -1,6 +1,9 @@
 package android.microanswer.healthy.bean;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
  * 由 Micro 创建于 2016/7/20.
  */
 
-public class Friend implements Serializable {
+public class Friend implements Serializable, Comparable<Friend> {
     private String account;
     private String avatar;
     private long birth;
@@ -163,6 +166,16 @@ public class Friend implements Serializable {
         this.weibo = weibo;
     }
 
+    private String letter;//账号首字母
+
+    public String getLetter() {
+        return letter;
+    }
+
+    public void setLetter(String letter) {
+        this.letter = letter;
+    }
+
     @Override
     public String toString() {
         return "Friend{" +
@@ -183,6 +196,16 @@ public class Friend implements Serializable {
                 ", time=" + time +
                 ", title='" + title + '\'' +
                 ", weibo='" + weibo + '\'' +
+                ", letter='" + letter + '\'' +
                 '}';
     }
+
+    @Override
+    public int compareTo(Friend friend) {
+        if (letter != null && friend != null && friend.getLetter() != null) {
+            return -1 * friend.getLetter().compareTo(getLetter());
+        }
+        return 0;
+    }
+
 }

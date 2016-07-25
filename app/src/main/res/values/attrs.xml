@@ -22,4 +22,13 @@
         <attr name="item_smallTitle" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="LetterView">
+        <attr name="text_size" format="dimension"/>
+        <attr name="text_color" format="color"/>
+        <attr name="text_current_color" format="color"/>
+        <attr name="under_line" format="boolean"/>
+        <attr name="hint_text_size" format="dimension"/>
+        <attr name="hint_text_color" format="color"/>
+    </declare-styleable>
+
 </resources>

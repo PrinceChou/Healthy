@@ -3,6 +3,7 @@
     <color name="colorPrimary">#2d7814</color>
     <color name="colorPrimaryDark">#225c0f</color>
     <color name="colorAccent">#ab575f</color>
+    <color name="trans_colorPrimary">#332d7814</color>
     <color name="trancent">#00ffffff</color>
 
     <color name="whilte">#ffffff</color>
