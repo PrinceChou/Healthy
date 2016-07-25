@@ -214,6 +214,18 @@ public class LetterView extends View {
         invalidate();
     }
 
+    public void setCurrentLetter(char letter) {
+        if (letter == '*' || (letter >= 'a' && letter <= 'z') || letter == '#') {
+            letter = String.valueOf(letter).toUpperCase().charAt(0);
+            for (int i = 0; i < letters.length; i++) {
+                if (letters[i] == letter) {
+                    setCurrentindex(i);
+                    return;
+                }
+            }
+        }
+    }
+
     private OnLetterSelectListener onLetterSelectListener;
 
     public OnLetterSelectListener getOnLetterSelectListener() {

@@ -50,6 +50,9 @@
             android:name="android.microanswer.healthy.FriendsActivity"
             android:label="关注好友"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="android.microanswer.healthy.FriendActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -128,6 +128,10 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\notification_template_big_media.xml"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_friend.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\activity_friend.xml"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\viewpager_healthy_itemitem_health_knowledge.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\viewpager_healthy_itemitem_health_knowledge.xml"
     },

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/activity_friend_headview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:fitsSystemWindows="true"
+        android:paddingBottom="12dp"
+        android:paddingTop="?android:attr/actionBarSize">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/activity_friend_headview_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/head"
+            app:civ_border_color="@color/whilte"
+            app:civ_border_width="1dp"/>
+
+        <TextView
+            android:id="@+id/activity_friend_headview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_friend_headview_img"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="隔壁的王叔叔"
+            android:textColor="@color/whilte"
+            android:textSize="15sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_friend_headview_title"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/activity_friend_headview_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="男"
+                android:textColor="@color/whilte"
+                android:textSize="14sp"/>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@color/whilte"
+                />
+
+            <TextView
+                android:id="@+id/activity_friend_headview_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="22岁"
+                android:textColor="@color/whilte"
+                android:textSize="14sp"/>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@color/whilte"
+                />
+
+            <TextView
+                android:id="@+id/activity_friend_headview_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="四川成都"
+                android:textColor="@color/whilte"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_friend_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:elevation="4dp"
+        app:theme="@style/mDrawerArrowToggle"
+        app:title="好友信息"
+        app:titleTextColor="@color/whilte"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/activity_friend_headview"
+        android:background="@color/whilte">
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

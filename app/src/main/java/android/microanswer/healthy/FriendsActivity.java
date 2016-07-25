@@ -1,6 +1,7 @@
 package android.microanswer.healthy;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.microanswer.healthy.adapter.FriendsListAdapter;
 import android.microanswer.healthy.bean.Friend;
 import android.microanswer.healthy.bean.FriendGroup;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,11 +28,11 @@ import java.util.Map;
  * 由 Micro 创建于 2016/7/20.
  */
 
-public class FriendsActivity extends BaseActivity implements AdapterView.OnItemClickListener, LetterView.OnLetterSelectListener, View.OnClickListener {
+public class FriendsActivity extends BaseActivity implements AdapterView.OnItemClickListener, LetterView.OnLetterSelectListener, View.OnClickListener, AbsListView.OnScrollListener {
 
     private ListView listView;
     private LetterView letterView;
-    private FriendsListAdapter adapter;
+    private static FriendsListAdapter adapter;
 
     private View load_fail_view;
     private View loading_view;
@@ -45,11 +47,16 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
         letterView.setOnLetterSelectListener(this);
         listView = (ListView) findViewById(R.id.activity_friends_listview);
         listView.setOnItemClickListener(this);
+        listView.setOnScrollListener(this);
         load_fail_view = findViewById(R.id.activity_friends_loading_fail_view);
         load_fail_view.setOnClickListener(this);
         loading_view = findViewById(R.id.activity_friends_loading_view);
         listView.setEmptyView(loading_view);
-        initData();
+        if (adapter == null) {
+            initData();
+        } else {
+            listView.setAdapter(adapter);
+        }
     }
 
     private void initData() {
@@ -139,8 +146,10 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//        Friend friend = (Friend) adapterView.getItemAtPosition(i);
-        //TODO 跳转好友界面
+        Friend friend = (Friend) adapterView.getItemAtPosition(i);
+        Intent intent = new Intent(this, FriendActivity.class);
+        intent.putExtra("data", friend);
+        startActivity(intent, true);
     }
 
     @Override
@@ -158,8 +167,22 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.activity_friends_loading_view) {
+        if (view.getId() == R.id.activity_friends_loading_fail_view) {
             initData();
+        }
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int i) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+        Object itemAtPosition = absListView.getItemAtPosition(i);
+        if (itemAtPosition instanceof FriendGroup) {
+            FriendGroup fg = (FriendGroup) itemAtPosition;
+            letterView.setCurrentLetter(fg.getLetter().charAt(0));
         }
     }
 }
