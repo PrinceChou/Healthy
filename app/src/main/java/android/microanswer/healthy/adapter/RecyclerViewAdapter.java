@@ -7,7 +7,6 @@ import android.microanswer.healthy.bean.BookListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.database.DataManager;
-import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.JavaBeanTools;
 import android.microanswer.healthy.viewbean.HealthyItemGroup;
 import android.microanswer.healthy.viewbean.HealthyItemItemAsk;
@@ -17,7 +16,6 @@ import android.microanswer.healthy.viewbean.HealthyItemItemKnowledge;
 import android.microanswer.healthy.viewbean.SmartBannerViewHolder;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -478,18 +476,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
             }
             return smartBannerViewHolder;
         } else if (viewType == TYPE_ITEMGROUP) {
-            View itemGroupView = View.inflate(context, R.layout.viewpager_healthy_itemgroup, null);
+            View itemGroupView = View.inflate(context, R.layout.healthy_itemgroup, null);
             return new HealthyItemGroup(itemGroupView);
         } else if (viewType == TYPE_ITEM_ASK) {
-            View itemitem = View.inflate(context, R.layout.viewpager_healthy_itemitem_ask, null);
+            View itemitem = View.inflate(context, R.layout.healthy_itemitem_ask, null);
             HealthyItemItemAsk healthyItemItem = new HealthyItemItemAsk(itemitem);
             return healthyItemItem;
         } else if (viewType == TYPE_ITEM_BOOKS) {
-            return new HealthyItemItemBooks(View.inflate(context, R.layout.viewpager_healthy_itemitem_health_books, null));
+            return new HealthyItemItemBooks(View.inflate(context, R.layout.healthy_itemitem_health_books, null));
         } else if (viewType == TYPE_ITEM_KNOWLEDGE) {
-            return new HealthyItemItemKnowledge(View.inflate(context, R.layout.viewpager_healthy_itemitem_health_knowledge, null));
+            return new HealthyItemItemKnowledge(View.inflate(context, R.layout.healthy_itemitem_health_knowledge, null));
         } else if (viewType == TYPE_ITEM_INFO) {
-            return new HealthyItemItemInfo(View.inflate(context, R.layout.viewpager_healthy_itemitem_health_knowledge, null), context);
+            return new HealthyItemItemInfo(View.inflate(context, R.layout.healthy_itemitem_health_knowledge, null), context);
         }
         return null;
     }

@@ -5,6 +5,7 @@
         android:title="健康咨询">
         <ListPreference
             android:defaultValue="-1"
+            android:persistent="true"
             android:entries="@array/main_set_info_entries"
             android:entryValues="@array/main_set_info_values"
             android:key="main_set_info_data"
@@ -17,6 +18,7 @@
         android:title="健康知识">
         <ListPreference
             android:defaultValue="-1"
+            android:persistent="true"
             android:entries="@array/main_set_lore_entries"
             android:entryValues="@array/main_set_lore_values"
             android:key="main_set_lore_data"
@@ -29,9 +31,10 @@
         android:title="健康图书">
         <ListPreference
             android:defaultValue="-1"
+            android:key="main_set_book_data"
             android:entries="@array/main_set_book_entries"
             android:entryValues="@array/main_set_book_values"
-            android:key="main_set_info_data"
+            android:persistent="true"
             android:summary="主界面将加载选中的分类数据"
             android:title="健康图书分类设置"
             />

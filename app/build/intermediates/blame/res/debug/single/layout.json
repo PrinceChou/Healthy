@@ -28,12 +28,20 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\fragment_life.xml"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\healthy_itemitem_ask.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\healthy_itemitem_ask.xml"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\notification_template_media.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\healthy_itemgroup.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\healthy_itemgroup.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
@@ -64,10 +72,6 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\fragment_cook.xml"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\viewpager_healthy_itemgroup.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\viewpager_healthy_itemgroup.xml"
-    },
-    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
@@ -86,10 +90,6 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.1.1\\res\\layout\\design_bottom_sheet_dialog.xml"
-    },
-    {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\viewpager_healthy_itemitem_ask.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\viewpager_healthy_itemitem_ask.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fixed_bottom_navigation_item.xml",
@@ -132,10 +132,6 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\activity_friend.xml"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\viewpager_healthy_itemitem_health_knowledge.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\viewpager_healthy_itemitem_health_knowledge.xml"
-    },
-    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_list_menu_item_layout.xml"
     },
@@ -170,10 +166,6 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\viewpager_healthy_banner.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\viewpager_healthy_banner.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
@@ -284,12 +276,12 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\activity_about.xml"
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\healthy_itemitem_health_books.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\healthy_itemitem_health_books.xml"
     },
     {
-        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\viewpager_healthy_itemitem_health_books.xml",
-        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\viewpager_healthy_itemitem_health_books.xml"
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\activity_about.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\healthy_banner.xml",
@@ -306,6 +298,10 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\healthy_itemitem_health_knowledge.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\healthy_itemitem_health_knowledge.xml"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.design.internal.NavigationMenuPresenter;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
     public static final String SHAREDPREFERENCES_KEY_WEALTHY = "skw";
