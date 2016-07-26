@@ -129,7 +129,12 @@ public final class DataManager {
     public ArrayList<InfoListItem> getInfoListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {//{"limit " + count + " offset "+ (count * (page - 1))}
-            Cursor result = readableDatabase.query(DataBaseOpenHelper.TABLE_INFO, null, DataBaseOpenHelper.INFO_INFOCLASSIFY + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.INFO_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor result = null;
+            if (id != -1) {
+                result = readableDatabase.query(DataBaseOpenHelper.TABLE_INFO, null, DataBaseOpenHelper.INFO_INFOCLASSIFY + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.INFO_ID + " DESC", (count * (page - 1)) + "," + count);
+            } else {
+                result = readableDatabase.query(DataBaseOpenHelper.TABLE_INFO, null, null, null, null, null, DataBaseOpenHelper.INFO_ID + " DESC", (count * (page - 1)) + "," + count);
+            }
             ArrayList<InfoListItem> data = new ArrayList<>();
             try {
                 if (result.moveToFirst()) {
@@ -218,6 +223,21 @@ public final class DataManager {
     }
 
     /**
+     * 删除所有健康信息数据
+     *
+     * @return
+     */
+    public int clearInfo() {
+        SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
+        int c = 0;
+        if (writableDatabase.isOpen()) {
+            c = writableDatabase.delete(DataBaseOpenHelper.TABLE_INFO, null, null);
+            writableDatabase.close();
+        }
+        return c;
+    }
+
+    /**
      * 获取健康知识分类
      *
      * @return
@@ -301,8 +321,12 @@ public final class DataManager {
     public ArrayList<LoreListItem> getLoreListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_LORE, null, DataBaseOpenHelper.LORE_LORECLASSIFY + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.LORE_ID + " DESC", (count * (page - 1)) + "," + count);
-            Log.i("从数据库获取到的", "健康知识cursor数据条数:" + query.getCount());
+            Cursor query;
+            if (id != -1) {
+                query = readableDatabase.query(DataBaseOpenHelper.TABLE_LORE, null, DataBaseOpenHelper.LORE_LORECLASSIFY + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.LORE_ID + " DESC", (count * (page - 1)) + "," + count);
+            } else {
+                query = readableDatabase.query(DataBaseOpenHelper.TABLE_LORE, null, null, null, null, null, DataBaseOpenHelper.LORE_ID + " DESC", (count * (page - 1)) + "," + count);
+            }
             ArrayList<LoreListItem> data = new ArrayList<>();
             if (query.moveToFirst()) {
                 do {
@@ -372,6 +396,21 @@ public final class DataManager {
      */
     public boolean hasLoreListItem(int id) {
         return getLoreListItem(id) != null;
+    }
+
+    /**
+     * 删除所有健康知识数据
+     *
+     * @return
+     */
+    public int clearLore() {
+        SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
+        int c = 0;
+        if (writableDatabase.isOpen()) {
+            c = writableDatabase.delete(DataBaseOpenHelper.TABLE_LORE, null, null);
+            writableDatabase.close();
+        }
+        return c;
     }
 
 
@@ -535,6 +574,21 @@ public final class DataManager {
     }
 
     /**
+     * 删除所有健康问答数据
+     *
+     * @return
+     */
+    public int clearAsk() {
+        SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
+        int c = 0;
+        if (writableDatabase.isOpen()) {
+            c = writableDatabase.delete(DataBaseOpenHelper.TABLE_ASK, null, null);
+            writableDatabase.close();
+        }
+        return c;
+    }
+
+    /**
      * 获取健康图书分类
      */
     public ArrayList<BookClassifyItem> getBookClassifyItems() {
@@ -614,7 +668,12 @@ public final class DataManager {
     public ArrayList<BookListItem> getBookListItems(int count, int page, int id) {
         SQLiteDatabase readableDatabase = dboh.getReadableDatabase();
         if (readableDatabase.isOpen()) {
-            Cursor query = readableDatabase.query(DataBaseOpenHelper.TABLE_BOOK, null, DataBaseOpenHelper.BOOK_BOOKCLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.BOOK_ID + " DESC", (count * (page - 1)) + "," + count);
+            Cursor query;
+            if (id != -1) {
+                query = readableDatabase.query(DataBaseOpenHelper.TABLE_BOOK, null, DataBaseOpenHelper.BOOK_BOOKCLASS + " = ? ", new String[]{id + ""}, null, null, DataBaseOpenHelper.BOOK_ID + " DESC", (count * (page - 1)) + "," + count);
+            } else {
+                query = readableDatabase.query(DataBaseOpenHelper.TABLE_BOOK, null, null, null, null, null, DataBaseOpenHelper.BOOK_ID + " DESC", (count * (page - 1)) + "," + count);
+            }
             ArrayList<BookListItem> data = new ArrayList<>();
             if (query.moveToFirst())
                 do {
@@ -689,6 +748,20 @@ public final class DataManager {
         return getBookListItem(id) != null;
     }
 
+    /**
+     * 删除所有健康图书
+     *
+     * @return
+     */
+    public int clearBooks() {
+        SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
+        int c = 0;
+        if (writableDatabase.isOpen()) {
+            c = writableDatabase.delete(DataBaseOpenHelper.TABLE_BOOK, null, null);
+            writableDatabase.close();
+        }
+        return c;
+    }
 
     /**
      * 获取健康食物分类
@@ -854,6 +927,21 @@ public final class DataManager {
      */
     public boolean hasFoodListItem(int id) {
         return getFoodLiteItem(id) != null;
+    }
+
+    /**
+     * 删除所有健康信息数据
+     *
+     * @return
+     */
+    public int clearFood() {
+        SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
+        int c = 0;
+        if (writableDatabase.isOpen()) {
+            c = writableDatabase.delete(DataBaseOpenHelper.TABLE_FOOD, null, null);
+            writableDatabase.close();
+        }
+        return c;
     }
 
     /**
@@ -1024,6 +1112,20 @@ public final class DataManager {
         return getCookListItem(id) != null;
     }
 
+    /**
+     * 删除所有健康信息数据
+     *
+     * @return
+     */
+    public int clearCook() {
+        SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
+        int c = 0;
+        if (writableDatabase.isOpen()) {
+            c = writableDatabase.delete(DataBaseOpenHelper.TABLE_COOK, null, null);
+            writableDatabase.close();
+        }
+        return c;
+    }
     /**
      * 判断某一张表中是否存在某一条为id的数据
      *

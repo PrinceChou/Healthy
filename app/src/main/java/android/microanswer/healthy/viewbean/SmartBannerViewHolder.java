@@ -113,7 +113,7 @@ public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements Vi
 
     }
 
-    private String[] tags = {"", "企业要闻", "医疗新闻", "生活贴士", "药品新闻", "食品新闻", "社会热点", "疾病快讯"};
+    private String[] tags = {"健康快讯", "企业要闻", "医疗新闻", "生活贴士", "药品新闻", "食品新闻", "社会热点", "疾病快讯"};
 
     private List<InfoListItem> data;
 

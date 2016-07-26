@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import android.widget.Toast;
  * 由 Micro 创建于 2016/6/30.
  */
 
-public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewAdapter.RefreshListener, RecyclerViewAdapter.OnItemClickListener {
+public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewAdapter.RefreshListener, RecyclerViewAdapter.OnItemClickListener, Runnable {
     private View root = null;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -50,13 +49,6 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
         recyclerView.addOnScrollListener(scrollListener);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
-        if (BaseTools.isNetworkAvailable(getActivity())) {
-            recyclerViewAdapter.generateOnlineData();
-        } else {
-            recyclerViewAdapter.generateDatabaseData();
-            Toast.makeText(getActivity(), "当前网络不可用", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     /**
@@ -88,7 +80,8 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
     private void initData() {
-        recyclerViewAdapter = new RecyclerViewAdapter(getActivity());
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), this);
+        recyclerViewAdapter.generateDatabaseData();
         recyclerViewAdapter.setRefreshListener(this);
         linearLayoutManager = new LinearLayoutManager(getActivity());
     }
@@ -108,5 +101,14 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public void onClick(Object item) {
         Toast.makeText(getActivity(), item.toString(), Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void run() {
+        if (BaseTools.isNetworkAvailable(getActivity())) {
+            recyclerViewAdapter.generateOnlineData();
+        } else {
+            recyclerViewAdapter.generateDatabaseData();
+        }
     }
 }
