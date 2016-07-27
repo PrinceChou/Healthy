@@ -104,15 +104,76 @@
         app:titleTextColor="@color/whilte"/>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ScrollView
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
         android:layout_below="@id/activity_friend_headview"
+        android:layout_alignParentBottom="true"
         android:background="@color/whilte">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <android.microanswer.healthy.view.AutoMoveTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:lines="1"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:text="我是一只美丽的隔壁的王叔叔，你要和我做朋友吗？点击关注哦我问吧！"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="@color/line_color"/>
+
+            <android.microanswer.healthy.view.ItemView2
+                android:id="@+id/itemView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:item_title_padding="15dp"
+                app:itemtitle="电话"
+                app:under_line_enable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:paddingRight="12dp"
+                    android:text="13541227014"/>
+
+            </android.microanswer.healthy.view.ItemView2>
+
+
+            <android.microanswer.healthy.view.ItemView2
+                android:id="@+id/itemView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:item_title_padding="15dp"
+                app:itemtitle="QQ号码"
+                app:under_line_enable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:paddingRight="12dp"
+                    android:text="374288225"/>
+
+            </android.microanswer.healthy.view.ItemView2>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
