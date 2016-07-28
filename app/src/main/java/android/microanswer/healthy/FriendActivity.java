@@ -1,6 +1,7 @@
 package android.microanswer.healthy;
 
 import android.microanswer.healthy.bean.Friend;
+import android.microanswer.healthy.view.ItemView2;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
@@ -22,12 +23,19 @@ public class FriendActivity extends BaseActivity {
 
     private Friend friend;
 
-
+    private TextView signature;
     private TextView headview_title;
     private TextView headview_sex;
     private TextView headview_age;
     private TextView headview_city;
     private CircleImageView headview_img;
+
+    private ItemView2 tel;
+    private ItemView2 qq;
+    private ItemView2 weibo;
+    private ItemView2 integral;
+    private ItemView2 doman;
+    private ItemView2 id;
 
 
     @Override
@@ -44,9 +52,25 @@ public class FriendActivity extends BaseActivity {
         headview_city = (TextView) findViewById(R.id.activity_friend_headview_city);
         headview_img = (CircleImageView) findViewById(R.id.activity_friend_headview_img);
         headview_sex = (TextView) findViewById(R.id.activity_friend_headview_sex);
+        signature = (TextView) findViewById(R.id.activity_friend_signature);
+
+        tel = (ItemView2) findViewById(R.id.activity_friend_tel);
+        qq = (ItemView2) findViewById(R.id.activity_friend_qq);
+        weibo = (ItemView2) findViewById(R.id.activity_friend_weibo);
+        integral = (ItemView2) findViewById(R.id.activity_friend_integral);
+        doman = (ItemView2) findViewById(R.id.activity_friend_home);
+        id = (ItemView2) findViewById(R.id.activity_friend_id);
+        signature.setText((friend.getSignature() + "").replace("null", "未设置"));
+
+        tel.getContentView(TextView.class).setText((friend.getPhone() + "").replace("null", "未设置"));
+        qq.getContentView(TextView.class).setText((friend.getQq() + "").replace("null", "未设置"));
+        weibo.getContentView(TextView.class).setText((friend.getWeibo() + "").replace("null", "未设置"));
+        integral.getContentView(TextView.class).setText((friend.getIntegral() + "").replace("null", "未设置"));
+        doman.getContentView(TextView.class).setText((friend.getDomain() + "").replace("null", "未设置"));
+        id.getContentView(TextView.class).setText((friend.getId() + "").replace("null", "未设置"));
 
         ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + friend.getAvatar(), headview_img);
-        headview_title.setText(friend.getAccount() + "");
+        headview_title.setText((friend.getAccount() + "").replace("null", "无名氏"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         int year = calendar.get(Calendar.YEAR);
@@ -56,7 +80,7 @@ public class FriendActivity extends BaseActivity {
         headview_city.setText(friend.getProvince()+" "+friend.getCity() + "");
         headview_sex.setText(friend.getGender() == 1 ? "男" : friend.getGender() == 0 ? "女" : "保密");
 
-        alertDialog(friend.getAccount(),friend.toString()).show();
+//        alertDialog(friend.getAccount(),friend.toString()).show();
 
     }
 

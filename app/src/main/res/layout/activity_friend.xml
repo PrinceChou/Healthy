@@ -117,6 +117,7 @@
             android:orientation="vertical">
 
             <android.microanswer.healthy.view.AutoMoveTextView
+                android:id="@+id/activity_friend_signature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
@@ -134,12 +135,13 @@
                 android:background="@color/line_color"/>
 
             <android.microanswer.healthy.view.ItemView2
-                android:id="@+id/itemView2"
+                android:id="@+id/activity_friend_tel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 app:item_title_padding="15dp"
+                app:under_line_padding="12dp"
                 app:itemtitle="电话"
                 app:under_line_enable="true">
 
@@ -154,12 +156,13 @@
 
 
             <android.microanswer.healthy.view.ItemView2
-                android:id="@+id/itemView3"
+                android:id="@+id/activity_friend_qq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 app:item_title_padding="15dp"
+                app:under_line_padding="12dp"
                 app:itemtitle="QQ号码"
                 app:under_line_enable="true">
 
@@ -172,6 +175,86 @@
 
             </android.microanswer.healthy.view.ItemView2>
 
+            <android.microanswer.healthy.view.ItemView2
+                android:id="@+id/activity_friend_weibo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:item_title_padding="15dp"
+                app:itemtitle="微博"
+                app:under_line_enable="true"
+                app:under_line_padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:paddingRight="12dp"
+                    android:text="飞翔的企鹅"/>
+
+            </android.microanswer.healthy.view.ItemView2>
+
+            <android.microanswer.healthy.view.ItemView2
+                android:id="@+id/activity_friend_integral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:item_title_padding="15dp"
+                app:itemtitle="用户积分"
+                app:under_line_enable="true"
+                app:under_line_padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:paddingRight="12dp"
+                    android:text="428"/>
+
+            </android.microanswer.healthy.view.ItemView2>
+
+            <android.microanswer.healthy.view.ItemView2
+                android:id="@+id/activity_friend_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:item_title_padding="15dp"
+                app:itemtitle="主页"
+                app:under_line_enable="true"
+                app:under_line_padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center"
+                    android:paddingRight="12dp"
+                    android:text="www.baidu.com"/>
+
+            </android.microanswer.healthy.view.ItemView2>
+
+            <android.microanswer.healthy.view.ItemView2
+                android:id="@+id/activity_friend_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:item_title_padding="15dp"
+                app:itemtitle="唯一识别码"
+                app:under_line_enable="true"
+                app:under_line_padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:paddingRight="12dp"
+                    android:text="114234"
+                    android:textSize="12sp"/>
+
+            </android.microanswer.healthy.view.ItemView2>
         </LinearLayout>
     </ScrollView>
 

@@ -23,6 +23,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -134,6 +135,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public boolean onOptionsItemSelected(MenuItem item) {
         mActionBarDrawerToggle.onOptionsItemSelected(item);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            drawerLayout.openDrawer(Gravity.LEFT);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void onClick(View v) {

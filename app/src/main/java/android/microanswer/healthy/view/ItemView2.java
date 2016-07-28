@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.GradientDrawable;
 import android.microanswer.healthy.R;
 import android.microanswer.healthy.tools.BaseTools;
 import android.util.AttributeSet;
@@ -21,7 +22,11 @@ public class ItemView2 extends ViewGroup {
 
 
     private TextView mTitle;
-    private Paint paint;
+    //    private Paint paint;
+    private GradientDrawable gradientDrawable;
+    private Rect gradientDrawableBound;
+    private float underlinepadding;
+
     private boolean underline = false;
 
 
@@ -36,8 +41,14 @@ public class ItemView2 extends ViewGroup {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStrokeWidth(3);
+        gradientDrawable = new GradientDrawable();
+        gradientDrawableBound = new Rect();
+        gradientDrawable.setColor(context.getResources().getColor(R.color.line_color));
+//        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        underlinepadding = (BaseTools.Dp2Px(context, 8f));
+//        paint.setColor(Color.GRAY);
+//        paint.setStyle(Paint.Style.STROKE);
+        setDrawingCacheQuality(DRAWING_CACHE_QUALITY_HIGH);
         mTitle = new TextView(context);
         mTitle.setGravity(Gravity.CENTER);
         mTitle.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -56,10 +67,16 @@ public class ItemView2 extends ViewGroup {
                     break;
                 case R.styleable.ItemView2_item_title_text_color:
                     mTitle.setTextColor(typedArray.getColor(index, Color.GRAY));
-                    paint.setColor(mTitle.getCurrentTextColor());
+                    gradientDrawable.setColor(mTitle.getCurrentTextColor());
                     break;
                 case R.styleable.ItemView2_under_line_enable:
                     underline = typedArray.getBoolean(index, false);
+                    break;
+                case R.styleable.ItemView2_under_line_padding:
+                    underlinepadding = typedArray.getDimension(index, BaseTools.Dp2Px(getContext(), 8f));
+                    break;
+                case R.styleable.ItemView2_item_title_size:
+                    mTitle.setTextSize(typedArray.getDimension(index, mTitle.getTextSize()));
                     break;
             }
         }
@@ -71,8 +88,8 @@ public class ItemView2 extends ViewGroup {
      *
      * @return
      */
-    public View getContentView() {
-        return getChildAt(1);
+    public <T> T getContentView(Class<T> clazz) {
+        return (T) getChildAt(1);
     }
 
 
@@ -85,6 +102,9 @@ public class ItemView2 extends ViewGroup {
         View childAt = getChildAt(1);
         if (childAt != null)
             childAt.layout(mTitle.getRight(), t, r, t + getMeasuredHeight());
+
+        gradientDrawableBound.set((int) (l + underlinepadding), t + getMeasuredHeight() - BaseTools.Dp2Px(getContext(), 0.5f), r - (int) underlinepadding, b);
+        gradientDrawable.setBounds(gradientDrawableBound);
     }
 
     @Override
@@ -124,6 +144,6 @@ public class ItemView2 extends ViewGroup {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (underline)
-            canvas.drawLine(0, getBottom(), getRight(), getBottom(), paint);
+            gradientDrawable.draw(canvas);
     }
 }

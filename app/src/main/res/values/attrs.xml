@@ -23,9 +23,11 @@
     </declare-styleable>
     <declare-styleable name="ItemView2">
         <attr name="itemtitle" format="string"/>
+        <attr name="item_title_size" format="dimension"/>
         <attr name="item_title_padding" format="dimension"/>
         <attr name="item_title_text_color" format="color"/>
         <attr name="under_line_enable" format="boolean"/>
+        <attr name="under_line_padding" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="LetterView">
