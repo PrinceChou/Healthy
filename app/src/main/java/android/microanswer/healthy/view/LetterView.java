@@ -1,6 +1,5 @@
 package android.microanswer.healthy.view;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -8,21 +7,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
 import android.microanswer.healthy.R;
 import android.microanswer.healthy.tools.BaseTools;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AbsListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 /**
@@ -48,7 +40,6 @@ public class LetterView extends View {
 
     private Paint paint;
     private Rect letterRect;
-    //    private PopupWindow popw;
     private TextView popwtv;
     private int currentindex;
     private int currentcolor = Color.BLACK;
@@ -82,15 +73,9 @@ public class LetterView extends View {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);//消除锯齿
         paint.setStyle(Paint.Style.STROKE);
         popwtv = new TextView(context);
-        popwtv.setBackgroundResource(R.drawable.trans_colorprimary_bg);
         popwtv.setGravity(Gravity.CENTER);
         popwtv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, -2));
         popwtv.setTextSize(BaseTools.sp2px(context, 20f));
-//        popw = new PopupWindow(context);
-//        popw.setContentView(popwtv);
-//        popw.setWidth(-2);
-//        popw.setHeight(-2);
-//        popw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         int indexCount = typedArray.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
             int attr = typedArray.getIndex(i);
@@ -112,6 +97,9 @@ public class LetterView extends View {
                     break;
                 case R.styleable.LetterView_hint_text_color:
                     popwtv.setTextColor(typedArray.getColor(attr, Color.GRAY));
+                    break;
+                case R.styleable.LetterView_hint_background:
+                    popwtv.setBackgroundDrawable(typedArray.getDrawable(attr));
                     break;
             }
         }
@@ -149,9 +137,9 @@ public class LetterView extends View {
         super.onDraw(canvas);
         for (int i = 0; i < letters.length; i++) {
             paint.getTextBounds(letters[i] + "", 0, 1, letterRect);
-            float w = letterRect.width();
+            float w = letterRect.width();//字母的宽度
             float x = (getWidth() - w) / 2f;
-            float h = getHeight() / (float) (letters.length);
+            float h = getHeight() / (float) (letters.length);//字母的高度
             float y = (h * (i + 1f)) - ((h - letterRect.height()) / 2f) - paint.getStrokeWidth();
             int c = paint.getColor();
             if (i == currentindex) {
@@ -184,36 +172,26 @@ public class LetterView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 wm.addView(popwtv, layoutParams);
-//                if (Build.VERSION.SDK_INT >= 21) {
-//                    Animator animator = ViewAnimationUtils.createCircularReveal(popwtv, scW / 2, scH / 2, 0, (int) Math.hypot(layoutParams.width, layoutParams.width));
-//                    animator.setDuration(200);
-//                    animator.start();
-//                }
-//                popw.showAtLocation(this, Gravity.RIGHT | Gravity.TOP, getWidth() * 2, (int) event.getRawY() - (popwtv.getHeight() / 2));
                 break;
             case MotionEvent.ACTION_MOVE:
                 wm.updateViewLayout(popwtv, layoutParams);
-//                popw.update(getWidth() * 2, (int) event.getRawY() - (popwtv.getHeight() / 2), popwtv.getHeight(), popwtv.getHeight(), true);
                 break;
             case MotionEvent.ACTION_UP:
-//                if (Build.VERSION.SDK_INT >= 21) {
-//                    Animator animator = ViewAnimationUtils.createCircularReveal(popwtv, scW / 2, scH / 2, (int) Math.hypot(layoutParams.width, layoutParams.width), 0);
-//                    animator.setDuration(200);
-//                    animator.start();
-//                }
                 wm.removeView(popwtv);
-//                popw.dismiss();
                 break;
         }
         return true;
     }
 
 
-    public void setCurrentindex(int index) {
+    private void setCurrentindex(int index) {
         this.currentindex = index;
         invalidate();
     }
 
+    /**
+     * 设置当前所处的字母
+     */
     public void setCurrentLetter(char letter) {
         if (letter == '*' || (letter >= 'a' && letter <= 'z') || letter == '#') {
             letter = String.valueOf(letter).toUpperCase().charAt(0);

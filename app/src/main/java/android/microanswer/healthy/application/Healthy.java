@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.ImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.tencent.tauth.Tencent;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ import java.util.concurrent.Executor;
 
 public class Healthy extends Application {
     public static ImageLoaderConfiguration ilc = null;
-
+    public static Tencent tencent;//腾讯sdk服务
     @Override
     public void onCreate() {
         super.onCreate();
@@ -53,6 +54,10 @@ public class Healthy extends Application {
         }
         if (!ImageLoader.getInstance().isInited()) {
             ImageLoader.getInstance().init(ilc);
+        }
+
+        if (tencent == null) {
+            tencent = Tencent.createInstance("222222", this);
         }
     }
 

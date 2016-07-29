@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <!-- <declare-styleable name="BottomNavigationBar">
-        <attr name="bnbElevation" format="dimension" />
-        <attr name="bnbActiveColor" format="color" />
-        <attr name="bnbInactiveColor" format="color" />
-        <attr name="bnbBackgroundColor" format="color" />
-        <attr name="bnbAnimationDuration" format="integer" />
-        <attr name="bnbMode" format="enum">
-            <enum name="mode_default" value="0" />
-            <enum name="mode_fixed" value="1" />
-            <enum name="mode_shifting" value="2" />
-        </attr>
-        <attr name="bnbBackgroundStyle" format="enum">
-            <enum name="background_style_default" value="0" />
-            <enum name="background_style_static" value="1" />
-            <enum name="background_style_ripple" value="2" />
-        </attr>
-    </declare-styleable>-->
     <declare-styleable name="ItemView">
         <attr name="item_title" format="string" />
         <attr name="item_smallTitle" format="string" />
@@ -31,12 +14,13 @@
     </declare-styleable>
 
     <declare-styleable name="LetterView">
-        <attr name="text_size" format="dimension"/>
-        <attr name="text_color" format="color"/>
-        <attr name="text_current_color" format="color"/>
-        <attr name="under_line" format="boolean"/>
-        <attr name="hint_text_size" format="dimension"/>
-        <attr name="hint_text_color" format="color"/>
+        <attr name="text_size" format="dimension"/><!-- 文本大小 -->
+        <attr name="text_color" format="color"/><!-- 文本颜色 -->
+        <attr name="text_current_color" format="color"/><!-- 当前选中文本颜色 -->
+        <attr name="under_line" format="boolean"/> <!-- 是否下划线 -->
+        <attr name="hint_text_size" format="dimension"/><!-- 提示文本大小 -->
+        <attr name="hint_text_color" format="color"/><!-- 提示文本颜色 -->
+        <attr name="hint_background" format="color|reference"/><!-- 提示背景 -->
     </declare-styleable>
 
 </resources>

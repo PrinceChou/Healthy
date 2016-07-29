@@ -1,7 +1,6 @@
 package android.microanswer.healthy;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +19,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -207,6 +207,15 @@ public abstract class BaseActivity extends ActionBarActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton(getString(R.string.sure), null);
+        return builder.create();
+    }
+
+    public AlertDialog alertDialog(String title, String message, DialogInterface.OnClickListener ok) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("确定", ok);
+        builder.setNegativeButton("取消", null);
         return builder.create();
     }
 

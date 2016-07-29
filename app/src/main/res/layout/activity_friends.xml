@@ -98,10 +98,11 @@
             android:background="@color/colorPrimary"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            app:hint_text_color="@color/colorPrimary"
+            app:hint_text_color="@color/whilte"
             app:hint_text_size="25sp"
             app:text_color="@color/whilte"
-            app:text_current_color="@color/black"
+            app:text_current_color="@color/colorAccent"
+            app:hint_background="@drawable/trans_colorprimary_bg"
             app:text_size="12sp"/>
 
 

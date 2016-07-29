@@ -149,7 +149,7 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
         Friend friend = (Friend) adapterView.getItemAtPosition(i);
         Intent intent = new Intent(this, FriendActivity.class);
         intent.putExtra("data", friend);
-        startActivity(intent, true);
+        startActivity(intent, false);
     }
 
     @Override
