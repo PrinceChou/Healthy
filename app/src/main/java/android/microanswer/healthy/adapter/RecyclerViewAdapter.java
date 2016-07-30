@@ -296,22 +296,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
 
                     Log.i("加载网络数据", "开始加载健康知识");
                     int loreClassID = tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_lore_data", "-1")));
-                    for (int i = 0; i < 2; i++) {
-                        List<LoreListItem> loreListData = JavaBeanTools.Lore.getLoreListData(1 + i, 2, loreClassID);
-                        if (loreListData != null) {
-                            dataManager.clearLore();
-                            dataManager.putLoreListItems(loreListData);
+                    List<LoreListItem> loreListData1 = JavaBeanTools.Lore.getLoreListData(1, 4, loreClassID);
+                    if (loreListData1 != null) {
+                        dataManager.clearLore();
+                        dataManager.putLoreListItems(loreListData1);
+                        for (int i = 0; i < 2; i++) {
                             HashMap<String, Object> items = new HashMap<String, Object>();
                             items.put("type", TYPE_ITEM_KNOWLEDGE);
-                            items.put("data", loreListData);
+                            items.put("data", loreListData1.subList((i * 2), (i * 2) + 2));
                             Message msg = handler.obtainMessage();
                             msg.what = WHAT_ITEMUPDATE;
                             msg.obj = items;
                             msg.arg1 = (i + 2);
                             handler.sendMessage(msg);
-                        }
-                    }//请求健康知识数据
-
+                        }//请求健康知识数据
+                    }
                     Log.i("加载网络数据", "开始加载健康问答");
                     List<AskClassifyItem> askClassifyData = JavaBeanTools.Ask.getAskClassifyData();
 

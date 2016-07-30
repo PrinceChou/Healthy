@@ -24,6 +24,8 @@ import java.util.concurrent.Executor;
  */
 
 public class Healthy extends Application {
+    public static final String APP_ID_FOR_TENCENT = "1105506561";
+    public static final String APP_KEY_FOR_TENCENT = "Qy0ai0WXvvfd5AcE";
     public static ImageLoaderConfiguration ilc = null;
     public static Tencent tencent;//腾讯sdk服务
     @Override
@@ -57,7 +59,7 @@ public class Healthy extends Application {
         }
 
         if (tencent == null) {
-            tencent = Tencent.createInstance("222222", this);
+            tencent = Tencent.createInstance(APP_ID_FOR_TENCENT, this);
         }
     }
 

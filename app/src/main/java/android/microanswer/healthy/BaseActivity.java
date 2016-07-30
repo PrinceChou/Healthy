@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -44,7 +45,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     public static final String client_id = "1569107";
     public static final String client_secret = "b197106453b5ea7323720d343d671acb";
-
+    public static final String redirect_uri = "http://www.tngou.net/api/oauth2/response";
     protected static final String APP_WORKDIR = "android.microanswer.healthy";
 
     protected int screenWidth;
@@ -56,6 +57,12 @@ public abstract class BaseActivity extends ActionBarActivity {
         screenHeight = getWindowManager().getDefaultDisplay().getHeight();
         screenWidth = getWindowManager().getDefaultDisplay().getWidth();
     }
+
+
+    public boolean isTextEmpty(String text) {
+        return TextUtils.isEmpty(text);
+    }
+
 
     /**
      * 弹出一个错误提示框
@@ -270,7 +277,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 return;
             }
         }
-        super.startActivity(intent);
+        super.startActivityForResult(intent, reqerstcode);
     }
 
 

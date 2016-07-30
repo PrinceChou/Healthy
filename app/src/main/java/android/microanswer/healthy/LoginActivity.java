@@ -21,11 +21,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -176,9 +179,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
 
                 break;
-            case R.id.activity_login_qq:
+            case R.id.activity_login_qq://QQ登陆
+//                int login = Healthy.tencent.login(this, "all", miuiListener);
+//                toast(login + "", POSOTION_TOP);
+                jumpForResultTo(QQLoginActivity.class, false, 1111);
                 break;
-            case R.id.activity_login_sina:
+            case R.id.activity_login_sina://新浪登陆
                 break;
             case R.id.activity_login_textview_noaccount:
                 jumpForResultTo(RegActivity.class, true, RegActivity.REG_ACCOUNT);
@@ -200,10 +206,44 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             User.getUser().setPassword(name_pwds[1]);
             toast("注册成功，正在登录", POSOTION_TOP);
             requestuserinfo();
+        } else if (resultCode == QQLoginActivity.LOGINOK) {
+            String code = data.getStringExtra("code");
+
+            final String accesstokenurl = "http://www.tngou.net/api/oauth2/accesstoken?code=" + code + "&client_id=" + client_id + "&client_secret=" + client_secret;
+
+            runOnOtherThread(new BaseOtherThread() {
+                @Override
+                void onOtherThreadRunEnd(Message msg) {
+                    requestuserinfo();
+                }
+
+                @Override
+                public Map getTaskParams() {
+                    Map<String, String> url = new HashMap<String, String>();
+                    url.put("url", accesstokenurl);
+                    return url;
+                }
+
+                @Override
+                public Message run(Map params) {
+
+                    String url = (String) params.get("url");
+
+                    String request = InternetServiceTool.request(url);
+                    com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(request);
+                    if (jsonObject.getBooleanValue("status")) {
+                        User.getUser().setId(jsonObject.getInteger("uid"));
+                        User.getUser().setAccess_token(jsonObject.getString("access_token"));
+                        User.getUser().setRefresh_token(jsonObject.getString("refresh_token"));
+                    }
+                    return null;
+                }
+            }, 765);
+            
+
         }
 
     }
-
 
     private void requestuserinfo() {
         runOnOtherThread(new OtherThreadTask<String, String>() {
@@ -417,6 +457,127 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             }
         } else {
             SimpleViewFocusHinter.dismassMaked();
+        }
+    }
+
+
+    /**
+     * qq登陆结果Bean
+     */
+    public static class QQResult implements Serializable {
+
+        /**
+         * ret : 0
+         * openid : EBFBF391BECFD988EF505C999D10B448
+         * access_token : 2218772A44E0338F827B273235CCEF8B
+         * pay_token : 3D10A4E2C60DAABFCDEF7543D4B8B73D
+         * expires_in : 7776000
+         * pf : desktop_m_qq-10000144-android-2002-
+         * pfkey : 06b2ee67bb7869f3695aa29d692f6344
+         * msg :
+         * login_cost : 319
+         * query_authority_cost : 349
+         * authority_cost : 0
+         */
+
+        private int ret;
+        private String openid;
+        private String access_token;
+        private String pay_token;
+        private int expires_in;
+        private String pf;
+        private String pfkey;
+        private String msg;
+        private int login_cost;
+        private int query_authority_cost;
+        private int authority_cost;
+
+        public int getRet() {
+            return ret;
+        }
+
+        public void setRet(int ret) {
+            this.ret = ret;
+        }
+
+        public String getOpenid() {
+            return openid;
+        }
+
+        public void setOpenid(String openid) {
+            this.openid = openid;
+        }
+
+        public String getAccess_token() {
+            return access_token;
+        }
+
+        public void setAccess_token(String access_token) {
+            this.access_token = access_token;
+        }
+
+        public String getPay_token() {
+            return pay_token;
+        }
+
+        public void setPay_token(String pay_token) {
+            this.pay_token = pay_token;
+        }
+
+        public int getExpires_in() {
+            return expires_in;
+        }
+
+        public void setExpires_in(int expires_in) {
+            this.expires_in = expires_in;
+        }
+
+        public String getPf() {
+            return pf;
+        }
+
+        public void setPf(String pf) {
+            this.pf = pf;
+        }
+
+        public String getPfkey() {
+            return pfkey;
+        }
+
+        public void setPfkey(String pfkey) {
+            this.pfkey = pfkey;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
+
+        public int getLogin_cost() {
+            return login_cost;
+        }
+
+        public void setLogin_cost(int login_cost) {
+            this.login_cost = login_cost;
+        }
+
+        public int getQuery_authority_cost() {
+            return query_authority_cost;
+        }
+
+        public void setQuery_authority_cost(int query_authority_cost) {
+            this.query_authority_cost = query_authority_cost;
+        }
+
+        public int getAuthority_cost() {
+            return authority_cost;
+        }
+
+        public void setAuthority_cost(int authority_cost) {
+            this.authority_cost = authority_cost;
         }
     }
 }

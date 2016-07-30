@@ -20,6 +20,10 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\select_dialog_item_material.xml"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qqlogin.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\layout\\activity_qqlogin.xml"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\shifting_bottom_navigation_item.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.ashokvarma.android\\bottom-navigation-bar\\1.3.0\\res\\layout\\shifting_bottom_navigation_item.xml"
     },

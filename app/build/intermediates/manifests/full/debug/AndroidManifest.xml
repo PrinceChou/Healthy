@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -63,6 +64,10 @@
             android:name="android.microanswer.healthy.LoginActivity"
             android:label="@string/login"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="android.microanswer.healthy.QQLoginActivity"
+            android:label="QQ登录"
+            android:screenOrientation="portrait" />
         <activity
             android:name="android.microanswer.healthy.SetActivity"
             android:label="@string/set"

@@ -18,6 +18,23 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
+ * 0---------------------
+ * 该类不能独立运行，依赖于自定义属性。属性内容如下：
+ *
+ *<declare-styleable name="LetterView">
+ *<attr name="text_size" format="dimension"/><!-- 文本大小 -->
+ *<attr name="text_color" format="color"/><!-- 文本颜色 -->
+ *<attr name="text_current_color" format="color"/><!-- 当前选中文本颜色 -->
+ *<attr name="under_line" format="boolean"/> <!-- 是否下划线 -->
+ *<attr name="hint_text_size" format="dimension"/><!-- 提示文本大小 -->
+ *<attr name="hint_text_color" format="color"/><!-- 提示文本颜色 -->
+ *<attr name="hint_background" format="color|reference"/><!-- 提示背景 -->
+ *</declare-styleable>
+ * 以上属性应写在自定义属性xml文件里
+ *这样，在使用该View的时候，可以直接在xml里面设置想要的效果
+ *
+ *
+ * 0---------------------
  * 字母索引自定义View
  * 由 Micro 创建于 2016/7/21.
  */

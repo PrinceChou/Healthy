@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,7 +91,7 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
                 List<Friend> friends = JavaBeanTools.UserInterface.myHeart(30, 1, User.getUser().getAccount(), User.getUser().getAccess_token());
 //                Collections.sort(friends);
 
-                if (friends == null) {
+                if (friends == null || friends.size() < 1) {
                     return new Message();
                 }
 
