@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:2:1-99:12
+ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:2:1-103:12
 	package
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml
@@ -38,7 +38,7 @@ ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:10
 	android:name
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:10:22-66
 application
-ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:12:5-97:19
+ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:12:5-101:19
 MERGED from [com.android.support:appcompat-v7:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-vector-drawable:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\AndroidManifest.xml:23:5-20
@@ -230,6 +230,14 @@ ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:93
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:95:13-31
 	android:name
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:94:13-45
+activity#android.microanswer.healthy.LoreActivity
+ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:97:9-100:51
+	android:screenOrientation
+		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:100:13-49
+	android:label
+		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:99:13-33
+	android:name
+		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:98:13-41
 uses-sdk
 INJECTED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78

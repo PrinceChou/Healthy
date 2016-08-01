@@ -99,16 +99,34 @@ public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onClick(Object item) {
-        Toast.makeText(getActivity(), item.toString(), Toast.LENGTH_SHORT).show();
-
+        if (onItemClickListener != null) {
+            onItemClickListener.onItemClick(item);
+        }
     }
 
     @Override
     public void run() {
         if (BaseTools.isNetworkAvailable(getActivity())) {
-            recyclerViewAdapter.generateOnlineData();
+            onRefresh();
         } else {
             recyclerViewAdapter.generateDatabaseData();
         }
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    /**
+     * 单项点击监听
+     */
+    public static interface OnItemClickListener {
+        void onItemClick(Object item);
     }
 }

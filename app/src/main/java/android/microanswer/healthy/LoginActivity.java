@@ -38,7 +38,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private static final String userurl = "http://www.tngou.net/api/user";//获取用户信息
     public static final int REQUEST_LOGIN = 4;
 
-    private ActionBar actionbar;
     private EditText etaccount, et_pwd;
     private TextView forgotpwd, noaccount;
     private Button submit;
@@ -58,7 +57,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void initview() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_login_toolbar);
         setSupportActionBar(toolbar);
-        actionbar = getSupportActionBar();
+        ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
             actionbar.setHomeButtonEnabled(true);
             actionbar.setDisplayHomeAsUpEnabled(true);

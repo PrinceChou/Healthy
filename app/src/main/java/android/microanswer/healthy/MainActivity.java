@@ -3,7 +3,10 @@ package android.microanswer.healthy;
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
+import android.microanswer.healthy.fragment.HealthyFragment;
+import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.view.MActionBarDrawerToggle;
 import android.os.Build;
@@ -11,7 +14,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import android.support.design.internal.NavigationMenuPresenter;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -37,9 +39,8 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Set;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HealthyFragment.OnItemClickListener {
     public static final String SHAREDPREFERENCES_KEY_WEALTHY = "skw";
     public static final String SHAREDPREFERENCES_KEY_WEALTHY_TIME = "skwt";
 
@@ -95,6 +96,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         fragmentManager = getSupportFragmentManager();
         fragments = new Fragment[3];
         fragments[0] = fragmentManager.findFragmentById(R.id.activity_main_fragment_1);
+        if (fragments[0] instanceof HealthyFragment) {
+            HealthyFragment hf = (HealthyFragment) fragments[0];
+            hf.setOnItemClickListener(this);
+        }
         fragments[1] = fragmentManager.findFragmentById(R.id.activity_main_fragment_2);
         fragments[2] = fragmentManager.findFragmentById(R.id.activity_main_fragment_3);
 
@@ -298,6 +303,29 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    /**
+     * 内容被点击
+     *
+     * @param item
+     */
+    @Override
+    public void onItemClick(Object item) {
+        if (!BaseTools.isNetworkAvailable(this)) {
+            toast("网诺不可用", POSOTION_TOP);
+            return;
+        }
+
+
+//        alertDialog("信息", "" + item).show();
+        if (item instanceof LoreListItem) {
+            //TODO 跳转到健康知识详情页面
+            LoreListItem loreListItem = (LoreListItem) item;
+            Intent intent = new Intent(this, LoreActivity.class);
+            intent.putExtra("data", loreListItem);
+            startActivity(intent);
+        }
     }
 
     class WealtherLoader implements OtherThreadTask {

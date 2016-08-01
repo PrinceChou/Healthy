@@ -95,6 +95,10 @@
             android:name="android.microanswer.healthy.DonationActivity"
             android:label="捐赠"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="android.microanswer.healthy.LoreActivity"
+            android:label="知识详情"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
