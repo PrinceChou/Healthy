@@ -192,7 +192,7 @@ public class SmartBannerViewHolder extends RecyclerView.ViewHolder implements Vi
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Bitmap bitmap1 = BaseTools.doBlur(bitmap, 10);
+                    Bitmap bitmap1 = BaseTools.doBlur(bitmap, 100);
                     Message msg = Message.obtain();
                     msg.obj = bitmap1;
                     handler.sendMessage(msg);

@@ -266,101 +266,127 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     if (jsondata.getBoolean("status")) {
                         User user = User.getUser();
                         try {
+                            if (jsondata.has("id"))
                             user.setId(jsondata.getInt("id"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("account"))
                             user.setAccount(jsondata.getString("account"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-//                        try {
-//                            user.setAvatar(jsondata.getString("avatar"));
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
                         try {
+                            if (jsondata.has("avatar"))
+                                user.setAvatar(jsondata.getString("avatar"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            if (jsondata.has("birth"))
                             user.setBirth(new Date(jsondata.getLong("birth")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("city"))
                             user.setCity(jsondata.getString("city"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("domain"))
                             user.setDomain(jsondata.getString("domain"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("email"))
                             user.setEmail(jsondata.getString("email"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("gender"))
                             user.setGender(jsondata.getInt("gender"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("home"))
                             user.setHome(jsondata.getString("home"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("integral"))
                             user.setIntegral(jsondata.getInt("integral"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("isemail"))
                             user.setIsemail(jsondata.getInt("isemail"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("isphone"))
                             user.setIsphone(jsondata.getInt("isphone"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("phone"))
                             user.setPhone(jsondata.getString("phone"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("province"))
                             user.setProvince(jsondata.getString("province"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("qq"))
                             user.setQq(jsondata.getString("qq"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("qqid"))
+                                user.setQqid(jsondata.getString("qqid"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            if (jsondata.has("signature"))
                             user.setSignature(jsondata.getString("signature"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("time"))
                             user.setTime(jsondata.getLong("time"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("title"))
                             user.setTitle(jsondata.getString("title"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("weibo"))
                             user.setWeibo(jsondata.getString("weibo"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
+                            if (jsondata.has("weiboid"))
                             user.setWeiboid(jsondata.getInt("weiboid"));
                         } catch (Exception e) {
                             e.printStackTrace();

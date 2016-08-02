@@ -246,7 +246,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
         }
     }
 
-    private int tranceformInt(int in) {
+    /**
+     * 如果trance为true，该方法才有作用，否则原值返回
+     *
+     * @param in
+     * @param trance
+     * @return
+     */
+    private int tranceformInt(int in, boolean trance) {
+
+        if (!trance) {
+            return in;
+        }
+
         if (in == -1) {
             return (int) Math.floor(Math.random() * 7) + 1;
         }
@@ -278,7 +290,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
                     Map<String, Object> banner = new HashMap<>();
                     banner.put("type", TYPE_BANNER);
                     int classifyId = Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1"));
-                    classifyId = tranceformInt(classifyId);
+                    classifyId = tranceformInt(classifyId, false);
                     List<InfoListItem> infoListData1 = JavaBeanTools.Info.getInfoListData(infoPage++, 10, classifyId);
                     if (infoListData1 != null) {
                         //先删除原有的数据，重新写入新数据
@@ -295,7 +307,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
 
 
                     Log.i("加载网络数据", "开始加载健康知识");
-                    int loreClassID = tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_lore_data", "-1")));
+                    int loreClassID = tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_lore_data", "-1")), false);
                     List<LoreListItem> loreListData1 = JavaBeanTools.Lore.getLoreListData(1, 4, loreClassID);
                     if (loreListData1 != null) {
                         dataManager.clearLore();
@@ -331,7 +343,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
 
 
                     Log.i("加载网络数据", "开始加载健康图书");
-                    int bookclassify = tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_book_data", "-1")));
+                    int bookclassify = tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_book_data", "-1")), true);
                     List<BookListItem> itembookData = JavaBeanTools.Book.getBookList(1, 9, bookclassify);
                     if (itembookData != null) {
                         dataManager.clearBooks();

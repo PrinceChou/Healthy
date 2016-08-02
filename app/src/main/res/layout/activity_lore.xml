@@ -135,6 +135,25 @@
                 android:orientation="vertical"
                 android:paddingBottom="12dp">
 
+
+                <!-- 评论列表容器 -->
+                <LinearLayout
+                    android:id="@+id/activity_lore_pinlunlistcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="还没有评论"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,6 +167,7 @@
                     android:textSize="13sp"/>
 
                 <EditText
+                    android:id="@+id/activity_lore_pinlun_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
@@ -157,11 +177,13 @@
                     android:background="@drawable/edittext_bg"
                     android:gravity="left|top"
                     android:hint="有什么感想，你也来说说吧！"
+                    android:inputType="textMultiLine"
                     android:lines="5"
                     android:padding="6dp"
                     android:textSize="12sp"/>
 
                 <TextView
+                    android:id="@+id/activity_lore_sendpinlun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

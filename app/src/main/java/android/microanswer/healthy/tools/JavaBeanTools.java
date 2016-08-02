@@ -163,7 +163,9 @@ public class JavaBeanTools {
          * @return
          */
         public static final List<InfoListItem> getInfoListData(int page, int rows, int id) {
+
             String url = "http://www.tngou.net/api/info/list?page=" + page + "&rows=" + rows + "&id=" + id;
+
             String result = InternetServiceTool.request(url);
             try {
             com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(result);

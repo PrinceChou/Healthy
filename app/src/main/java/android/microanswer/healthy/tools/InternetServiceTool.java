@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import static android.R.attr.data;
 
@@ -87,6 +89,55 @@ public class InternetServiceTool {
                 reader.close();
             } catch (Exception e2) {
                 result = "error:" + e2.toString();
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     * 【POST】请求
+     * 请求一个网址，返回一个结果
+     * 一个参数以数组表示，数组第一个是参数名，第二个是参数值
+     *
+     * @param urla    网址
+     * @param parmars 参数
+     * @return
+     */
+    public static final String request(String urla, ArrayList<String[]> parmars) {
+        String result = "";
+        InputStreamReader inputStreamReader = null;
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(urla);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setReadTimeout(5000);
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.setRequestMethod("GET");
+            if (parmars != null)
+                for (String[] ps : parmars) {
+                    httpURLConnection.addRequestProperty(ps[0], ps[1]);
+                }
+            httpURLConnection.connect();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            reader = new BufferedReader(inputStreamReader);
+            StringBuffer sbf = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sbf.append(line);
+            }
+            result = sbf.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = "error-->[" + e.toString() + "]";
+        } finally {
+            try {
+                if (inputStreamReader != null)
+                    inputStreamReader.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                result = "error-->[" + e2.toString() + "]";
             }
         }
         return result;

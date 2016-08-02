@@ -40,6 +40,14 @@ import java.util.Map;
  * 范雪蛟
  */
 public abstract class BaseActivity extends ActionBarActivity {
+    public final static String TYPE_LORE = "lore";
+    public final static String TYPE_INFO = "info";
+    public final static String TYPE_ASK = "ask";
+    public final static String TYPE_BOOK="book";
+    public final static String TYPE_FOOD ="food";
+    public final static String TYPE_COOK = "cook";
+
+
     public final static int POSOTION_TOP = 1;
     public final static int POSOTION_BOTTOM = 2;
 
