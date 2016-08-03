@@ -230,14 +230,14 @@ ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:93
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:95:13-31
 	android:name
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:94:13-45
-activity#android.microanswer.healthy.LoreActivity
+activity#android.microanswer.healthy.LoreInfoAskActivity
 ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:97:9-100:51
 	android:screenOrientation
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:100:13-49
 	android:label
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:99:13-33
 	android:name
-		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:98:13-41
+		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:98:13-48
 uses-sdk
 INJECTED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:21:5-23:78

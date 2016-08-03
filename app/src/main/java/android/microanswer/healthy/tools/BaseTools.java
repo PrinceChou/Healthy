@@ -373,6 +373,25 @@ public class BaseTools {
         return baseSql.append(baseSqlEnd).toString();
     }
 
+    /**
+     * 图片高斯模糊
+     */
+    public static Bitmap doBlur2(Bitmap bitmap) {
+        return BlurTool.BoxBlurFilter(bitmap);
+    }
+
+
+    /**
+     * 图片高斯模糊
+     *
+     * @param bitmap           要模糊的图片
+     * @param radius           模糊半径
+     * @param blurAlphaChannel 是否包含透明度
+     * @return 模糊结果
+     */
+    public static Bitmap doBlur(Bitmap bitmap, int radius, boolean blurAlphaChannel) {
+        return BlurTool.stackBlurImage(bitmap, radius, blurAlphaChannel);
+    }
 
     /**
      * 图片高斯模糊
@@ -381,6 +400,7 @@ public class BaseTools {
      * @param radius
      * @return
      */
+    @Deprecated
     public static Bitmap doBlur(Bitmap sentBitmap, int radius) {
         boolean canReuseInBitmap = false;
 

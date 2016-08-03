@@ -3,6 +3,8 @@ package android.microanswer.healthy;
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.microanswer.healthy.bean.AskListItem;
+import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.fragment.HealthyFragment;
@@ -316,16 +318,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             toast("网诺不可用", POSOTION_TOP);
             return;
         }
-
-
-//        alertDialog("信息", "" + item).show();
+        Intent intent = new Intent(this, LoreInfoAskActivity.class);
         if (item instanceof LoreListItem) {
-            //TODO 跳转到健康知识详情页面
             LoreListItem loreListItem = (LoreListItem) item;
-            Intent intent = new Intent(this, LoreActivity.class);
             intent.putExtra("data", loreListItem);
             startActivity(intent);
+        } else if (item instanceof AskListItem) {
+            AskListItem askListItem = (AskListItem) item;
+            intent.putExtra("data", askListItem);
+            startActivity(intent);
+        } else if (item instanceof InfoListItem) {
+            InfoListItem infoListItem = (InfoListItem) item;
+            intent.putExtra("data", infoListItem);
+            startActivity(intent);
         }
+
+
     }
 
     class WealtherLoader implements OtherThreadTask {

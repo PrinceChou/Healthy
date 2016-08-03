@@ -95,8 +95,8 @@
             android:label="捐赠"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".LoreActivity"
-            android:label="知识详情"
+            android:name=".LoreInfoAskActivity"
+            android:label="详细信息"
             android:screenOrientation="portrait"/>
     </application>
 

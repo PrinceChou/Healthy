@@ -96,8 +96,8 @@
             android:label="捐赠"
             android:screenOrientation="portrait" />
         <activity
-            android:name="android.microanswer.healthy.LoreActivity"
-            android:label="知识详情"
+            android:name="android.microanswer.healthy.LoreInfoAskActivity"
+            android:label="详细信息"
             android:screenOrientation="portrait" />
     </application>
 
