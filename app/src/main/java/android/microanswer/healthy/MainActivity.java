@@ -281,7 +281,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                             case R.id.menu_hint:
                                 break;
                             case R.id.menu_userfriend:
+                                if (isTextEmpty(User.getUser().getAccount())) {//没有登录要先登录
+                                    jumpForResultTo(LoginActivity.class, true, LoginActivity.REQUEST_LOGIN);
+                                    return;
+                                }
+
                                 jumpTo(FriendsActivity.class, true);
+                                break;
+                            case R.id.menu_userlike:
+                                if (isTextEmpty(User.getUser().getAccount())) {//没有登录要先登录
+                                    jumpForResultTo(LoginActivity.class, true, LoginActivity.REQUEST_LOGIN);
+                                    return;
+                                }
+                                jumpTo(CollectedActivity.class, true);
                                 break;
                         }
                     }

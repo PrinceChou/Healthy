@@ -16,6 +16,10 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\email.png"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\refresh.png",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\refresh.png"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_item_right.png",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\ic_item_right.png"
     },
@@ -70,6 +74,10 @@
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\qq.png",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\qq.png"
+    },
+    {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\nodata.png",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\nodata.png"
     },
     {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\sina.png",
