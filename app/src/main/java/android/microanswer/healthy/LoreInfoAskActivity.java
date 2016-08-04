@@ -10,6 +10,7 @@ import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.tools.JavaBeanTools;
+import android.microanswer.healthy.view.HtmlView;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
@@ -55,13 +56,13 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
 
     private TextView title;
     private TextView time;
-    private TextView content;
+    private HtmlView content;
 
     private TextView tv_like;
     private TextView tv_read;
     private TextView tv_say;
 
-    private ImageView img;
+//    private ImageView img;
 
     private LinearLayout pinglunListConent;//评论列表容器
 
@@ -90,8 +91,8 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
 
         title = (TextView) findViewById(R.id.activity_lore_title);
         time = (TextView) findViewById(R.id.activity_lore_time);
-        content = (TextView) findViewById(R.id.activity_lore_content);
-        img = (ImageView) findViewById(R.id.activity_lore_img);
+        content = (HtmlView) findViewById(R.id.activity_lore_content);
+//        img = (ImageView) findViewById(R.id.activity_lore_img);
 
         tv_like = (TextView) findViewById(R.id.activity_lore_likecount);
         tv_read = (TextView) findViewById(R.id.activity_lore_readcount);
@@ -136,7 +137,6 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                     count = ai.getCount() + "";
                     titlea = ai.getTitle();
                     timea = new Date(ai.getTime()).toLocaleString();
-                    ai.setMessage(ai.getMessage().replace("<p>", "<p>　　"));
                     message = ai.getMessage();
                     imga = ai.getImg();
                 } else if (msg.obj instanceof LoreListItem) {
@@ -146,7 +146,6 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                     count = ll.getCount() + "";
                     titlea = ll.getTitle();
                     timea = new Date(ll.getTime()).toLocaleString();
-                    ll.setMessage(ll.getMessage().replace("<p>", "<p>　　"));
                     message = ll.getMessage();
                     imga = ll.getImg();
                 } else if (msg.obj instanceof InfoListItem) {
@@ -156,7 +155,6 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                     count = il.getCount() + "";
                     titlea = il.getTitle();
                     timea = new Date(il.getTime()).toLocaleString();
-                    il.setMessage(il.getMessage().replace("<p>", "<p>　　"));
                     message = il.getMessage();
                     imga = il.getImg();
                 }
@@ -168,70 +166,71 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                 title.setText(titlea);
                 time.setText("发布时间：" + timea);
 
-                final SpannableStringBuilder ssb = (SpannableStringBuilder) Html.fromHtml(message, null, null);
+//                final SpannableStringBuilder ssb = (SpannableStringBuilder) Html.fromHtml(message, null, null);
                 dataview.setVisibility(View.VISIBLE);
                 loadingview.setVisibility(View.GONE);
                 loadPinlun();
-                content.setText(ssb);
-                ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + imga, img);
+//                content.setText(ssb);
+                content.setHtml(message);
+//                ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + imga, img);
                 //使用XMLreader实现html解析
                 if (true) {
                     return;
                 }
 
 
-                ImageSpan[] spans = ssb.getSpans(0, ssb.length(), ImageSpan.class);
-
-                if (spans.length > 0) {
-                    dataview.setVisibility(View.VISIBLE);
-                    loadingview.setVisibility(View.GONE);
-                    loadPinlun();
-                    for (ImageSpan is : spans) {
-                        final ImageSpan imageSpan = is;
-                        ImageLoader.getInstance().loadImage(imageSpan.getSource(), new ImageLoadingListener() {
-                            @Override
-                            public void onLoadingStarted(String imageUri, View view) {
-
-                            }
-
-                            @Override
-                            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                            }
-
-                            @Override
-                            public synchronized void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                                try {
-                                    Field mDrawable = ImageSpan.class.getDeclaredField("mDrawable");
-                                    mDrawable.setAccessible(true);
-                                    BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), loadedImage);
-                                    float sc = getScreenWidth() / (float) loadedImage.getWidth();
-
-                                    bitmapDrawable.setBounds(0, 0, getScreenWidth(), (int) (loadedImage.getHeight() * sc));
-                                    mDrawable.set(imageSpan, bitmapDrawable);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                ssb.setSpan(imageSpan, ssb.getSpanStart(imageSpan), ssb.getSpanEnd(imageSpan), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                    content.setText(ssb);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onLoadingCancelled(String imageUri, View view) {
-
-                            }
-                        });
-                    }
-                } else {
-                    dataview.setVisibility(View.VISIBLE);
-                    loadingview.setVisibility(View.GONE);
-                    loadPinlun();
-                    content.setText(ssb);
-                }
+////                ImageSpan[] spans = ssb.getSpans(0, ssb.length(), ImageSpan.class);
+//
+//                if (spans.length > 0) {
+//                    dataview.setVisibility(View.VISIBLE);
+//                    loadingview.setVisibility(View.GONE);
+//                    loadPinlun();
+//                    for (ImageSpan is : spans) {
+//                        final ImageSpan imageSpan = is;
+//                        ImageLoader.getInstance().loadImage(imageSpan.getSource(), new ImageLoadingListener() {
+//                            @Override
+//                            public void onLoadingStarted(String imageUri, View view) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+//
+//                            }
+//
+//                            @Override
+//                            public synchronized void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                                try {
+//                                    Field mDrawable = ImageSpan.class.getDeclaredField("mDrawable");
+//                                    mDrawable.setAccessible(true);
+//                                    BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), loadedImage);
+//                                    float sc = getScreenWidth() / (float) loadedImage.getWidth();
+//
+//                                    bitmapDrawable.setBounds(0, 0, getScreenWidth(), (int) (loadedImage.getHeight() * sc));
+//                                    mDrawable.set(imageSpan, bitmapDrawable);
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                                try {
+//                                ssb.setSpan(imageSpan, ssb.getSpanStart(imageSpan), ssb.getSpanEnd(imageSpan), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                                    content.setText(ssb);
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onLoadingCancelled(String imageUri, View view) {
+//
+//                            }
+//                        });
+//                    }
+//                } else {
+//                    dataview.setVisibility(View.VISIBLE);
+//                    loadingview.setVisibility(View.GONE);
+//                    loadPinlun();
+//                    content.setText(ssb);
+//                }
 //                ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + loreListItem.getImg(), img);
             }
 

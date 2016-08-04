@@ -110,22 +110,20 @@
                 </LinearLayout>
             </ScrollView>
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/activity_lore_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"/>-->
 
-            <TextView
+            <android.microanswer.healthy.view.HtmlView
                 android:id="@+id/activity_lore_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:autoLink="all"
                 android:paddingBottom="12dp"
                 android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textIsSelectable="true"/>
+                android:paddingRight="12dp"/>
 
 
             <LinearLayout

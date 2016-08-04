@@ -29,4 +29,5 @@ dependencies {
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile files('libs/open_sdk_r5756.jar')
+    compile files('libs/tagsoup-1.2.1.jar')
 }
