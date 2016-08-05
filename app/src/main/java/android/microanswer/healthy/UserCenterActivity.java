@@ -1,8 +1,11 @@
 package android.microanswer.healthy;
 
 import android.graphics.Color;
+import android.microanswer.healthy.application.Healthy;
+import android.microanswer.healthy.bean.Collected;
 import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.view.ItemView;
+import android.microanswer.healthy.view.ItemView2;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
@@ -13,28 +16,34 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.io.File;
 import java.sql.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 48fe7ed6e993241f335882ddlb27c0d7
  * Created by Micro on 2016/6/12.
  */
 
-public class UserCenterActivity extends BaseActivity {
+public class UserCenterActivity extends BaseActivity implements View.OnClickListener {
     private ActionBar actionBar;
 
-    private ItemView headview;
-    private ItemView userlikeview;
-    private ItemView userfriend;
-    private ItemView usernicknameview;
-    private ItemView sexview;
-    private ItemView birthdayview;
-    private ItemView telview;
-    private ItemView qqview;
-    private ItemView sinaview;
-    private ItemView singlnatureview;
-    private ItemView cityview;
+    private ItemView2 headview;
+    private ItemView2 userlikeview;
+    private ItemView2 userfriend;
+    private ItemView2 usernicknameview;
+    private ItemView2 sexview;
+    private ItemView2 birthdayview;
+    private ItemView2 telview;
+    private ItemView2 qqview;
+    private ItemView2 sinaview;
+    private ItemView2 singlnatureview;
+    private ItemView2 cityview;
+
+    private CircleImageView headdview;
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -51,17 +60,20 @@ public class UserCenterActivity extends BaseActivity {
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.activity_usercenter_collapsingToolBarLayout);
         try{collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);}catch(Exception e){e.printStackTrace();}//设置展开字体颜色
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后字体颜色;
-        headview = (ItemView) findViewById(R.id.activity_usercenter_itemview_head);
-        userlikeview = (ItemView) findViewById(R.id.activity_usercenter_itemview_userlike);
-        userfriend = (ItemView) findViewById(R.id.activity_usercenter_itemview_userfriend);
-        usernicknameview = (ItemView) findViewById(R.id.activity_usercenter_itemview_usernickname);
-        sexview = (ItemView) findViewById(R.id.activity_usercenter_itemview_usersex);
-        birthdayview = (ItemView) findViewById(R.id.activity_usercenter_itemview_userbrithday);
-        telview = (ItemView) findViewById(R.id.activity_usercenter_itemview_tel);
-        qqview = (ItemView) findViewById(R.id.activity_usercenter_itemview_qq);
-        sinaview = (ItemView) findViewById(R.id.activity_usercenter_itemview_sina);
-        singlnatureview = (ItemView) findViewById(R.id.activity_usercenter_itemview_singnauter);
-        cityview = (ItemView) findViewById(R.id.activity_usercenter_itemview_city);
+        headview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_head);
+        headdview = (CircleImageView) headview.findViewById(R.id.activity_usercenter_imageview_head);
+        userlikeview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_userlike);
+        userlikeview.setOnClickListener(this);
+        userfriend = (ItemView2) findViewById(R.id.activity_usercenter_itemview_userfriend);
+        userfriend.setOnClickListener(this);
+        usernicknameview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_usernickname);
+        sexview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_usersex);
+        birthdayview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_userbrithday);
+        telview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_tel);
+        qqview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_qq);
+        sinaview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_sina);
+        singlnatureview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_singnauter);
+        cityview = (ItemView2) findViewById(R.id.activity_usercenter_itemview_city);
     }
 
 
@@ -81,6 +93,8 @@ public class UserCenterActivity extends BaseActivity {
         if (user.getGender() == 0) {
             //性别保密
         }
+
+        ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + user.getAvatar(), headdview);
 
         Date userBirth = user.getBirth();
         ((TextView) birthdayview.findViewById(R.id.activity_usercenter_TextView_birthday)).setText(userBirth == null ? "未设置" : userBirth.toLocaleString());
@@ -125,5 +139,14 @@ public class UserCenterActivity extends BaseActivity {
             userfile.delete();
         }
         User.setUser(null);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.activity_usercenter_itemview_userlike) {
+            jumpTo(CollectedActivity.class, true);
+        } else if (view.getId() == R.id.activity_usercenter_itemview_userfriend) {
+            jumpTo(FriendsActivity.class, true);
+        }
     }
 }

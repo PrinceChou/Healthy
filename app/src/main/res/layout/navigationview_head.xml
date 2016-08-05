@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/view_sliding_menu_top"
-    android:layout_width="match_parent"
-    android:layout_height="170dip"
-    android:background="@color/colorPrimary">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/view_sliding_menu_top"
+                android:layout_width="match_parent"
+                android:layout_height="170dip"
+                android:background="@color/colorPrimary">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/view_sliding_menu_head"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_above="@+id/view_sliding_menu_textview_wealther"
         android:layout_margin="10dip"
+        app:civ_border_color="@color/whilte"
+        app:civ_border_width="0.7dp"
         android:onClick="onClick"
-        android:padding="5dp"
         android:src="@mipmap/head" />
 
     <LinearLayout
@@ -35,6 +37,7 @@
             android:maxLines="1"
             android:ellipsize="marquee"
             android:lines="1"
+            android:clickable="true"
             android:onClick="onClick"
             android:singleLine="true"
             android:paddingBottom="4dip"

@@ -37,6 +37,7 @@
             android:id="@+id/activity_collected_emptyview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -64,6 +65,7 @@
             android:id="@+id/activity_collected_loadview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#66222222"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -73,7 +75,10 @@
                 android:background="@drawable/shape_rount_colorprimay"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="40dp">
+                android:paddingBottom="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:paddingTop="20dp">
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

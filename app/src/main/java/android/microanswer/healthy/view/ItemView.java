@@ -15,6 +15,7 @@ import android.widget.TextView;
  * Created by Micro on 2016/6/20.
  */
 
+@Deprecated
 public class ItemView extends RelativeLayout {
     private View rootview;
     private TextView title, smalltitle;
@@ -37,6 +38,7 @@ public class ItemView extends RelativeLayout {
             setSmalltitle(smalltitlestring);
         }
         typedArray.recycle();
+        setClickable(true);
     }
 
     @Override

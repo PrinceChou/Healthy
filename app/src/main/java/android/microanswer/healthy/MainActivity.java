@@ -3,6 +3,7 @@ package android.microanswer.healthy;
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.microanswer.healthy.application.Healthy;
 import android.microanswer.healthy.bean.AskListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
@@ -31,16 +32,20 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HealthyFragment.OnItemClickListener {
     public static final String SHAREDPREFERENCES_KEY_WEALTHY = "skw";
@@ -49,6 +54,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private static final int THREAD_WEALTHY_LOAD = 1;
     private ActionBar actionBar;
     private DrawerLayout drawerLayout;
+    private CircleImageView headview;
     private TextView wealther_tv, nick_name_tv, singnature_tv;
     private NavigationView navigationView;
     private BottomNavigationBar bottomNavigationBar;
@@ -90,6 +96,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        headview = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.view_sliding_menu_head);
         singnature_tv = (TextView) navigationView.getHeaderView(0).findViewById(R.id.view_sliding_menu_singnature);
         nick_name_tv = (TextView) navigationView.getHeaderView(0).findViewById(R.id.view_sliding_menu_nickname);
         wealther_tv = (TextView) navigationView.getHeaderView(0).findViewById(R.id.view_sliding_menu_textview_wealther);
@@ -132,6 +140,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             nick_name_tv.setText(getString(R.string.defultnickname));
             singnature_tv.setVisibility(View.GONE);
         } else {
+            ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + User.getUser().getAvatar(), headview);
             nick_name_tv.setText(User.getUser().getAccount());
             singnature_tv.setText(User.getUser().getSignature());
             singnature_tv.setVisibility(View.VISIBLE);
@@ -178,6 +187,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == LoginActivity.REQUEST_LOGIN) {
             nick_name_tv.setText(User.getUser().getAccount());
+            ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + User.getUser().getAvatar(), headview);
             toast("登录成功", POSOTION_TOP);
         }
     }

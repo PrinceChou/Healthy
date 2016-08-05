@@ -81,6 +81,7 @@ public class ItemView2 extends ViewGroup {
             }
         }
         typedArray.recycle();
+        setClickable(true);
     }
 
     /**

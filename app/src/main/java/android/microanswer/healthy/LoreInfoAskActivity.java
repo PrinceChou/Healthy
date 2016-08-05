@@ -625,7 +625,10 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                         sendpinlun.setEnabled(false);
                         String url = null;
                         try {
-                            url = "http://www.tngou.net/api/memo/add?access_token=" + User.getUser().getAccess_token() + "&oid=" + loreListItem.getId() + "&otype=" + TYPE_LORE + "&title=" + URLEncoder.encode(loreListItem.getTitle(), "UTF-8") + "&memo=" + URLEncoder.encode(pinluncontent, "UTF-8");
+                            int id = (int) (loreListItem != null ? loreListItem.getId() : askListItem != null ? askListItem.getId() : infoListItem.getId());
+                            String type = (loreListItem != null ? TYPE_LORE : askListItem != null ? TYPE_ASK : TYPE_INFO);
+                            String title = (loreListItem != null ? loreListItem.getTitle() : askListItem != null ? askListItem.getTitle() : infoListItem.getTitle());
+                            url = "http://www.tngou.net/api/memo/add?access_token=" + User.getUser().getAccess_token() + "&oid=" + id + "&otype=" + type + "&title=" + URLEncoder.encode(title, "UTF-8") + "&memo=" + URLEncoder.encode(pinluncontent, "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
