@@ -230,11 +230,19 @@ public abstract class BaseActivity extends ActionBarActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton("确定", ok);
-        builder.setNegativeButton("取消", null);
+//        builder.setNegativeButton("取消", null);
         return builder.create();
     }
 
 
+    public AlertDialog alertDialog(String title, String message, DialogInterface.OnClickListener ok,DialogInterface.OnClickListener ca) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("确定", ok);
+        builder.setNegativeButton("取消", ca);
+        return builder.create();
+    }
 
 
     /**

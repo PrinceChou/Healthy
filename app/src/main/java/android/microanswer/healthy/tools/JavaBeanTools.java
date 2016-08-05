@@ -817,7 +817,7 @@ public class JavaBeanTools {
          * @return
          */
         public static final AskListItem getAskShow(int id) {
-            String url = "thttp://www.tngou.net/api/ask/show?id=" + id;
+            String url = "http://www.tngou.net/api/ask/show?id=" + id;
             return request(url, AskListItem.class);
         }
     }

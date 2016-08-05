@@ -110,11 +110,21 @@
                 </LinearLayout>
             </ScrollView>
 
-            <!--<ImageView
-                android:id="@+id/activity_lore_img"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/activity_lore_likebutton"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"/>-->
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/shape_rount_color"
+                android:clickable="true"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="4dp"
+                android:text="　收藏　"
+                android:textColor="@color/whilte"
+                android:textSize="10sp"/>
 
             <android.microanswer.healthy.view.HtmlView
                 android:id="@+id/activity_lore_content"

@@ -68,6 +68,10 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\simpale_list_selector.xml",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\drawable\\simpale_list_selector.xml"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\dot2.xml",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\drawable\\dot2.xml"
     },

@@ -1,16 +1,19 @@
 package android.microanswer.healthy;
 
+import android.content.Intent;
 import android.microanswer.healthy.adapter.CollectedListAdapter;
 import android.microanswer.healthy.bean.Collected;
+import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
@@ -25,13 +28,15 @@ import java.util.Map;
  * 由 Micro 创建于 2016/8/4.
  */
 
-public class CollectedActivity extends BaseActivity implements View.OnClickListener {
+public class CollectedActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
 
     private String TAG = "CollectedActivity";
 
     private ListView listview;
     private View loadview;
     private View emptyview;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    //    private CircleRefreshLayout circleRefreshLayout;
     private CollectedListAdapter adapter;
 
     @Override
@@ -40,7 +45,10 @@ public class CollectedActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_collected);
         suitToolBar(R.id.activity_collected_toolbar);
         setToolBarBackEnable();
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.view_collected_item_refreshlayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
         listview = (ListView) findViewById(R.id.activity_collectedlistview);
+        listview.setOnItemClickListener(this);
         loadview = findViewById(R.id.activity_collected_loadview);
         emptyview = findViewById(R.id.activity_collected_emptyview);
         emptyview.setOnClickListener(this);
@@ -76,11 +84,15 @@ public class CollectedActivity extends BaseActivity implements View.OnClickListe
                     errorDialog("数据加载失败", CollectedActivity.this).show();
                 }
                 loadview.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+                toast("加载已完成", POSOTION_BOTTOM);
             }
 
             @Override
             public Map getTaskParams() {
                 loadview.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(true);
+                adapter.clear();
                 return null;
             }
 
@@ -118,5 +130,18 @@ public class CollectedActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         update();
+    }
+
+    @Override
+    public void onRefresh() {
+        update();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this, LoreInfoAskActivity.class);
+        Collected c = (Collected) adapter.getItem(i);
+        intent.putExtra("data", c);
+        startActivity(intent);
     }
 }

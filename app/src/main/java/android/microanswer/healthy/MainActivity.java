@@ -375,6 +375,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             }
 
             Message message = new Message();
+
+
             message.obj = weakther;
             return message;
         }

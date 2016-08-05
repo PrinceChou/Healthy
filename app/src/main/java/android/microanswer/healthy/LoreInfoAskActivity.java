@@ -1,9 +1,11 @@
 package android.microanswer.healthy;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.microanswer.healthy.bean.AskListItem;
+import android.microanswer.healthy.bean.Collected;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -26,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -49,20 +53,25 @@ import java.util.Map;
 
 public class LoreInfoAskActivity extends BaseActivity implements View.OnClickListener {
 
+    private String TAG = "LoreInfoAskActivity";
+
+
     private LoreListItem loreListItem;
     private InfoListItem infoListItem;
     private AskListItem askListItem;
+
+    private Collected collected;
 
 
     private TextView title;
     private TextView time;
     private HtmlView content;
+    private TextView activity_lore_likebutton;//收藏，取消收藏按钮
 
     private TextView tv_like;
     private TextView tv_read;
     private TextView tv_say;
 
-//    private ImageView img;
 
     private LinearLayout pinglunListConent;//评论列表容器
 
@@ -72,27 +81,60 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
 
     private EditText pinlunbox;
     private TextView sendpinlun;
-
+    private Serializable data;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lore);
         suitToolBar(R.id.activity_lore_toolbar);
         setToolBarBackEnable();
-        final Serializable data = getIntent().getSerializableExtra("data");
+        data = getIntent().getSerializableExtra("data");
         if (data instanceof AskListItem) {
             askListItem = (AskListItem) data;
         } else if (data instanceof InfoListItem) {
             infoListItem = (InfoListItem) data;
         } else if (data instanceof LoreListItem) {
             loreListItem = (LoreListItem) data;
+        } else if (data instanceof Collected) {
+            collected = (Collected) data;
+
+            if (collected.getOtype().equalsIgnoreCase("lore")) {
+                LoreListItem l = new LoreListItem();
+                l.setId(collected.getOid());
+                data = l;
+                loreListItem = l;
+            } else if (collected.getOtype().equalsIgnoreCase("info")) {
+                InfoListItem i = new InfoListItem();
+                i.setId(collected.getOid());
+                data = i;
+                infoListItem = i;
+            } else if (collected.getOtype().equalsIgnoreCase("ask")) {
+                AskListItem a = new AskListItem();
+                a.setId(collected.getOid());
+                data = a;
+                askListItem = a;
+            } else {
+                AlertDialog dialog = alertDialog("错误的格式", "这是我们的问题，我们会在后期更新修复.", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+                dialog.setCancelable(false);
+                dialog.show();
+                return;
+            }
+
         }
 
+        activity_lore_likebutton = (TextView) findViewById(R.id.activity_lore_likebutton);
+        activity_lore_likebutton.setOnClickListener(this);
+        activity_lore_likebutton.setEnabled(false);
+        activity_lore_likebutton.setTag(false);
 
         title = (TextView) findViewById(R.id.activity_lore_title);
         time = (TextView) findViewById(R.id.activity_lore_time);
         content = (HtmlView) findViewById(R.id.activity_lore_content);
-//        img = (ImageView) findViewById(R.id.activity_lore_img);
 
         tv_like = (TextView) findViewById(R.id.activity_lore_likecount);
         tv_read = (TextView) findViewById(R.id.activity_lore_readcount);
@@ -166,72 +208,14 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                 title.setText(titlea);
                 time.setText("发布时间：" + timea);
 
-//                final SpannableStringBuilder ssb = (SpannableStringBuilder) Html.fromHtml(message, null, null);
                 dataview.setVisibility(View.VISIBLE);
                 loadingview.setVisibility(View.GONE);
                 loadPinlun();
-//                content.setText(ssb);
+                loadlike();
                 content.setHtml(message);
-//                ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + imga, img);
-                //使用XMLreader实现html解析
                 if (true) {
                     return;
                 }
-
-
-////                ImageSpan[] spans = ssb.getSpans(0, ssb.length(), ImageSpan.class);
-//
-//                if (spans.length > 0) {
-//                    dataview.setVisibility(View.VISIBLE);
-//                    loadingview.setVisibility(View.GONE);
-//                    loadPinlun();
-//                    for (ImageSpan is : spans) {
-//                        final ImageSpan imageSpan = is;
-//                        ImageLoader.getInstance().loadImage(imageSpan.getSource(), new ImageLoadingListener() {
-//                            @Override
-//                            public void onLoadingStarted(String imageUri, View view) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//
-//                            }
-//
-//                            @Override
-//                            public synchronized void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                                try {
-//                                    Field mDrawable = ImageSpan.class.getDeclaredField("mDrawable");
-//                                    mDrawable.setAccessible(true);
-//                                    BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), loadedImage);
-//                                    float sc = getScreenWidth() / (float) loadedImage.getWidth();
-//
-//                                    bitmapDrawable.setBounds(0, 0, getScreenWidth(), (int) (loadedImage.getHeight() * sc));
-//                                    mDrawable.set(imageSpan, bitmapDrawable);
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                                try {
-//                                ssb.setSpan(imageSpan, ssb.getSpanStart(imageSpan), ssb.getSpanEnd(imageSpan), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                                    content.setText(ssb);
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onLoadingCancelled(String imageUri, View view) {
-//
-//                            }
-//                        });
-//                    }
-//                } else {
-//                    dataview.setVisibility(View.VISIBLE);
-//                    loadingview.setVisibility(View.GONE);
-//                    loadPinlun();
-//                    content.setText(ssb);
-//                }
-//                ImageLoader.getInstance().displayImage("http://tnfs.tngou.net/image" + loreListItem.getImg(), img);
             }
 
             @Override
@@ -245,16 +229,19 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
                     LoreListItem loreShow = JavaBeanTools.Lore.getLoreShow((int) loreListItem.getId());
                     Message msg = new Message();
                     msg.obj = loreShow;
+                    loreListItem = loreShow;
                     return msg;
                 } else if (data instanceof AskListItem) {
                     AskListItem askListIte = JavaBeanTools.Ask.getAskShow((int) askListItem.getId());
                     Message msg = new Message();
                     msg.obj = askListIte;
+                    askListItem = askListIte;
                     return msg;
                 } else if (data instanceof InfoListItem) {
                     InfoListItem infoitem = JavaBeanTools.Info.getInfo(infoListItem.getId());
                     Message msg = new Message();
                     msg.obj = infoitem;
+                    infoListItem = infoitem;
                     return msg;
                 }
                 return new Message();
@@ -346,13 +333,242 @@ public class LoreInfoAskActivity extends BaseActivity implements View.OnClickLis
         }, 6678);
     }
 
+    /**
+     * 加载是否被收藏
+     */
+    private void loadlike() {
+        runOnOtherThread(new BaseOtherThread() {
+            @Override
+            void onOtherThreadRunEnd(Message msg) {
+                if (msg != null) {
+                    if (msg.arg1 == 1) {
+                        activity_lore_likebutton.setText("取消收藏");
+                        activity_lore_likebutton.setTag(true);
+                    } else {
+                        activity_lore_likebutton.setText("　收藏　");
+                        activity_lore_likebutton.setTag(false);
+                    }
+                    activity_lore_likebutton.setEnabled(true);
+                } else {
+                    toast("收藏信息获取失败", POSOTION_BOTTOM);
+                }
+
+            }
+
+            @Override
+            public Map getTaskParams() {
+                HashMap<String, Object> p = new HashMap<String, Object>();
+                int id = (int) (loreListItem != null ? loreListItem.getId() : askListItem != null ? askListItem.getId() : infoListItem.getId());
+                String type = (loreListItem != null ? TYPE_LORE : askListItem != null ? TYPE_ASK : TYPE_INFO);
+                p.put("id", id);
+                p.put("type", type);
+                return p;
+            }
+
+            @Override
+            public Message run(Map params) {
+                String url = "http://www.tngou.net/api/favorite?access_token=" + User.getUser().getAccess_token() + "&id=" + params.get("id") + "&type=" + params.get("type");
+
+                try {
+                    String request = InternetServiceTool.request(url);
+                    JSONObject jsonObject = JSON.parseObject(request);
+                    if (jsonObject.getBooleanValue("status")) {
+                        Message msg = new Message();
+                        msg.arg1 = jsonObject.getIntValue("favorite");
+                        return msg;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }, 6666);
+
+    }
+
     @Override
     public void onClick(View view) {
         if (view == sendpinlun) {
             //发送评论
             sendPinlun();
+        } else if (view == activity_lore_likebutton) {
+            //收藏，取消收藏
+            like();
         }
     }
+
+    private boolean islikeing = false;//标记是否正在喜欢
+
+    private void like() {
+        if (islikeing) {
+            return;
+        }
+        islikeing = true;
+
+        if ((boolean) activity_lore_likebutton.getTag()) {//如果已经收藏了，则点击收藏为取消
+            deletelike();
+            return;
+        }
+
+        AlertDialog.Builder d = new AlertDialog.Builder(this);
+        d.setTitle("设置收藏标签");
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        TextView t = new TextView(this);
+        t.setText("可不填");
+        t.setTextSize(BaseTools.sp2px(this, 4f));
+        ll.addView(t);
+        ll.setPadding(BaseTools.Dp2Px(this, 12f), 0, 0, 0);
+        final EditText et = new EditText(this);
+        et.setSingleLine();
+        ll.addView(et);
+        d.setView(ll);
+        d.setPositiveButton("收藏", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                String keyw = et.getText().toString();
+
+                if ("".equalsIgnoreCase(keyw)) {
+                    keyw = (loreListItem != null ? loreListItem.getTitle() : askListItem != null ? askListItem.getTitle() : infoListItem.getTitle());
+                }
+                sendlike(true, keyw);
+            }
+        });
+        d.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                islikeing = false;
+            }
+        });
+        d.show();
+    }
+
+
+    private void deletelike() {
+        runOnOtherThread(new BaseOtherThread() {
+            CharSequence os;
+
+            @Override
+            void onOtherThreadRunEnd(Message msg) {
+                islikeing = false;
+                if (msg != null) {
+                    if (msg.arg1 == 0) {
+                        activity_lore_likebutton.setText("　收藏　");
+                        activity_lore_likebutton.setTag(false);
+                    } else {
+                        activity_lore_likebutton.setText("取消收藏");
+                        activity_lore_likebutton.setTag(true);
+                    }
+                } else {
+                    activity_lore_likebutton.setText(os);
+                }
+
+            }
+
+            @Override
+            public Map getTaskParams() {
+                os = activity_lore_likebutton.getText();
+                activity_lore_likebutton.setText("操作中..");
+                HashMap<String, Object> p = new HashMap<String, Object>();
+                int id = (int) (loreListItem != null ? loreListItem.getId() : askListItem != null ? askListItem.getId() : infoListItem.getId());
+                String type = (loreListItem != null ? TYPE_LORE : askListItem != null ? TYPE_ASK : TYPE_INFO);
+                p.put("id", id);
+                p.put("type", type);
+                return p;
+            }
+
+            @Override
+            public Message run(Map params) {
+                String url = "http://www.tngou.net/api/favorite/delete?access_token=" + User.getUser().getAccess_token() + "&id=" + params.get("id") + "&type=" + params.get("type");
+                try {
+                    String request = InternetServiceTool.request(url);
+                    JSONObject jsonObject = JSON.parseObject(request);
+                    if (jsonObject.getBooleanValue("status")) {
+                        Message msg = new Message();
+                        msg.arg1 = jsonObject.getIntValue("favorite");
+                        return msg;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }, 5466);
+    }
+
+
+    /**
+     * 请求收藏
+     *
+     * @param like
+     * @param likemsg
+     */
+    private void sendlike(final boolean like, final String likemsg) {
+
+        runOnOtherThread(new BaseOtherThread() {
+            CharSequence os;
+
+            @Override
+            void onOtherThreadRunEnd(Message msg) {
+                islikeing = false;
+                if (msg != null) {
+                    if (msg.arg1 == 0) {
+                        activity_lore_likebutton.setText("　收藏　");
+                        activity_lore_likebutton.setTag(false);
+                    } else {
+                        activity_lore_likebutton.setText("取消收藏");
+                        activity_lore_likebutton.setTag(true);
+                    }
+                } else {
+                    activity_lore_likebutton.setText(os);
+                }
+
+            }
+
+            @Override
+            public Map getTaskParams() {
+                os = activity_lore_likebutton.getText();
+                activity_lore_likebutton.setText("操作中..");
+                HashMap<String, Object> p = new HashMap<String, Object>();
+                int id = (int) (loreListItem != null ? loreListItem.getId() : askListItem != null ? askListItem.getId() : infoListItem.getId());
+                String type = (loreListItem != null ? TYPE_LORE : askListItem != null ? TYPE_ASK : TYPE_INFO);
+                String title = (loreListItem != null ? loreListItem.getTitle() : askListItem != null ? askListItem.getTitle() : infoListItem.getTitle());
+                p.put("id", id);
+                p.put("type", type);
+                p.put("title", title);
+                p.put("keyword", likemsg);
+                return p;
+            }
+
+            @Override
+            public Message run(Map params) {
+                String url = null;
+                try {
+                    url = "http://www.tngou.net/api/favorite/add?access_token=" + User.getUser().getAccess_token() + "&id=" + params.get("id")
+                            + "&type=" + params.get("type") + "&title=" + URLEncoder.encode(params.get("title") + "", "UTF-8") + "&keyword=" + URLEncoder.encode(params.get("keyword") + "", "UTF-8");
+
+                    Log.i(TAG, "收藏时请求的地址：" + url);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    String request = InternetServiceTool.request(url);
+                    JSONObject jsonObject = JSON.parseObject(request);
+
+                    if (jsonObject.getBooleanValue("status")) {
+                        Message msg = new Message();
+                        msg.arg1 = jsonObject.getIntValue("favorite");
+                        return msg;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }, 6656);
+    }
+
 
     private boolean isPinlunging = false;//标记是否正在评论
 

@@ -54,6 +54,21 @@ public class CollectedListAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public Collected deleteItem(int postion) {
+        Collected delete = delete(postion);
+        notifyDataSetChanged();
+        return delete;
+    }
+
+    private Collected delete(int position) {
+        if (this.data != null) {
+            if (this.data.size() - 1 <= position) {
+                return this.data.remove(position);
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public int getCount() {
