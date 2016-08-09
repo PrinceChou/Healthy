@@ -88,7 +88,7 @@
                     android:ems="3"
                     android:maxEms="3"
                     android:maxLines="2"
-                    android:text="我国国民身高基本与日本持平"
+                    android:text="加载中..."
                     android:textSize="13sp"/>
             </FrameLayout>
 
@@ -126,7 +126,7 @@
                     android:ems="3"
                     android:maxEms="3"
                     android:maxLines="2"
-                    android:text="我国国民身高基本与日本持平基本与日本持平基本与日本持平"
+                    android:text="加载中..."
                     android:textSize="13sp"/>
             </FrameLayout>
 
@@ -164,7 +164,7 @@
                     android:ems="3"
                     android:maxEms="3"
                     android:maxLines="2"
-                    android:text="我国国民身高基本与日本持平"
+                    android:text="加载中..."
                     android:textSize="13sp"/>
             </FrameLayout>
 
@@ -202,7 +202,7 @@
                     android:ems="3"
                     android:maxEms="3"
                     android:maxLines="2"
-                    android:text="我国国民身高基本与日本持平基本与日本持平基本与日本持平"
+                    android:text="加载中..."
                     android:textSize="13sp"/>
             </FrameLayout>
 
@@ -240,7 +240,7 @@
                     android:ems="3"
                     android:maxEms="3"
                     android:maxLines="2"
-                    android:text="我国国民身高基本与日本持平"
+                    android:text="加载中..."
                     android:textSize="13sp"/>
             </FrameLayout>
 
@@ -278,7 +278,7 @@
                     android:ems="3"
                     android:maxEms="3"
                     android:maxLines="2"
-                    android:text="我国国民身高基本与日本持平基本与日本持平基本与日本持平"
+                    android:text="加载中..."
                     android:textSize="13sp"/>
             </FrameLayout>
 
@@ -354,7 +354,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
                 <ImageView
                     android:id="@+id/healthy_list_headview_book_img1"
@@ -394,7 +394,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -425,7 +425,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -463,7 +463,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -494,7 +494,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -525,7 +525,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -563,7 +563,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -594,7 +594,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 
@@ -626,7 +626,7 @@
                     android:gravity="center"
                     android:maxEms="3"
                     android:singleLine="true"
-                    android:text="我的爱U盾和"/>
+                    android:text="加载中..."/>
 
             </FrameLayout>
 

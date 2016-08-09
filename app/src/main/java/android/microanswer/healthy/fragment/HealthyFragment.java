@@ -15,9 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 /**
+ * 本类以及本类中的适配器均未使用，已经使用HealthyFragment2替代
  * 由 Micro 创建于 2016/6/30.
  */
-
+@Deprecated
 public class HealthyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewAdapter.RefreshListener, RecyclerViewAdapter.OnItemClickListener, Runnable {
     private View root = null;
     private RecyclerView recyclerView;

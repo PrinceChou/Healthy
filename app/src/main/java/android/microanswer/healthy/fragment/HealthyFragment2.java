@@ -7,6 +7,8 @@ import android.microanswer.healthy.adapter.RecyclerViewAdapter;
 import android.microanswer.healthy.bean.BookListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
+import android.microanswer.healthy.database.DataManager;
+import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.JavaBeanTools;
 import android.microanswer.healthy.viewbean.ListHeadView;
 import android.os.Bundle;
@@ -56,6 +58,8 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
 
     private Handler mainHandler;//主线程handler,
 
+    private DataManager dataManager;
+
 
     @Nullable
     @Override
@@ -73,7 +77,6 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
         inflateview();
         initview();
         if (childThreadHandler == null) {
-            ptrFrameLayout.autoRefresh();
             new Thread(this).start();
         }
         return root;
@@ -86,6 +89,7 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
         adapter = new HealListViewAdapter(getActivity());
         adapter.setOnItemClickListener(this);
         listfootview = View.inflate(getActivity(), R.layout.listview_foot, null);
+        dataManager = new DataManager(getActivity());
     }
 
 
@@ -116,7 +120,17 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
      */
     private void bangBangData() {
         infoPage = 1;
-        final List<InfoListItem> infoListData = JavaBeanTools.Info.getInfoListData(infoPage, 10, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+        final List<InfoListItem> infoListData;
+        if (BaseTools.isNetworkAvailable(getActivity())) {
+            infoListData = JavaBeanTools.Info.getInfoListData(infoPage, 10, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+            if (infoListData != null) {
+                dataManager.clearInfo();
+                dataManager.putInfoListItems(infoListData);
+            }
+        } else {
+            infoListData = dataManager.getInfoListItems(10, infoPage, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+        }
+
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -124,7 +138,16 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
                     listHeadView.setBannerData(infoListData);
             }
         });
-        final List<LoreListItem> loreListData = JavaBeanTools.Lore.getLoreListData(1, 6, Integer.parseInt(sharedPreferences.getString("main_set_lore_data", "-1")));
+        final List<LoreListItem> loreListData;
+        if (BaseTools.isNetworkAvailable(getActivity())) {
+            loreListData = JavaBeanTools.Lore.getLoreListData(1, 6, Integer.parseInt(sharedPreferences.getString("main_set_lore_data", "-1")));
+            if (loreListData != null) {
+                dataManager.clearLore();
+                dataManager.putLoreListItems(loreListData);
+            }
+        } else {
+            loreListData = dataManager.getLoreListItems(6, 1, Integer.parseInt(sharedPreferences.getString("main_set_lore_data", "-1")));
+        }
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -132,7 +155,16 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
                     listHeadView.setLoreListData(loreListData);
             }
         });
-        final List<BookListItem> booklistdata = JavaBeanTools.Book.getBookList(1, 9, RecyclerViewAdapter.tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_book_data", "-1")), true));
+        final List<BookListItem> booklistdata;
+        if (BaseTools.isNetworkAvailable(getActivity())) {
+            booklistdata = JavaBeanTools.Book.getBookList(1, 9, RecyclerViewAdapter.tranceformInt(Integer.parseInt(sharedPreferences.getString("main_set_book_data", "-1")), true));
+            if (booklistdata != null) {
+                dataManager.clearBooks();
+                dataManager.putBookListItems(booklistdata);
+            }
+        } else {
+            booklistdata = dataManager.getBookListItems(9, 1, -1);
+        }
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -141,9 +173,18 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
             }
         });
 
-        final List<InfoListItem> infoListData2 = JavaBeanTools.Info.getInfoListData(++infoPage, 10, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+        final List<InfoListItem> infoListData2;
+
+        if (BaseTools.isNetworkAvailable(getActivity())) {
+            infoListData2 = JavaBeanTools.Info.getInfoListData(++infoPage, 10, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+            if (infoListData2 != null) {
+                dataManager.putInfoListItems(infoListData2);
+            }
+        } else {
+            infoListData2 = dataManager.getInfoListItems(10, ++infoPage, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+        }
         final List<List<InfoListItem>> data = new ArrayList<>();
-        if (infoListData2 != null) {
+        if (infoListData2 != null && infoListData2.size() == 10) {
             for (int i = 0; i < 5; i++) {
                 data.add(infoListData2.subList((i * 2), (i * 2) + 2));
             }
@@ -192,9 +233,18 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
                 childThreadHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        final List<InfoListItem> infoListData2 = JavaBeanTools.Info.getInfoListData(++infoPage, 10, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+                        final List<InfoListItem> infoListData2;
+
+                        if (BaseTools.isNetworkAvailable(getActivity())) {
+                            infoListData2 = JavaBeanTools.Info.getInfoListData(++infoPage, 10, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+                            if (infoListData2 != null) {
+                                dataManager.putInfoListItems(infoListData2);
+                            }
+                        } else {
+                            infoListData2 = dataManager.getInfoListItems(10, ++infoPage, Integer.parseInt(sharedPreferences.getString("main_set_info_data", "-1")));
+                        }
                         final List<List<InfoListItem>> data = new ArrayList<>();
-                        if (infoListData2 != null) {
+                        if (infoListData2 != null && infoListData2.size() == 10) {
                             for (int i = 0; i < 5; i++) {
                                 data.add(infoListData2.subList((i * 2), (i * 2) + 2));
                             }

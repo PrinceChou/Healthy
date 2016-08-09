@@ -37,7 +37,7 @@ import java.util.Set;
 /**
  * 由 Micro 创建于 2016/6/30.
  */
-
+@Deprecated
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements HealthyItemItemAsk.OnHealItemItemAskClickListener, HealthyItemItemBooks.OnHealthyItemItemBooksClickListener, HealthyItemItemKnowledge.OnHealthyItemKnowledgeClickListener, HealthyItemItemInfo.OnHealthyItemItemInfoClickListener, SmartBannerViewHolder.OnSmartBannerItemClickListener {
     public static final int TYPE_BANNER = 1;
     public static final int TYPE_ITEMGROUP = 2;
