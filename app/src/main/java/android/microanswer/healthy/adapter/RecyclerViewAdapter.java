@@ -254,7 +254,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Healthy
      * @param trance
      * @return
      */
-    private int tranceformInt(int in, boolean trance) {
+    public static int tranceformInt(int in, boolean trance) {
 
         if (!trance) {
             return in;

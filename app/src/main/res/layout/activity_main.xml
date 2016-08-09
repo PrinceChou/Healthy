@@ -83,7 +83,7 @@
 
                 <fragment
                     android:id="@+id/activity_main_fragment_1"
-                    android:name="android.microanswer.healthy.fragment.HealthyFragment"
+                    android:name="android.microanswer.healthy.fragment.HealthyFragment2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />

@@ -9,6 +9,7 @@ import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.fragment.HealthyFragment;
+import android.microanswer.healthy.fragment.HealthyFragment2;
 import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.view.MActionBarDrawerToggle;
@@ -47,7 +48,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HealthyFragment.OnItemClickListener {
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HealthyFragment2.OnItemClickListener {
     public static final String SHAREDPREFERENCES_KEY_WEALTHY = "skw";
     public static final String SHAREDPREFERENCES_KEY_WEALTHY_TIME = "skwt";
 
@@ -106,8 +107,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         fragmentManager = getSupportFragmentManager();
         fragments = new Fragment[3];
         fragments[0] = fragmentManager.findFragmentById(R.id.activity_main_fragment_1);
-        if (fragments[0] instanceof HealthyFragment) {
-            HealthyFragment hf = (HealthyFragment) fragments[0];
+        if (fragments[0] instanceof HealthyFragment2) {
+            HealthyFragment2 hf = (HealthyFragment2) fragments[0];
             hf.setOnItemClickListener(this);
         }
         fragments[1] = fragmentManager.findFragmentById(R.id.activity_main_fragment_2);
@@ -335,9 +336,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
      * @param item
      */
     @Override
-    public void onItemClick(Object item) {
+    public void onClick(Object item) {
         if (!BaseTools.isNetworkAvailable(this)) {
-            toast("网诺不可用", POSOTION_TOP);
+            toast("网络不可用", POSOTION_TOP);
             return;
         }
         Intent intent = new Intent(this, LoreInfoAskActivity.class);

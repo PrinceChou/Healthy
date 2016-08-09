@@ -28,7 +28,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.baoyz.swipemenulistview:library:1.3.0'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile files('libs/open_sdk_r5756.jar')
     compile files('libs/tagsoup-1.2.1.jar')
 }
