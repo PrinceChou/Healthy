@@ -1,28 +1,24 @@
 package android.microanswer.healthy;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.microanswer.healthy.tools.BaseTools;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +35,7 @@ import java.util.Map;
  * <br/>
  * 范雪蛟
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     public final static String TYPE_LORE = "lore";
     public final static String TYPE_INFO = "info";
     public final static String TYPE_ASK = "ask";
@@ -305,9 +301,31 @@ public abstract class BaseActivity extends ActionBarActivity {
      * @return 新开的线程
      */
     public void runOnOtherThread(OtherThreadTask otherThreadTask, int id) {
-        new OtherThread(otherThreadTask, id).execute(otherThreadTask.getTaskParams());
+
+        if (threadSparseArray == null) {
+            threadSparseArray = new SparseArray<>();
+        }
+
+        threadSparseArray.put(threadSparseArray.size() + 1, new OtherThread(otherThreadTask, id).execute(otherThreadTask.getTaskParams()));
     }
 
+    private SparseArray<AsyncTask> threadSparseArray;
+
+
+    /**
+     * 关闭所有正在进行的线程
+     */
+    public void shutDownAllOtherThread() {
+        if (threadSparseArray != null) {
+            for (int i = 0; i < threadSparseArray.size(); i++) {
+                int i1 = threadSparseArray.keyAt(i);
+                AsyncTask asyncTask = threadSparseArray.get(i1);
+                if (asyncTask != null) {
+                    asyncTask.cancel(true);
+                }
+            }
+        }
+    }
 
     /**
      * 开启一个新界面

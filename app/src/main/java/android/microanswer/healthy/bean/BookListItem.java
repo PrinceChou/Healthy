@@ -117,10 +117,27 @@ public class BookListItem implements Serializable {
         this.rcount = rcount;
     }
 
+    @Override
+    public String toString() {
+        return "BookListItem{" +
+                "name='" + name + '\'' +
+                ", img='" + img + '\'' +
+                ", author='" + author + '\'' +
+                ", summary='" + summary + '\'' +
+                ", bookclass=" + bookclass +
+                ", count=" + count +
+                ", fcount=" + fcount +
+                ", rcount=" + rcount +
+                ", id=" + id +
+                ", time=" + time +
+                ", list=" + list +
+                '}';
+    }
+
     /**
      * 章节
      */
-    public static class BookPage{
+    public static class BookPage implements Serializable, Comparable<BookPage> {
         private String message;
         private int id;
         private int seq;
@@ -165,6 +182,22 @@ public class BookListItem implements Serializable {
 
         public void setBook(int book) {
             this.book = book;
+        }
+
+        @Override
+        public String toString() {
+            return "BookPage{" +
+                    "message='" + message + '\'' +
+                    ", id=" + id +
+                    ", seq=" + seq +
+                    ", title='" + title + '\'' +
+                    ", book=" + book +
+                    '}';
+        }
+
+        @Override
+        public int compareTo(BookPage bookPage) {
+            return -(bookPage.getId() - getId());
         }
     }
 }

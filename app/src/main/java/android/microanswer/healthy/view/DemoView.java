@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 /**
  * 由 Micro 创建于 2016/6/28.
  */
-
+@Deprecated
 public class DemoView extends View {
     private int widthMode = 0, widthSize, heightMode, heightSize;
 

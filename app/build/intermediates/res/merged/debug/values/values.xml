@@ -2025,6 +2025,19 @@
         <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
         <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
     </style>
+    <style name="bookdialoganim">
+        <item name="android:windowEnterAnimation">@anim/bookpagedialog_in</item>
+        <item name="android:windowExitAnimation">@anim/bookpagedialog_out</item>
+
+    </style>
+    <style name="bookdialogstyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/bookdialoganim</item>
+    </style>
     <style name="mDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="android:textColorSecondary">@color/whilte</item>
     </style>

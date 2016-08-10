@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.microanswer.healthy.application.Healthy;
 import android.microanswer.healthy.bean.AskListItem;
+import android.microanswer.healthy.bean.BookListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
@@ -345,18 +346,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (item instanceof LoreListItem) {
             LoreListItem loreListItem = (LoreListItem) item;
             intent.putExtra("data", loreListItem);
-            startActivity(intent);
         } else if (item instanceof AskListItem) {
             AskListItem askListItem = (AskListItem) item;
             intent.putExtra("data", askListItem);
-            startActivity(intent);
         } else if (item instanceof InfoListItem) {
             InfoListItem infoListItem = (InfoListItem) item;
             intent.putExtra("data", infoListItem);
-            startActivity(intent);
+        } else if (item instanceof BookListItem) {
+            BookListItem bookListItem = (BookListItem) item;
+            intent.putExtra("data", bookListItem);
+            intent.setClass(this, BookActivity.class);
         }
-
-
+        startActivity(intent);
     }
 
     class WealtherLoader implements OtherThreadTask {

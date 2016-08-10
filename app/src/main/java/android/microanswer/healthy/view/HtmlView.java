@@ -1,16 +1,28 @@
 package android.microanswer.healthy.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.microanswer.healthy.R;
 import android.text.Html;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.LoadedFrom;
+import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.ccil.cowan.tagsoup.HTMLSchema;
 import org.ccil.cowan.tagsoup.Parser;
@@ -54,6 +66,7 @@ public class HtmlView extends LinearLayout {
     }
 
     public void setHtml(final String mhtml) {
+        removeAllViews();
         String html = mhtml;
         if (!html.startsWith("<html>")) {
             html = "<html>" + html;
@@ -63,7 +76,9 @@ public class HtmlView extends LinearLayout {
             html = html + "</html>";
         }
 
-        html = html.replace("<p>", "<p>　　");
+        if (!html.contains("<p>　　")) {
+            html = html.replace("<p>", "<p>　　");
+        }
 
         InputSource inputSource = new InputSource(new StringReader(html));
         try {
@@ -97,32 +112,24 @@ public class HtmlView extends LinearLayout {
                 tags.addLast(qName);
                 if (qName.equalsIgnoreCase("img")) {
                     final ImageView imageView = new ImageView(getContext());
-                    imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-//                    imageView.setScaleType(ScaleType.ScaleType);
+//                    imageView.setLayoutParams(new LayoutParams(getWidth(), LayoutParams.WRAP_CONTENT));
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imageView.setImageResource(R.mipmap.loading);
                     addView(imageView);
-                    ImageLoader.getInstance().displayImage(attributes.getValue("src"), imageView);
-                    /*new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try {
-                                URL url = null;
-                                url = new URL(attributes.getValue("src"));
-                                final Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                                post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        imageView.setImageBitmap(bitmap);
-                                    }
-                                });
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();*/
+                    ImageLoader.getInstance().displayImage(attributes.getValue("src"), imageView,
+                            new DisplayImageOptions.Builder()
+                                    .displayer(new BitmapDisplayer() {
+                                        @Override
+                                        public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
+                                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((getWidth() - getPaddingLeft() - getPaddingRight()), bitmap.getHeight() * ((getWidth() - getPaddingLeft() - getPaddingRight()) / bitmap.getWidth()));
+                                            imageAware.getWrappedView().setLayoutParams(layoutParams);
+                                            imageAware.setImageBitmap(bitmap);
+                                        }
+                                    })
+                                    .build());
                 } else if (qName.equalsIgnoreCase("p")) {
                     TextView tv = new TextView(getContext());
+                    tv.setTextColor(Color.GRAY);
                     addView(tv);
                     tv.setText("\n");
                 }

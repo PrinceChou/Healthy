@@ -7,7 +7,10 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 import static android.R.attr.data;
 
@@ -17,6 +20,8 @@ import static android.R.attr.data;
  * @author Micro
  */
 public class InternetServiceTool {
+
+    private static final String TAG = "InternetServiceTool";
 
     /**
      * 天气
@@ -142,6 +147,52 @@ public class InternetServiceTool {
         }
         return result;
     }
+
+    @Deprecated
+    public static final String requestPost(String urlm, Map parma) {
+        String result = null;
+        URL url = null;
+        HttpURLConnection urlConnection = null;
+        InputStreamReader inputstreamreader = null;
+        BufferedReader buffreader = null;
+        try {
+            url = new URL(urlm);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            if (parma != null) {
+                Set<Map.Entry> entries = parma.entrySet();
+                for (Map.Entry entry : entries) {
+                    urlConnection.addRequestProperty(entry.getKey()+"", ""+entry.getValue());
+                }
+            }
+
+            urlConnection.connect();
+            inputstreamreader = new InputStreamReader(urlConnection.getInputStream());
+            buffreader = new BufferedReader(inputstreamreader);
+
+            StringBuilder sbu = new StringBuilder();
+            String temp = null;
+
+            while ((temp = buffreader.readLine()) != null) {
+                sbu.append(temp);
+            }
+            result = sbu.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (buffreader != null) {
+                    buffreader.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+
 
     /**
      * 请求一个网址，返回一个结果
