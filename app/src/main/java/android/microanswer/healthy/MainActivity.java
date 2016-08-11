@@ -243,7 +243,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             fragmentTransaction.hide(fragments[1]);
             fragmentTransaction.show(fragments[2]);
         }
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNowAllowingStateLoss();
     }
 
     @Override

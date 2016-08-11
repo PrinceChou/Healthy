@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 我的收藏
  * 由 Micro 创建于 2016/8/4.
  */
 
@@ -141,6 +142,9 @@ public class CollectedActivity extends BaseActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(this, LoreInfoAskActivity.class);
         Collected c = (Collected) adapter.getItem(i);
+        if (c.getOtype().equals("book")) {
+            intent.setClass(this, BookActivity.class);
+        }
         intent.putExtra("data", c);
         startActivity(intent);
     }

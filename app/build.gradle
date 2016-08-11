@@ -29,6 +29,7 @@ dependencies {
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'com.felipecsl.asymmetricgridview:library:2.0.1'
     compile files('libs/open_sdk_r5756.jar')
     compile files('libs/tagsoup-1.2.1.jar')
 }

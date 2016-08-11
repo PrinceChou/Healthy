@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 /**
@@ -28,6 +29,7 @@ public class BookPageDialog extends Dialog implements View.OnClickListener {
     private int index;
 
     private Button up, next;
+    private ScrollView view_booklistpagedialog_scrollview;
 
 
     public BookPageDialog(Context context, BookListItem item, int index) {
@@ -43,12 +45,14 @@ public class BookPageDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.view_bookpagedialog);
         htmlView = (HtmlView) findViewById(R.id.view_bookpagedialog_htmlview);
         toolbar = (Toolbar) findViewById(R.id.view_booklistpagedialog_toolbar);
+        view_booklistpagedialog_scrollview = (ScrollView) findViewById(R.id.view_booklistpagedialog_scrollview);
         up = (Button) findViewById(R.id.view_booklistpagedialog_up);
         up.setOnClickListener(this);
         next = (Button) findViewById(R.id.view_booklistpagedialog_next);
         next.setOnClickListener(this);
         toolbar.setTitle(item.getList().get(index).getTitle());
         htmlView.setBackgroundColor(Color.WHITE);
+
         htmlView.setHtml(item.getList().get(index).getMessage());
     }
 
@@ -61,7 +65,7 @@ public class BookPageDialog extends Dialog implements View.OnClickListener {
         attributes.alpha = 1f;
         attributes.format = PixelFormat.RGBA_8888;
         attributes.width = getWindow().getWindowManager().getDefaultDisplay().getWidth();
-        attributes.height = getWindow().getWindowManager().getDefaultDisplay().getHeight() * 3 / 4;
+        attributes.height = getWindow().getWindowManager().getDefaultDisplay().getHeight() * 4 / 5;
         attributes.gravity = Gravity.LEFT | Gravity.BOTTOM;
         getWindow().setAttributes(attributes);
     }
@@ -75,6 +79,8 @@ public class BookPageDialog extends Dialog implements View.OnClickListener {
                 index--;
                 toolbar.setTitle(item.getList().get(index).getTitle());
                 htmlView.setHtml(item.getList().get(index).getMessage());
+                view_booklistpagedialog_scrollview.smoothScrollTo(0, 0);
+
             }
         } else if (view == next) {
             if (index == item.getList().size() - 1) {
@@ -83,6 +89,7 @@ public class BookPageDialog extends Dialog implements View.OnClickListener {
                 index++;
                 toolbar.setTitle(item.getList().get(index).getTitle());
                 htmlView.setHtml(item.getList().get(index).getMessage());
+                view_booklistpagedialog_scrollview.smoothScrollTo(0, 0);
             }
 
         }

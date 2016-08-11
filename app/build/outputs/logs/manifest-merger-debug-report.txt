@@ -83,6 +83,8 @@ MERGED from [com.android.support:support-vector-drawable:24.1.1] D:\Micro\docume
 MERGED from [com.android.support:support-v4:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
 MERGED from [de.hdodenhof:circleimageview:2.1.0] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\AndroidManifest.xml:9:5-20
 MERGED from [in.srain.cube:ultra-ptr:1.0.11] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\in.srain.cube\ultra-ptr\1.0.11\AndroidManifest.xml:11:5-20
+MERGED from [com.felipecsl.asymmetricgridview:library:2.0.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.felipecsl.asymmetricgridview\library\2.0.1\AndroidManifest.xml:10:5-20
+MERGED from [com.android.support:support-v4:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
 	android:label
 		ADDED from D:\Micro\document\project\Healthy\app\src\main\AndroidManifest.xml:16:9-41
 	android:supportsRtl
@@ -304,6 +306,8 @@ MERGED from [com.android.support:support-vector-drawable:24.1.1] D:\Micro\docume
 MERGED from [com.android.support:support-v4:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
 MERGED from [de.hdodenhof:circleimageview:2.1.0] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\AndroidManifest.xml:5:5-7:41
 MERGED from [in.srain.cube:ultra-ptr:1.0.11] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\in.srain.cube\ultra-ptr\1.0.11\AndroidManifest.xml:7:5-9:41
+MERGED from [com.felipecsl.asymmetricgridview:library:2.0.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.felipecsl.asymmetricgridview\library\2.0.1\AndroidManifest.xml:8:5-43
+MERGED from [com.android.support:support-v4:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:24.1.1] D:\Micro\document\project\Healthy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion

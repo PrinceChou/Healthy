@@ -104,16 +104,17 @@ public class ListHeadView extends LinearLayout implements View.OnClickListener, 
     }
 
     public void setBookListData(List<BookListItem> datas) {
-        if (datas.size() == 9) {
-            for (int i = 0; i < datas.size(); i++) {
-                BookListItem item = datas.get(i);
-                book_tvs[i].setText(item.getName());
-                book_imgs[i].setTag(item);
-                ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + item.getImg(), book_imgs[i]);
+        if (datas != null)
+            if (datas.size() == 9) {
+                for (int i = 0; i < datas.size(); i++) {
+                    BookListItem item = datas.get(i);
+                    book_tvs[i].setText(item.getName());
+                    book_imgs[i].setTag(item);
+                    ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + item.getImg(), book_imgs[i]);
+                }
+            } else {
+                Log.i(TAG, "健康图书的数据条数不正确");
             }
-        } else {
-            Log.i(TAG, "健康图书的数据条数不正确");
-        }
 
     }
 
