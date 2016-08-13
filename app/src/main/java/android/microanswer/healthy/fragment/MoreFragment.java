@@ -27,14 +27,21 @@ public class MoreFragment extends Fragment implements AdapterView.OnItemClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_more, null);
-        gridView = (AsymmetricGridView) root.findViewById(R.id.fragment_more_gridview);
+        if (root == null) {
+            root = inflater.inflate(R.layout.fragment_more, null);
+        }
+        if (gridView == null) {
+            gridView = (AsymmetricGridView) root.findViewById(R.id.fragment_more_gridview);
+        }
         gridView.setOnItemClickListener(this);
         gridView.setRequestedColumnCount(4);
         gridView.setRequestedHorizontalSpacing(0);
-        adapter = new MoreGridviewAdapter(getActivity());
-        asymadapter = new AsymmetricGridViewAdapter(getActivity(), gridView, adapter);
-        gridView.setAdapter(asymadapter);
+
+        if (gridView.getAdapter() == null) {
+            adapter = new MoreGridviewAdapter(getActivity());
+            asymadapter = new AsymmetricGridViewAdapter(getActivity(), gridView, adapter);
+            gridView.setAdapter(asymadapter);
+        }
         return root;
     }
 

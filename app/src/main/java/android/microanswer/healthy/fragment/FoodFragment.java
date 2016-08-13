@@ -30,7 +30,7 @@ import java.util.List;
  * 由 Micro 创建于 2016/7/17.
  */
 
-public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedListener {
+public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedListener, FoodRecyclerViewAdapter.OnClickListener {
     private static final String TAG = "FoodFragment";
 
     private static final int WHAT_LOAD_MORE = 2;//加载更多内容
@@ -70,7 +70,8 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
                             tabLayout.addTab(tabLayout.newTab().setText(classify.getTitle()));
                         }
                     }
-                    dialog.dismiss();
+                    if (dialog != null)
+                        dialog.dismiss();
                     break;
                 case WHAT_LOAD_FOODCLASSIFY_FAILL:
                     if (dialog != null)
@@ -218,6 +219,7 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
         if (recyclerView.getAdapter() == null) {
             adapter = new FoodRecyclerViewAdapter(getActivity());
+            adapter.setOnClickListener(this);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -227,9 +229,7 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
         int id = cookClassifies.get(tab.getPosition()).getId();
         if (adapter.getClassifyData(id) == null) {
 
-            ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, 1, id);
-
-            if (FoodListItems == null || FoodListItems.size() != PAGE_COUNT) {
+            if (BaseTools.isNetworkAvailable(getActivity())) {//网络可用，从网络加载数据
                 Message msg = childHandler.obtainMessage();
                 msg.what = WHAT_LOAD_CLASSIFYDATA;
                 msg.arg1 = id;
@@ -241,10 +241,34 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
 //                dialog.setTitle("正在加载[" + cookClassifies.get(tab.getPosition()).getName() + "]的列表数据");
                 dialog.setMessage("加载中...");
                 dialog.show();
-            } else {
-                adapter.setClassifyData(id, FoodListItems);
-                adapter.setCurrentClassify(id);
+            } else {//网络不可用，从数据库加载数据
+                ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, 1, id);
+                if (FoodListItems != null && FoodListItems.size() == PAGE_COUNT) {
+                    adapter.setClassifyData(id, FoodListItems);
+                    adapter.setCurrentClassify(id);
+                }
             }
+
+//
+//
+//            ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, 1, id);
+//
+//            if (FoodListItems == null || FoodListItems.size() != PAGE_COUNT) {
+//                Message msg = childHandler.obtainMessage();
+//                msg.what = WHAT_LOAD_CLASSIFYDATA;
+//                msg.arg1 = id;
+//                msg.sendToTarget();
+//                if (tab.getPosition() == 0) {//tab等于0的时候是软件打开的时候,不要弹出窗口
+//                    return;
+//                }
+//                dialog = new ProgressDialog(getActivity());
+////                dialog.setTitle("正在加载[" + cookClassifies.get(tab.getPosition()).getName() + "]的列表数据");
+//                dialog.setMessage("加载中...");
+//                dialog.show();
+//            } else {
+//                adapter.setClassifyData(id, FoodListItems);
+//                adapter.setCurrentClassify(id);
+//            }
         } else {
             adapter.setCurrentClassify(id);
         }
@@ -260,6 +284,13 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
     }
 
+    @Override
+    public void onClick(FoodListItem foodListItem) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onItemClick(foodListItem);
+        }
+    }
+
 
     private class RecyclerviewScroller extends RecyclerView.OnScrollListener {
         @Override
@@ -271,14 +302,26 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
                     return;
                 }
                 isLoadingMore = true;
-                ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
-                Log.i(TAG, "加载更多健康食物:" + FoodListItems);
-                if (FoodListItems == null || FoodListItems.size() != PAGE_COUNT) {
+
+                if (BaseTools.isNetworkAvailable(getActivity())) {
                     childHandler.sendEmptyMessage(WHAT_LOAD_MORE);//通知子线程加载更多
                 } else {
-                    adapter.appendClassifyData(adapter.getCurrentClassify(), FoodListItems);
-                    isLoadingMore = false;
+                    ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
+                    if (FoodListItems != null && FoodListItems.size() == PAGE_COUNT) {
+                        adapter.appendClassifyData(adapter.getCurrentClassify(), FoodListItems);
+                        isLoadingMore = false;
+                    }
                 }
+
+
+//                ArrayList<FoodListItem> FoodListItems = dataManager.getFoodListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
+//                Log.i(TAG, "加载更多健康食物:" + FoodListItems);
+//                if (FoodListItems == null || FoodListItems.size() != PAGE_COUNT) {
+//                    childHandler.sendEmptyMessage(WHAT_LOAD_MORE);//通知子线程加载更多
+//                } else {
+//                    adapter.appendClassifyData(adapter.getCurrentClassify(), FoodListItems);
+//                    isLoadingMore = false;
+//                }
             }
 
         }
@@ -292,5 +335,19 @@ public class FoodFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
     private boolean isSlideToBottom(RecyclerView recyclerView) {
         return recyclerView != null && recyclerView.getAdapter() != null && getActivity() != null && recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= (recyclerView.computeVerticalScrollRange() - BaseTools.Dp2Px(getActivity(), 100));
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Object object);
     }
 }

@@ -90,16 +90,19 @@
 
 
             </FrameLayout>
+
             <com.ashokvarma.bottomnavigation.BottomNavigationBar
                 android:id="@+id/activity_main_bottomnavigationbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 app:bnbActiveColor="@color/whilte"
                 app:bnbBackgroundColor="@color/blue_light"
                 app:bnbBackgroundStyle="background_style_static"
                 app:bnbElevation="10dip"
-                app:bnbMode="mode_fixed">
+                app:bnbMode="mode_fixed"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
             </com.ashokvarma.bottomnavigation.BottomNavigationBar>
         </RelativeLayout>

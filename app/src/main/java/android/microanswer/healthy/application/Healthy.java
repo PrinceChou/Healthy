@@ -3,6 +3,7 @@ package android.microanswer.healthy.application;
 import android.app.Application;
 import android.content.res.Configuration;
 import android.microanswer.healthy.R;
+import android.os.Handler;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
@@ -31,6 +32,8 @@ public class Healthy extends Application {
     public static final String APP_KEY_FOR_TENCENT = "Qy0ai0WXvvfd5AcE";
     public static ImageLoaderConfiguration ilc = null;
     public static Tencent tencent;//腾讯sdk服务
+
+//    public static Handler WORKHANDLER=null;//这个handler用于整个程序
     @Override
     public void onCreate() {
         super.onCreate();

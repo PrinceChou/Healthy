@@ -6,11 +6,14 @@ import android.content.SharedPreferences;
 import android.microanswer.healthy.application.Healthy;
 import android.microanswer.healthy.bean.AskListItem;
 import android.microanswer.healthy.bean.BookListItem;
+import android.microanswer.healthy.bean.CookListItem;
+import android.microanswer.healthy.bean.FoodListItem;
 import android.microanswer.healthy.bean.InfoListItem;
 import android.microanswer.healthy.bean.LoreListItem;
 import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.fragment.HealthyFragment;
 import android.microanswer.healthy.fragment.HealthyFragment2;
+import android.microanswer.healthy.fragment.LifeFragment;
 import android.microanswer.healthy.tools.BaseTools;
 import android.microanswer.healthy.tools.InternetServiceTool;
 import android.microanswer.healthy.view.MActionBarDrawerToggle;
@@ -49,7 +52,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HealthyFragment2.OnItemClickListener {
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener, HealthyFragment2.OnItemClickListener, LifeFragment.OnItemClickListener {
     public static final String SHAREDPREFERENCES_KEY_WEALTHY = "skw";
     public static final String SHAREDPREFERENCES_KEY_WEALTHY_TIME = "skwt";
 
@@ -113,6 +116,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             hf.setOnItemClickListener(this);
         }
         fragments[1] = fragmentManager.findFragmentById(R.id.activity_main_fragment_2);
+        if (fragments[1] instanceof LifeFragment) {
+            LifeFragment lifeFragment = (LifeFragment) fragments[1];
+            lifeFragment.setOnItemClickListener(this);
+        }
+
         fragments[2] = fragmentManager.findFragmentById(R.id.activity_main_fragment_3);
 
         mActionBarDrawerToggle = new MActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_navigation, R.string.close_navigation);
@@ -342,6 +350,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             toast("网络不可用", POSOTION_TOP);
             return;
         }
+
+        if (item == null) {
+            return;
+        }
+
         Intent intent = new Intent(this, LoreInfoAskActivity.class);
         if (item instanceof LoreListItem) {
             LoreListItem loreListItem = (LoreListItem) item;
@@ -356,6 +369,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             BookListItem bookListItem = (BookListItem) item;
             intent.putExtra("data", bookListItem);
             intent.setClass(this, BookActivity.class);
+        } else if (item instanceof FoodListItem) {
+            //TODO 跳转到food详情界面
+            alertDialog("点击了Food", "" + item).show();
+            return;
+        } else if (item instanceof CookListItem) {
+            //TODO 跳转到cook详情界面
+            alertDialog("点击了Cook", "" + item).show();
+            return;
         }
         startActivity(intent);
     }

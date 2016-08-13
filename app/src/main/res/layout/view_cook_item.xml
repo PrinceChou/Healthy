@@ -10,6 +10,7 @@
         android:id="@+id/view_cook_item_img"
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:clickable="true"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"/>
 

@@ -29,7 +29,7 @@ import java.util.List;
  * 由 Micro 创建于 2016/7/17.
  */
 
-public class CookFragment extends Fragment implements TabLayout.OnTabSelectedListener {
+public class CookFragment extends Fragment implements TabLayout.OnTabSelectedListener, CookRecyclerViewAdapter.OnClickListener {
     private static final String TAG = "CookFragment";
 
     private static final int WHAT_LOAD_MORE = 2;//加载更多内容
@@ -69,14 +69,17 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
                             tabLayout.addTab(tabLayout.newTab().setText(cookclassify.getTitle()));
                         }
                     }
-                    dialog.dismiss();
+                    if (dialog != null)
+                        dialog.dismiss();
                     break;
                 case WHAT_LOAD_COOKCLASSIFY_FAILL:
-                    dialog.dismiss();
+                    if (dialog != null)
+                        dialog.dismiss();
                     BaseActivity.errorDialog("加载未成功,请稍后重试!", getActivity());
                     break;
                 case WHAT_LOAD_CLASSIFYDATA_FAILL:
-                    dialog.dismiss();
+                    if (dialog != null)
+                        dialog.dismiss();
                     BaseActivity.errorDialog("加载未成功,请稍后重试!", getActivity());
                     break;
                 case WHAT_LOAD_CLASSIFYDATA_OK:
@@ -84,7 +87,8 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
                     int classify = msg.arg1;
                     adapter.setClassifyData(classify, cooklistitems);
                     adapter.setCurrentClassify(classify);
-                    dialog.dismiss();
+                    if (dialog != null)
+                        dialog.dismiss();
                     break;
                 case WHAT_LOAD_MORE_OK:
                     List<CookListItem> cooklistitems1 = (List<CookListItem>) msg.obj;
@@ -213,6 +217,7 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
         if (recyclerView.getAdapter() == null) {
             adapter = new CookRecyclerViewAdapter(getActivity());
+            adapter.setOnClickListener(this);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -222,9 +227,7 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
         int id = cookClassifies.get(tab.getPosition()).getId();
         if (adapter.getClassifyData(id) == null) {
 
-            ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, 1, id);
-
-            if (cookListItems == null || cookListItems.size() != PAGE_COUNT) {
+            if (BaseTools.isNetworkAvailable(getActivity())) {//网络良好，从网络加载数据
                 Message msg = childHandler.obtainMessage();
                 msg.what = WHAT_LOAD_CLASSIFYDATA;
                 msg.arg1 = id;
@@ -236,10 +239,32 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
 //                dialog.setTitle("正在加载[" + cookClassifies.get(tab.getPosition()).getName() + "]的列表数据");
                 dialog.setMessage("加载中...");
                 dialog.show();
-            } else {
-                adapter.setClassifyData(id, cookListItems);
-                adapter.setCurrentClassify(id);
+            } else {//网络不好，从数据库加载数据
+                ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, 1, id);
+                if (cookListItems != null && cookListItems.size() == PAGE_COUNT) {
+                    adapter.setClassifyData(id, cookListItems);
+                    adapter.setCurrentClassify(id);
+                }
             }
+//
+//            ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, 1, id);
+//
+//            if (cookListItems == null || cookListItems.size() != PAGE_COUNT) {
+//                Message msg = childHandler.obtainMessage();
+//                msg.what = WHAT_LOAD_CLASSIFYDATA;
+//                msg.arg1 = id;
+//                msg.sendToTarget();
+//                if (tab.getPosition() == 0) {//tab等于0的时候是软件打开的时候,不要弹出窗口
+//                    return;
+//                }
+//                dialog = new ProgressDialog(getActivity());
+////                dialog.setTitle("正在加载[" + cookClassifies.get(tab.getPosition()).getName() + "]的列表数据");
+//                dialog.setMessage("加载中...");
+//                dialog.show();
+//            } else {
+//                adapter.setClassifyData(id, cookListItems);
+//                adapter.setCurrentClassify(id);
+//            }
         } else {
             adapter.setCurrentClassify(id);
         }
@@ -255,6 +280,13 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
     }
 
+    @Override
+    public void onClick(Object obj) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(obj);
+        }
+    }
+
 
     private class RecyclerviewScroller extends RecyclerView.OnScrollListener {
         @Override
@@ -266,12 +298,23 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
                     return;
                 }
                 isLoadingMore = true;
-                ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
-                if (cookListItems == null || cookListItems.size() != PAGE_COUNT) {
+
+                if (BaseTools.isNetworkAvailable(getActivity())) {//网络良好，从网络加载数据
                     childHandler.sendEmptyMessage(WHAT_LOAD_MORE);//通知子线程加载更多
                 } else {
-                    adapter.appendClassifyData(adapter.getCurrentClassify(), cookListItems);
+                    ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
+                    if (cookListItems != null && cookListItems.size() == PAGE_COUNT) {
+                        adapter.appendClassifyData(adapter.getCurrentClassify(), cookListItems);
+                    }
                 }
+
+
+//                ArrayList<CookListItem> cookListItems = dataManager.getCookListItems(PAGE_COUNT, adapter.getCurrentClassifyPage() + 1, adapter.getCurrentClassify());
+//                if (cookListItems == null || cookListItems.size() != PAGE_COUNT) {
+//                    childHandler.sendEmptyMessage(WHAT_LOAD_MORE);//通知子线程加载更多
+//                } else {
+//                    adapter.appendClassifyData(adapter.getCurrentClassify(), cookListItems);
+//                }
             }
 
         }
@@ -285,5 +328,19 @@ public class CookFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
     private boolean isSlideToBottom(RecyclerView recyclerView) {
         return recyclerView != null && recyclerView.getAdapter() != null && getActivity() != null && recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= (recyclerView.computeVerticalScrollRange() - BaseTools.Dp2Px(getActivity(), 100));
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onClick(Object obj);
     }
 }

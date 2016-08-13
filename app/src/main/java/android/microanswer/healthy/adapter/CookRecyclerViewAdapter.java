@@ -18,7 +18,7 @@ import java.util.List;
  * 由 Micro 创建于 2016/7/18.
  */
 
-public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements CookItemHolder.OnClickListener {
 
     private SparseArray<List<CookListItem>> data;
     private Context context;
@@ -103,9 +103,9 @@ public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CookItemHolder) {
             CookItemHolder cookItemHolder = (CookItemHolder) holder;
+            cookItemHolder.setOnClickListener(this);
             CookListItem cookListItem = data.get(currentClassify).get(position);
-            cookItemHolder.setImg(cookListItem.getImg());
-            cookItemHolder.setTitle(cookListItem.getName());
+            cookItemHolder.setCookListItem(cookListItem);
         }
 
     }
@@ -121,4 +121,24 @@ public class CookRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
 
+    @Override
+    public void onclick(CookListItem cookListItem) {
+        if (onClickListener != null) {
+            onClickListener.onClick(cookListItem);
+        }
+    }
+
+    private OnClickListener onClickListener;
+
+    public OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(Object obj);
+    }
 }

@@ -1,7 +1,11 @@
 package android.microanswer.healthy;
 
 import android.app.Activity;
+import android.database.ContentObserver;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,6 +29,26 @@ public class NoUseFroTestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getContentResolver().registerContentObserver(Uri.parse(""), true, new ContentObserver(new Handler()) {
+            @Override
+            public boolean deliverSelfNotifications() {
+                return super.deliverSelfNotifications();
+            }
+
+            @Override
+            public void onChange(boolean selfChange) {
+                super.onChange(selfChange);
+            }
+
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                super.onChange(selfChange, uri);
+            }
+        });
+
+
+
+
 
 //        //遍历set--法1
 //        Set<Object> data = new HashSet<>();

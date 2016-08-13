@@ -1,8 +1,10 @@
 package android.microanswer.healthy.tools;
 
+import android.app.ActivityManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -16,7 +18,6 @@ import android.net.NetworkInfo;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -25,11 +26,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -371,6 +370,30 @@ public class BaseTools {
             baseSql.append(s1).append(" ").append(s2).append(i == fields.length - 1 ? "" : ",");
         }
         return baseSql.append(baseSqlEnd).toString();
+    }
+
+    /**
+     * 获取当前正在运行的Activiy所在的程序的名称
+     *
+     * @param context 上下文
+     * @author MicroAnswer
+     * @return 正在运行的程序名字
+     */
+    public static String getCurrentRunningActivityName(Context context) {
+        String name = null;
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = activityManager.getRunningAppProcesses();
+        if (runningAppProcesses != null && runningAppProcesses.size() > 0) {
+            String runningPackageName = runningAppProcesses.get(0).processName;
+            PackageManager packageManager = context.getPackageManager();
+            try {
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(runningPackageName, 0);
+                name = applicationInfo.loadLabel(packageManager).toString();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return name;
     }
 
     /**

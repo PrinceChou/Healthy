@@ -107,6 +107,10 @@
             android:name="android.microanswer.healthy.BookActivity"
             android:label="图书详情"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="android.microanswer.healthy.CookActivity"
+            android:label="菜谱详情"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

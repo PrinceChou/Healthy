@@ -64,7 +64,7 @@ public class FriendsActivity extends BaseActivity implements AdapterView.OnItemC
         runOnOtherThread(new BaseOtherThread() {
 
             @Override
-            void onOtherThreadRunEnd(Message msg) {
+           public void onOtherThreadRunEnd(Message msg) {
                 List<Friend> friends = (List<Friend>) msg.obj;
 
                 loading_view.setVisibility(View.GONE);

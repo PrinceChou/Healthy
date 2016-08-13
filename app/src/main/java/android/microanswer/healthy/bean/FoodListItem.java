@@ -150,4 +150,25 @@ public class FoodListItem implements Serializable {
         FoodListItem foodListItem = (FoodListItem) obj;
         return foodListItem.getId() == getId();
     }
+
+    @Override
+    public String toString() {
+        return "FoodListItem{" +
+                "count=" + count +
+                ", description='" + description + '\'' +
+                ", disease='" + disease + '\'' +
+                ", fcount=" + fcount +
+                ", food='" + food + '\'' +
+                ", id=" + id +
+                ", img='" + img + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                ", rcount=" + rcount +
+                ", summary='" + summary + '\'' +
+                ", symptom='" + symptom + '\'' +
+                ", url='" + url + '\'' +
+                ", foodclass=" + foodclass +
+                '}';
+    }
 }

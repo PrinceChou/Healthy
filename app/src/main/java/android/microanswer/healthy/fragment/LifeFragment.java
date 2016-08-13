@@ -15,7 +15,7 @@ import android.widget.RadioButton;
  * 由 Micro 创建于 2016/6/30.
  */
 
-public class LifeFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class LifeFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, CookFragment.OnItemClickListener, FoodFragment.OnItemClickListener {
     private View root = null;
     private RadioButton rb_cook;
     private RadioButton rb_food;
@@ -40,10 +40,16 @@ public class LifeFragment extends Fragment implements CompoundButton.OnCheckedCh
         if (fragments == null) {
             fragments = new Fragment[2];
         }
-        if (fragments[0] == null)
-            fragments[0] = new CookFragment();
-        if (fragments[1] == null)
-            fragments[1] = new FoodFragment();
+        if (fragments[0] == null) {
+            CookFragment cookFragment = new CookFragment();
+            cookFragment.setOnItemClickListener(this);
+            fragments[0] = cookFragment;
+        }
+        if (fragments[1] == null) {
+            FoodFragment foodFragment = new FoodFragment();
+            foodFragment.setOnItemClickListener(this);
+            fragments[1] = foodFragment;
+        }
 
         onCheckedChanged(rb_cook, true);
 
@@ -65,5 +71,31 @@ public class LifeFragment extends Fragment implements CompoundButton.OnCheckedCh
     }
 
 
+    @Override
+    public void onClick(Object obj) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(obj);
+        }
+    }
 
+    private OnItemClickListener onItemClickListener;
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public void onItemClick(Object object) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(object);
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onClick(Object obj);
+    }
 }

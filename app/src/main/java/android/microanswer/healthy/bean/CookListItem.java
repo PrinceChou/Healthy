@@ -130,4 +130,23 @@ public class CookListItem implements Serializable {
         CookListItem cookListItem = (CookListItem) obj;
         return cookListItem.getId() == getId();
     }
+
+    @Override
+    public String toString() {
+        return "CookListItem{" +
+                "count=" + count +
+                ", description='" + description + '\'' +
+                ", fcount=" + fcount +
+                ", food='" + food + '\'' +
+                ", id=" + id +
+                ", images='" + images + '\'' +
+                ", img='" + img + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                ", rcount=" + rcount +
+                ", url='" + url + '\'' +
+                ", cookclass=" + cookclass +
+                '}';
+    }
 }

@@ -106,6 +106,10 @@
             android:name=".BookActivity"
             android:label="图书详情"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CookActivity"
+            android:label="菜谱详情"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

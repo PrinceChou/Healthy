@@ -5,6 +5,7 @@ import android.microanswer.healthy.R;
 import android.microanswer.healthy.bean.FoodListItem;
 import android.microanswer.healthy.fragment.FoodFragment;
 import android.microanswer.healthy.viewbean.CookItemHolder;
+import android.microanswer.healthy.viewbean.FoodItemHolder;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -18,7 +19,7 @@ import java.util.List;
  * 由 Micro 创建于 2016/7/18.
  */
 
-public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements FoodItemHolder.OnClickListener {
 
     private SparseArray<List<FoodListItem>> data;
     private Context context;
@@ -106,16 +107,16 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemview = View.inflate(context, R.layout.view_cook_item, null);
-        return new CookItemHolder(itemview);
+        return new FoodItemHolder(itemview);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof CookItemHolder) {
-            CookItemHolder cookItemHolder = (CookItemHolder) holder;
+        if (holder instanceof FoodItemHolder) {
+            FoodItemHolder cookItemHolder = (FoodItemHolder) holder;
             FoodListItem cookListItem = data.get(currentClassify).get(position);
-            cookItemHolder.setImg(cookListItem.getImg());
-            cookItemHolder.setTitle(cookListItem.getName());
+            cookItemHolder.setOnClickListener(this);
+            cookItemHolder.setfoodListItem(cookListItem);
         }
 
     }
@@ -123,7 +124,7 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount() {
         if (currentClassify == -1 || data.get(currentClassify) == null) {
-            Toast.makeText(context, "No Data To Show With CookClassify " + currentClassify + " !", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "No Data To Show With CookClassify " + currentClassify + " !", Toast.LENGTH_SHORT).show();
             return 0;
         }
 
@@ -131,4 +132,24 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
 
+    @Override
+    public void onclick(FoodListItem foodListItem) {
+        if (onClickListener != null) {
+            onClickListener.onClick(foodListItem);
+        }
+    }
+
+    private OnClickListener onClickListener;
+
+    public OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(FoodListItem foodListItem);
+    }
 }

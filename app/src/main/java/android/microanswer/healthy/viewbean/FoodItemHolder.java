@@ -2,6 +2,7 @@ package android.microanswer.healthy.viewbean;
 
 import android.microanswer.healthy.R;
 import android.microanswer.healthy.bean.CookListItem;
+import android.microanswer.healthy.bean.FoodListItem;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,14 +14,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * 由 Micro 创建于 2016/7/18.
  */
 
-public class CookItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FoodItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private ImageView img;
     private TextView tv;
-    private CookListItem cookListItem;
+    private FoodListItem foodListItem;
     private OnClickListener onClickListener;
 
 
-    public CookItemHolder(View itemView) {
+    public FoodItemHolder(View itemView) {
         super(itemView);
         img = (ImageView) itemView.findViewById(R.id.view_cook_item_img);
         img.setOnClickListener(this);
@@ -39,18 +40,18 @@ public class CookItemHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View view) {
         if (onClickListener != null) {
-            onClickListener.onclick(this.cookListItem);
+            onClickListener.onclick(this.foodListItem);
         }
     }
 
-    public CookListItem getCookListItem() {
-        return cookListItem;
+    public FoodListItem getfoodListItem() {
+        return foodListItem;
     }
 
-    public void setCookListItem(CookListItem cookListItem) {
-        this.cookListItem = cookListItem;
-        setImg(this.cookListItem.getImg());
-        setTitle(this.cookListItem.getName());
+    public void setfoodListItem(FoodListItem foodListItem) {
+        this.foodListItem = foodListItem;
+        setImg(this.foodListItem.getImg());
+        setTitle(this.foodListItem.getName());
     }
 
     public OnClickListener getOnClickListener() {
@@ -62,6 +63,6 @@ public class CookItemHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
     public interface OnClickListener {
-        void onclick(CookListItem cookListItem);
+        void onclick(FoodListItem foodListItem);
     }
 }

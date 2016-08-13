@@ -173,7 +173,7 @@ public class BookActivity extends BaseActivity implements View.OnClickListener {
     private void requestBook() {
         runOnOtherThread(new BaseOtherThread() {
             @Override
-            void onOtherThreadRunEnd(Message msg) {
+            public void onOtherThreadRunEnd(Message msg) {
 
                 if (msg != null) {
                     bookListItem = (BookListItem) msg.obj;
@@ -221,7 +221,7 @@ public class BookActivity extends BaseActivity implements View.OnClickListener {
     private void requestLike() {
         runOnOtherThread(new BaseOtherThread() {
             @Override
-            void onOtherThreadRunEnd(Message msg) {
+           public void onOtherThreadRunEnd(Message msg) {
                 like$dislike.setEnabled(true);
                 if (msg.arg1 == LIKE) {
                     like$dislike.setText("取消收藏");
@@ -277,7 +277,7 @@ public class BookActivity extends BaseActivity implements View.OnClickListener {
     private void like(final String keyWord) {
         runOnOtherThread(new BaseOtherThread() {
             @Override
-            void onOtherThreadRunEnd(Message msg) {
+         public   void onOtherThreadRunEnd(Message msg) {
                 like$dislike.setEnabled(true);
                 if (msg.arg1 == LIKE) {
                     like$dislike.setTag(LIKE);
@@ -342,7 +342,7 @@ public class BookActivity extends BaseActivity implements View.OnClickListener {
     private void disLike() {
         runOnOtherThread(new BaseOtherThread() {
             @Override
-            void onOtherThreadRunEnd(Message msg) {
+          public  void onOtherThreadRunEnd(Message msg) {
                 like$dislike.setEnabled(true);
                 if (msg.arg1 == LIKE) {
                     like$dislike.setTag(LIKE);

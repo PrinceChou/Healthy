@@ -78,7 +78,7 @@ public class CollectedActivity extends BaseActivity implements View.OnClickListe
     private void update() {
         runOnOtherThread(new BaseOtherThread() {
             @Override
-            void onOtherThreadRunEnd(Message msg) {
+           public void onOtherThreadRunEnd(Message msg) {
                 if (msg != null)
                     adapter.setData((ArrayList<Collected>) msg.obj);
                 else {
