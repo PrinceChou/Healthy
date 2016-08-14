@@ -374,9 +374,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             alertDialog("点击了Food", "" + item).show();
             return;
         } else if (item instanceof CookListItem) {
-            //TODO 跳转到cook详情界面
-            alertDialog("点击了Cook", "" + item).show();
-            return;
+            CookListItem cookListItem = (CookListItem) item;
+            intent.putExtra("data", cookListItem);
+            intent.setClass(this, CookActivity.class);
         }
         startActivity(intent);
     }

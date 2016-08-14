@@ -5,6 +5,7 @@
     android:id="@+id/activity_cook"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
@@ -26,7 +27,7 @@
         <RelativeLayout
             android:id="@+id/activity_cook_head_relativelayout"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="wrap_content"
             android:background="@color/trans_colorPrimary"
             android:paddingBottom="6dp"
             android:paddingLeft="12dp"
@@ -36,7 +37,9 @@
             <ImageView
                 android:id="@+id/activity_cook_img"
                 android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_height="170dp"
+                android:background="#fff"
+                android:padding="1dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/cookimg"/>
 
@@ -48,8 +51,13 @@
                 android:layout_toRightOf="@id/activity_cook_img"
                 android:singleLine="true"
                 android:text="红薯饭"
+                android:background="@drawable/shape_whilte_round"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="4dp"
                 android:textColor="#000"
-                android:textSize="20sp"/>
+                android:textSize="17sp"/>
 
             <TextView
                 android:id="@+id/activity_cook_desc"
@@ -57,12 +65,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_cook_title"
                 android:layout_marginLeft="6dp"
+                android:background="@drawable/shape_whilte_round"
+                android:padding="6dp"
                 android:layout_marginTop="6dp"
                 android:layout_toRightOf="@id/activity_cook_img"
                 android:maxLines="6"
                 android:text="就算受累下力、吃苦与等待其实都不可怕，老百姓嘛干任何事情都是需要付出努力和代价"/>
 
             <TextView
+                android:id="@+id/activity_cook_like$dislike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_cook_desc"

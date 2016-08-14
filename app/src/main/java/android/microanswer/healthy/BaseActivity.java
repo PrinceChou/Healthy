@@ -1,6 +1,7 @@
 package android.microanswer.healthy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +14,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -74,9 +74,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param context
      * @return
      */
-    public static final android.support.v7.app.AlertDialog errorDialog(String message, Context context) {
-        android.support.v7.app.AlertDialog dialog = null;
-        android.support.v7.app.AlertDialog.Builder b = new android.support.v7.app.AlertDialog.Builder(context);
+    public static AlertDialog errorDialog(String message, Context context) {
+        AlertDialog dialog = null;
+        AlertDialog.Builder b = new AlertDialog.Builder(context);
         b.setTitle("出现错误");
         b.setIcon(android.R.drawable.ic_dialog_info);
         b.setMessage(message);
