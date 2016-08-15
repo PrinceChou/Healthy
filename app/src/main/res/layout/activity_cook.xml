@@ -38,9 +38,6 @@
                 android:id="@+id/activity_cook_img"
                 android:layout_width="120dp"
                 android:layout_height="170dp"
-                android:background="#fff"
-                android:padding="1dp"
-                android:scaleType="centerCrop"
                 android:src="@mipmap/cookimg"/>
 
             <android.microanswer.healthy.view.AutoMoveTextView
@@ -97,19 +94,46 @@
 
             <LinearLayout
                 android:id="@+id/activity_cook_keywords"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="3dp"/>
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="加载中..."/>
+                </LinearLayout>
+
+
+            </LinearLayout>
         </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="#88888888"/>
 
         <ScrollView
             android:layout_width="match_parent"
+            android:paddingBottom="12dp"
             android:layout_height="wrap_content">
 
             <android.microanswer.healthy.view.HtmlView
                 android:id="@+id/activity_cook_htmlview"
                 android:layout_width="match_parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:layout_height="wrap_content"/>
 
         </ScrollView>
