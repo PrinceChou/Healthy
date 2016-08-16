@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -256,6 +257,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         builder.setItems(items, onClickListener);
         return builder.create();
     }
+
 
     /**
      * 跳转到指定的Activity

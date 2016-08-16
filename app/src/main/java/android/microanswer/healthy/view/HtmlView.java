@@ -66,11 +66,6 @@ public class HtmlView extends LinearLayout {
     public void setHtml(final String mhtml) {
         removeAllViews();
         String html = mhtml;
-
-
-        html = html.replace("\r\n", "").replace("\r", "").replace("\n", "");
-
-
         if (!html.startsWith("<html>")) {
             html = "<html>" + html;
         }
@@ -82,13 +77,6 @@ public class HtmlView extends LinearLayout {
         if (!html.contains("<p>　　")) {
             html = html.replace("<p>", "<p>　　");
         }
-
-
-        html = html.replace(" ", "");
-
-        html = html.replace("<p></p>", "");
-
-
 
         InputSource inputSource = new InputSource(new StringReader(html));
         try {

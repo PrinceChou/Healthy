@@ -381,6 +381,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         startActivity(intent);
     }
 
+    @Override
+    public void onMoreLoreClick() {
+        jumpTo(MoreLoreActivity.class, false);
+    }
+
     class WealtherLoader implements OtherThreadTask {
 
         @Override

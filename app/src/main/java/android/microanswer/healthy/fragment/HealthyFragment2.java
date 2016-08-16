@@ -283,6 +283,13 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
         }
     }
 
+    @Override
+    public void onMoreLoreClick() {
+        if (onItemClickListener != null) {
+            onItemClickListener.onMoreLoreClick();
+        }
+    }
+
     private OnItemClickListener onItemClickListener;
 
     public OnItemClickListener getOnItemClickListener() {
@@ -295,5 +302,7 @@ public class HealthyFragment2 extends Fragment implements Runnable, PtrHandler, 
 
     public static interface OnItemClickListener {
         void onClick(Object obj);
+
+        void onMoreLoreClick();
     }
 }

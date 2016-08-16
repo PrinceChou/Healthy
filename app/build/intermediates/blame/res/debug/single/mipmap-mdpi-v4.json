@@ -68,6 +68,10 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\life.png"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\time.png",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\time.png"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\like.png",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\like.png"
     },

@@ -91,6 +91,8 @@ public class FoodActivity extends BaseActivity implements View.OnClickListener {
                             Bitmap b = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
                             Canvas c = new Canvas(b);
                             c.drawColor(Color.LTGRAY);
+
+
                             c.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), new Rect(4, 4, b.getWidth() - 4, b.getHeight() - 4), null);
                             imageAware.setImageBitmap(b);
                         }

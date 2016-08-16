@@ -12,6 +12,8 @@
 
     <style name="mDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="android:textColorSecondary">@color/whilte</item>
+        <item name="actionMenuTextColor">@color/whilte</item> <!--  敲定颜色-->
+        <item name="android:textSize">18sp</item> <!--  搞掂字体大小-->
     </style>
     <style name="BadgeText" parent="TextAppearance.AppCompat.Body2">
         <item name="android:textSize">@dimen/badge_text_size</item>

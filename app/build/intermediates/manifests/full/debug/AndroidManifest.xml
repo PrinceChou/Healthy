@@ -115,6 +115,10 @@
             android:name="android.microanswer.healthy.FoodActivity"
             android:label="食物详情"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="android.microanswer.healthy.MoreLoreActivity"
+            android:label="更多健康知识"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

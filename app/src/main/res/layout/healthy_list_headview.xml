@@ -44,6 +44,8 @@
             android:background="@color/black"/>
 
         <TextView
+            android:id="@+id/healthy_list_headview_moerlore"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="更多>"

@@ -266,7 +266,7 @@ public final class DataManager {
      * @param data
      * @return 写入的数据条数
      */
-    public int putLoreClassifyItems(ArrayList<LoreClassifyItem> data) {
+    public int putLoreClassifyItems(List<LoreClassifyItem> data) {
         SQLiteDatabase writableDatabase = dboh.getWritableDatabase();
 
         int c = 0;

@@ -31,6 +31,7 @@ public class ListHeadView extends LinearLayout implements View.OnClickListener, 
     private ImageView book_imgs[];
     private TextView book_tvs[];
 
+
     public ListHeadView(Context context) {
         super(context);
         setOrientation(VERTICAL);
@@ -81,6 +82,15 @@ public class ListHeadView extends LinearLayout implements View.OnClickListener, 
         for (ImageView book_img : book_imgs) {
             book_img.setOnClickListener(this);
         }
+
+        findViewById(R.id.healthy_list_headview_moerlore).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onMoreLoreClick();
+                }
+            }
+        });
 
     }
 
@@ -146,6 +156,8 @@ public class ListHeadView extends LinearLayout implements View.OnClickListener, 
 
     public static interface OnItemClickListener {
         void onClick(Object obj);
+
+        void onMoreLoreClick();
     }
 
 }

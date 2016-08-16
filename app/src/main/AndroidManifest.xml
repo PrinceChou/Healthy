@@ -114,6 +114,11 @@
             android:name=".FoodActivity"
             android:label="食物详情"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MoreLoreActivity"
+            android:label="更多健康知识"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
