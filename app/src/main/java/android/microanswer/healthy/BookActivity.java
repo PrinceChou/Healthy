@@ -114,7 +114,13 @@ public class BookActivity extends BaseActivity implements View.OnClickListener {
             pd.setMessage("加载中...");
             pd.setCancelable(false);
             pd.show();
-            requestBook();
+            if (cachedata.get(bookListItem.getId()) == null) {
+                requestBook();
+            } else {
+                bookListItem = cachedata.get(bookListItem.getId());
+                onBookGeted();
+            }
+//            requestBook();
         }
     }
 

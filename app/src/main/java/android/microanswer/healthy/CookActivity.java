@@ -1,5 +1,6 @@
 package android.microanswer.healthy;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.microanswer.healthy.application.Healthy;
+import android.microanswer.healthy.bean.Collected;
 import android.microanswer.healthy.bean.CookListItem;
 import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.tools.BaseTools;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -34,6 +37,7 @@ import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -55,12 +59,21 @@ public class CookActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout key_words_content;
     private HtmlView cook_htmlview;
 
+    private ProgressDialog dialog;
+    private static SparseArray<CookListItem> cachedata;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cook);
         suitToolBar(R.id.activity_cook_toolbar);
         setToolBarBackEnable();
+
+        if (cachedata == null) {
+            cachedata = new SparseArray<>();
+        }
+
+
         cook_img_bg = findViewById(R.id.activity_cook_head_relativelayout);
         cook_desc = (TextView) findViewById(R.id.activity_cook_desc);
         cook_img = (ImageView) findViewById(R.id.activity_cook_img);
@@ -72,26 +85,48 @@ public class CookActivity extends BaseActivity implements View.OnClickListener {
         cook_htmlview = (HtmlView) findViewById(R.id.activity_cook_htmlview);
 
 
-        cookListItem = (CookListItem) getIntent().getSerializableExtra("data");
+        Serializable serializable = getIntent().getSerializableExtra("data");
 
-        if (cookListItem != null) {
-            ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + cookListItem.getImg(), cook_img, new DisplayImageOptions.Builder()
-                    .displayer(new BitmapDisplayer() {
-                        @Override
-                        public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
-                            Bitmap b = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
-                            Canvas c = new Canvas(b);
-                            c.drawColor(Color.LTGRAY);
-                            c.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), new Rect(4, 4, b.getWidth() - 4, b.getHeight() - 4), null);
-                            imageAware.setImageBitmap(b);
-                        }
-                    }).
-                            build(), new CookImageLoadListener());
-            cook_desc.setText(cookListItem.getDescription());
-            cook_title.setText(cookListItem.getName());
+
+        if (serializable instanceof CookListItem) {
+
+            cookListItem = (CookListItem) serializable;
+
+            if (cookListItem != null) {
+                ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + cookListItem.getImg(), cook_img, new DisplayImageOptions.Builder()
+                        .displayer(new BitmapDisplayer() {
+                            @Override
+                            public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
+                                Bitmap b = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+                                Canvas c = new Canvas(b);
+                                c.drawColor(Color.LTGRAY);
+                                c.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), new Rect(4, 4, b.getWidth() - 4, b.getHeight() - 4), null);
+                                imageAware.setImageBitmap(b);
+                            }
+                        }).
+                                build(), new CookImageLoadListener());
+                cook_desc.setText(cookListItem.getDescription());
+                cook_title.setText(cookListItem.getName());
+            }
+        } else if (serializable instanceof Collected) {
+            Collected collected = (Collected) serializable;
+            cookListItem = new CookListItem();
+            cookListItem.setId(collected.getOid());
+            dialog = ProgressDialog.show(this, null, "加载中...");
         }
 
-        requestCookListItem();
+        if (cachedata.get(cookListItem.getId()) != null) {
+            if (dialog != null) {
+                dialog.dismiss();
+            }
+            cookListItem = cachedata.get(cookListItem.getId());
+            onCookListItemRequestOK();
+        } else {
+            requestCookListItem();
+        }
+
+
+
         requestIsLike();
     }
 
@@ -100,6 +135,22 @@ public class CookActivity extends BaseActivity implements View.OnClickListener {
      * 当数据请求成功的时候回调
      */
     private void onCookListItemRequestOK() {
+        key_words_content.removeAllViews();
+        cachedata.put(cookListItem.getId(), cookListItem);
+        ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + cookListItem.getImg(), cook_img, new DisplayImageOptions.Builder()
+                .displayer(new BitmapDisplayer() {
+                    @Override
+                    public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
+                        Bitmap b = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+                        Canvas c = new Canvas(b);
+                        c.drawColor(Color.LTGRAY);
+                        c.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), new Rect(4, 4, b.getWidth() - 4, b.getHeight() - 4), null);
+                        imageAware.setImageBitmap(b);
+                    }
+                }).
+                        build(), new CookImageLoadListener());
+        cook_desc.setText(cookListItem.getDescription());
+        cook_title.setText(cookListItem.getName());
         String keywords = cookListItem.getKeywords();
         String[] split = keywords.split(" ");
         for (String aSplit : split) {
@@ -311,7 +362,9 @@ public class CookActivity extends BaseActivity implements View.OnClickListener {
         runOnOtherThread(new BaseOtherThread() {
             @Override
             void onOtherThreadRunEnd(Message msg) {
-                key_words_content.removeAllViews();
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
                 if (msg.obj == null) {
                     errorDialog("加载失败,请稍后再试", CookActivity.this);
                 } else {

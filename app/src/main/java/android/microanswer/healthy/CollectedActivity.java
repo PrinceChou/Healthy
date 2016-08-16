@@ -144,6 +144,10 @@ public class CollectedActivity extends BaseActivity implements View.OnClickListe
         Collected c = (Collected) adapter.getItem(i);
         if (c.getOtype().equals("book")) {
             intent.setClass(this, BookActivity.class);
+        } else if (c.getOtype().equals("cook")) {
+            intent.setClass(this, CookActivity.class);
+        } else if (c.getOtype().equalsIgnoreCase("food")) {
+            intent.setClass(this, FoodActivity.class);
         }
         intent.putExtra("data", c);
         startActivity(intent);

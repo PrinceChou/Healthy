@@ -370,9 +370,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             intent.putExtra("data", bookListItem);
             intent.setClass(this, BookActivity.class);
         } else if (item instanceof FoodListItem) {
-            //TODO 跳转到food详情界面
-            alertDialog("点击了Food", "" + item).show();
-            return;
+           FoodListItem foodListItem = (FoodListItem) item;
+            intent.putExtra("data",foodListItem);
+            intent.setClass(this,FoodActivity.class);
         } else if (item instanceof CookListItem) {
             CookListItem cookListItem = (CookListItem) item;
             intent.putExtra("data", cookListItem);

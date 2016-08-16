@@ -91,4 +91,18 @@ public class Collected implements Serializable {
     public void setUser(int user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Collected{" +
+                "id=" + id +
+                ", oid=" + oid +
+                ", otype='" + otype + '\'' +
+                ", tag='" + tag + '\'' +
+                ", time=" + time +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

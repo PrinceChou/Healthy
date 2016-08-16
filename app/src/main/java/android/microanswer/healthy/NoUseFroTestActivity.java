@@ -6,6 +6,7 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,73 +26,28 @@ import java.util.Set;
  * 由 Micro 创建于 2016/7/13.
  */
 
-public class NoUseFroTestActivity extends Activity {
+public class NoUseFroTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getContentResolver().registerContentObserver(Uri.parse(""), true, new ContentObserver(new Handler()) {
+
+        runOnOtherThread(new BaseOtherThread(){
+
             @Override
-            public boolean deliverSelfNotifications() {
-                return super.deliverSelfNotifications();
+            public Map getTaskParams() {
+                return null;
             }
 
             @Override
-            public void onChange(boolean selfChange) {
-                super.onChange(selfChange);
+            public Message run(Map params) {
+                return null;
             }
 
             @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
+            void onOtherThreadRunEnd(Message msg) {
+
             }
-        });
+        },4354);
 
-
-
-
-
-//        //遍历set--法1
-//        Set<Object> data = new HashSet<>();
-//        Iterator<Object> iterator1 = data.iterator();
-//        while (iterator1.hasNext()) {
-//            Object next = iterator1.next();
-//            System.out.print(next);
-//        }
-//
-//        for (Iterator<Object> iterator = data.iterator(); iterator.hasNext(); ) {
-//            Object next =  iterator.next();
-//
-//        }
-//
-//        //遍历set--法2
-//        Set<Object> sdata = new HashSet<>();
-//        for (Object next : sdata) {
-//            System.out.print(next);
-//        }
-//
-//
-//        //遍历map--法1
-//        Map<String, Object> data2 = new HashMap<>();
-//        Set<String> strings = data2.keySet();
-//        Iterator<String> iterator2 = strings.iterator();
-//        while (iterator2.hasNext()) {
-//            String key = iterator2.next();
-//            Object o = data2.get(key);
-//            System.out.print(o);
-//        }
-//
-//        //遍历map--法2
-//        Map<String, Object> datas = new HashMap<>();
-//        Set<String> keys = datas.keySet();
-//        for (String key : keys) {
-//            System.out.print(datas.get(key));
-//        }
-//
-//        //遍历map--法3
-//        Map<String, Object> data3 = new HashMap<>();
-//        Set<Map.Entry<String, Object>> entries = data3.entrySet();
-//        for (Map.Entry<String, Object> item : entries) {
-//            System.out.print(item.getValue());
-//        }
     }
 }

@@ -110,6 +110,10 @@
             android:name=".CookActivity"
             android:label="菜谱详情"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".FoodActivity"
+            android:label="食物详情"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
