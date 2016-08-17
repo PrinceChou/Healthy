@@ -1,8 +1,11 @@
 package android.microanswer.healthy.tools;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -11,6 +14,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import static android.R.attr.data;
 
@@ -232,5 +236,84 @@ public class InternetServiceTool {
         }
         return result;
     }
+
+
+
+    /**
+     * 上传头像图片到Tngou服务器
+     *
+     * @param photofile
+     *            要上传的头像图片
+     * @return 头像图片上传完成后服务器返回的信息，上传异常将返回Null
+     */
+    public static String upLoadPhoto(File photofile) {
+        String murl = "http://www.tngou.net/tnfs/action/controller?action=uploadimage&path=avatar";
+        String serverPath = "avatar";
+
+        String end = "\r\n";
+        String flagTag = "--";
+        String boundary = "----" + UUID.randomUUID().toString();
+        try {
+            URL url = new URL(murl);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.setUseCaches(false);
+
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Connection", "Keep-Alive");
+            con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            // 先构建非文件部分上部
+            StringBuilder sbu = new StringBuilder();
+            sbu.append(flagTag + boundary + end);
+            sbu.append("Content-Disposition: form-data; name=\"path\"" + end);
+            sbu.append(end);
+            sbu.append(serverPath + end);
+            sbu.append(flagTag + boundary + end);
+            sbu.append(
+                    "Content-Disposition: form-data; name=\"upfile\"; filename=\"" + photofile.getName() + "\"" + end);
+            sbu.append("Content-Type: image/*" + end);
+            sbu.append(end);
+
+            // 非文件部分下部
+            StringBuffer sbu2 = new StringBuffer();
+            sbu2.append(end + flagTag + boundary + flagTag + end);
+
+            con.setRequestProperty("Content-Length", String.valueOf(
+                    sbu.toString().getBytes().length + sbu2.toString().getBytes().length + photofile.length()));
+
+            FileInputStream fin = new FileInputStream(photofile);
+            OutputStream outputStream = con.getOutputStream();
+            outputStream.write(sbu.toString().getBytes("UTF-8"));// 上传模拟表单上部
+            byte data[] = new byte[1024];
+            int datasize = 0;
+            while ((datasize = fin.read(data)) != -1) {// 上传图片数据
+                outputStream.write(data, 0, datasize);
+            }
+            outputStream.write(sbu2.toString().getBytes("UTF-8"));// 上传模拟表单下部
+
+            outputStream.flush();
+            fin.close();
+
+            // 获取服务器响应
+            InputStream is = con.getInputStream();
+
+            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            BufferedReader bfrd = new BufferedReader(inputStreamReader);
+            StringBuffer sbf = new StringBuffer();
+            String temp = null;
+            while ((temp = bfrd.readLine()) != null) {
+                sbf.append(temp);
+            }
+            bfrd.close();
+            outputStream.close();
+            return sbf.toString();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
 
 }
