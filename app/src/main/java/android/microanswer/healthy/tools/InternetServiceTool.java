@@ -262,6 +262,7 @@ public class InternetServiceTool {
 
             con.setRequestMethod("POST");
             con.setRequestProperty("Connection", "Keep-Alive");
+            con.setRequestProperty("Charset", "UTF-8");
             con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 
             // 先构建非文件部分上部

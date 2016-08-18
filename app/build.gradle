@@ -32,4 +32,5 @@ dependencies {
     compile 'com.felipecsl.asymmetricgridview:library:2.0.1'
     compile files('libs/open_sdk_r5756.jar')
     compile files('libs/tagsoup-1.2.1.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
 }

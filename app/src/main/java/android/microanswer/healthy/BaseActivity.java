@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.microanswer.healthy.bean.User;
 import android.microanswer.healthy.tools.BaseTools;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public final static String TYPE_BOOK="book";
     public final static String TYPE_FOOD ="food";
     public final static String TYPE_COOK = "cook";
-
+    public static final String userObjectFileName = "user.data";
 
     public final static int POSOTION_TOP = 1;
     public final static int POSOTION_BOTTOM = 2;
@@ -195,6 +198,33 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (f.mkdirs())
                 return f;
             else return null;
+        }
+    }
+
+
+    /**
+     * 将用户信息保存到文件
+     */
+    public void saveUserInFile() {
+        File appInternalWorkDir = getAppInternalWorkDir();
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            if (appInternalWorkDir != null) {
+                objectOutputStream = new ObjectOutputStream(new FileOutputStream(appInternalWorkDir.getAbsolutePath() + "/" + userObjectFileName));
+                objectOutputStream.writeObject(User.getUser());
+                objectOutputStream.flush();
+            } else {
+                Log.i("将登录信息写入文件", "文件目录创建失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (objectOutputStream != null)
+                    objectOutputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

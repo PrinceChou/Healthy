@@ -44,9 +44,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private ImageView qq, sina;
     private CheckBox seepwd;
 
-    public static final String userObjectFileName = "user.data";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -399,7 +396,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         } else {
                             Log.i("将登录信息写入文件", "文件目录创建失败");
                         }
-                        Log.e("LoginActivity", user.toString());
+//                        Log.e("LoginActivity", user.toString());
                     } else {
                         try {
                             res = jsondata.getString("msg") + "\n请重试";

@@ -153,7 +153,7 @@ public class BookActivity extends BaseActivity implements View.OnClickListener {
             tv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             tv.setText(bkg.getTitle());
             tv.setClickable(true);
-            tv.setBackgroundDrawable(getDrawable(android.support.v7.appcompat.R.drawable.abc_list_selector_holo_light));
+            tv.setBackgroundResource(android.R.drawable.list_selector_background);
             tv.setTextColor(Color.BLACK);
             activity_book_mulucontent.addView(tv);
         }

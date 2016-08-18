@@ -124,7 +124,7 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount() {
         if (currentClassify == -1 || data.get(currentClassify) == null) {
-//            Toast.makeText(context, "No Data To Show With CookClassify " + currentClassify + " !", Toast.LENGTH_SHORT).show();
+//         Toast.makeText(context, "No Data To Show With CookClassify " + currentClassify + " !", Toast.LENGTH_SHORT).show();
             return 0;
         }
 

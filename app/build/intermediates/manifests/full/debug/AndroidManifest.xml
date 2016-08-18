@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name="android.microanswer.healthy.application.Healthy"
@@ -118,6 +119,10 @@
         <activity
             android:name="android.microanswer.healthy.MoreLoreActivity"
             android:label="更多健康知识"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="android.microanswer.healthy.HeadPhotoCutActivity"
+            android:label="头像裁剪"
             android:screenOrientation="portrait" />
     </application>
 
