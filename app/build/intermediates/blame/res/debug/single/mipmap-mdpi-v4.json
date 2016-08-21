@@ -92,6 +92,10 @@
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\refreshicon.png"
     },
     {
+        "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\loading.png",
+        "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\loading.png"
+    },
+    {
         "merged": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\sina.png",
         "source": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\mipmap-mdpi\\sina.png"
     },

@@ -1,8 +1,10 @@
 package android.microanswer.healthy.application;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.microanswer.healthy.R;
+import android.microanswer.healthy.service.HealthyService;
 import android.os.Handler;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -67,6 +69,8 @@ public class Healthy extends Application {
         if (tencent == null) {
             tencent = Tencent.createInstance(APP_ID_FOR_TENCENT, this);
         }
+        Intent intent = new Intent(this, HealthyService.class);
+        startService(intent);
     }
 
     @Override
@@ -93,4 +97,6 @@ public class Healthy extends Application {
     public static void noUseMethod(Object... obj){
 
     }
+
+
 }

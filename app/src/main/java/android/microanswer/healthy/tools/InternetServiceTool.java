@@ -197,7 +197,6 @@ public class InternetServiceTool {
     }
 
 
-
     /**
      * 请求一个网址，返回一个结果
      *
@@ -248,7 +247,19 @@ public class InternetServiceTool {
      */
     public static String upLoadPhoto(File photofile) {
         String murl = "http://www.tngou.net/tnfs/action/controller?action=uploadimage&path=avatar";
-        String serverPath = "avatar";
+        return upLoadPhoto(murl, photofile);
+    }
+
+
+    public static String upLoadPhoto(String murl, File photofile) {
+
+        String serverPath;
+
+        if (murl.contains("=")) {
+            serverPath = murl.substring(murl.lastIndexOf("=") + 1);
+        } else {
+            serverPath = photofile.getName();
+        }
 
         String end = "\r\n";
         String flagTag = "--";

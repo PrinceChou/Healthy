@@ -111,7 +111,7 @@ public class HtmlView extends LinearLayout {
                 if (qName.equalsIgnoreCase("img")) {
                     final ImageView imageView = new ImageView(getContext());
 //                    imageView.setLayoutParams(new LayoutParams(getWidth(), LayoutParams.WRAP_CONTENT));
-                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imageView.setImageResource(R.mipmap.loading);
                     addView(imageView);
                     ImageLoader.getInstance().displayImage(attributes.getValue("src"), imageView,
@@ -119,7 +119,11 @@ public class HtmlView extends LinearLayout {
                                     .displayer(new BitmapDisplayer() {
                                         @Override
                                         public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
-                                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((getWidth() - getPaddingLeft() - getPaddingRight()), bitmap.getHeight() * ((getWidth() - getPaddingLeft() - getPaddingRight()) / bitmap.getWidth()));
+                                            int width = getWidth()-getPaddingLeft() - getPaddingRight();
+                                            int height = Math.round((width / (float)bitmap.getWidth()) * bitmap.getHeight());
+
+
+                                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
                                             imageAware.getWrappedView().setLayoutParams(layoutParams);
                                             imageAware.setImageBitmap(bitmap);
                                         }

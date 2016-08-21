@@ -149,6 +149,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (TextUtils.isEmpty(User.getUser().getAccess_token()) && TextUtils.isEmpty(User.getUser().getAccount())) {
             nick_name_tv.setText(getString(R.string.defultnickname));
             singnature_tv.setVisibility(View.GONE);
+            headview.setImageResource(R.mipmap.head);
         } else {
             ImageLoader.getInstance().displayImage(Healthy.IMAGE_URL + User.getUser().getAvatar(), headview);
             nick_name_tv.setText(User.getUser().getAccount());

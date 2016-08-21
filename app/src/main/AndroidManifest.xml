@@ -15,8 +15,26 @@
         android:allowBackup="true"
         android:icon="@mipmap/tb"
         android:label="@string/app_name"
+        android:persistent="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".service.HealthyService"
+            android:enabled="true"
+            />
+        <receiver
+            android:name=".recevier.VolumeReceiver"
+            android:enabled="true">
+
+            <intent-filter android:priority="1000">
+                <action android:name="android.media.VOLUME_CHANGED_ACTION"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".recevier.HealthyKillReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.microanswer.healthy.servicekilled"/>
+            </intent-filter>
+        </receiver>
 
 
         <!-- 腾讯SDK服务使用的Activity 开始 -->
