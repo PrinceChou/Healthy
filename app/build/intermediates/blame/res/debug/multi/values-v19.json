@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Micro\\document\\project\\Healthy\\app\\build\\intermediates\\res\\merged\\debug\\values-v19\\values-v19.xml",
+        "outputFile": "D:\\My\\Project\\HealthyTips\\Github\\Healthy\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v19\\values-v19.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 567
                 },
                 "from": {
-                    "file": "D:\\Micro\\document\\project\\Healthy\\app\\src\\main\\res\\values-v19\\styles.xml",
+                    "file": "D:\\My\\Project\\HealthyTips\\Github\\Healthy\\app\\src\\main\\res\\values-v19\\styles.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
